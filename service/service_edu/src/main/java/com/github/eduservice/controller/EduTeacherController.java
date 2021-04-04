@@ -1,9 +1,12 @@
 package com.github.eduservice.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.github.eduservice.entity.EduTeacher;
+import com.github.eduservice.service.EduTeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -14,8 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-04-04
  */
 @RestController
-@RequestMapping("/eduservice/edu-teacher")
+@RequestMapping("/eduservice/teacher")
 public class EduTeacherController {
 
+    @Autowired
+    private EduTeacherService eduTeacherService;
+
+    // 查询所有数据
+    @GetMapping("")
+    public List<EduTeacher> getAll() {
+        return eduTeacherService.list();
+    }
+
+    // 删除数据
+    @DeleteMapping("{id}")
+    public void removeById(@PathVariable("id") Long id) {
+
+    }
 }
 
