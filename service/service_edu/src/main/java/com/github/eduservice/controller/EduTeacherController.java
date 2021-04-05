@@ -126,7 +126,20 @@ public class EduTeacherController {
         map.put("items", records);
 
         return ResultCommon.success().setData(map);
+    }
 
+    /**
+     * 添加教师
+     * @param eduTeacher 教师信息
+     */
+    @PostMapping("")
+    @ApiOperation("添加教师")
+    public ResultCommon insert(@RequestBody EduTeacher eduTeacher) {
+        boolean save = eduTeacherService.save(eduTeacher);
+        if (save) {
+            return ResultCommon.success();
+        }
+        return ResultCommon.fail();
     }
 }
 
