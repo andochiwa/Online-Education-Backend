@@ -46,6 +46,27 @@ public class EduTeacherController {
     }
 
     /**
+     * 根据id查询教师
+     * @param id 数据库主键id
+     */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据id获取教师数据")
+    public ResultCommon getById(@PathVariable("id") Long id) {
+        EduTeacher eduTeacher = eduTeacherService.getById(id);
+        return ResultCommon.success().setData("items", eduTeacher);
+    }
+
+    @PutMapping("")
+    @ApiOperation(value = "根据id修改教师数据")
+    public ResultCommon update(@RequestBody EduTeacher eduTeacher) {
+        boolean flag = eduTeacherService.updateById(eduTeacher);
+        if (flag) {
+            return ResultCommon.success();
+        }
+        return ResultCommon.fail();
+    }
+
+    /**
      * 根据id逻辑删除教师
      * @param id 教师id
      */
