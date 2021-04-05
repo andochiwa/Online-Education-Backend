@@ -1,6 +1,7 @@
 package com.github.eduservice.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.eduservice.entity.EduTeacher;
 import com.github.eduservice.service.EduTeacherService;
 import com.github.utils.ResultCommon;
@@ -10,7 +11,9 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -46,6 +49,24 @@ public class EduTeacherController {
             return ResultCommon.success();
         }
         return ResultCommon.fail();
+    }
+
+    // 分页查询教师数据
+    @GetMapping("/{current}/{limit}")
+    @ApiOperation(value = "分页查询教师数据")
+    public ResultCommon getPage(@PathVariable("current") long current,
+                                @PathVariable("limit") long limit) {
+        Page<EduTeacher> pageTeacher = new Page<>(current, limit);
+        eduTeacherService.page(pageTeacher, null);
+
+        long total = pageTeacher.getTotal();
+        List<EduTeacher> records = pageTeacher.getRecords();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", total);
+        map.put("items", records);
+
+        return ResultCommon.success().setData(map);
     }
 }
 
