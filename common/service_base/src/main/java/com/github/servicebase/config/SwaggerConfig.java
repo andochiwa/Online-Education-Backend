@@ -37,7 +37,7 @@ public class SwaggerConfig {
                 .title("课程中心Api文档")
                 .description("本文档定义了课程中心微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("Helen", null, "a1066079469@gmail.com"))
+                .contact(new Contact("HAN", null, "a1066079469@gmail.com"))
                 .build();
     }
 }

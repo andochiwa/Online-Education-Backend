@@ -45,9 +45,15 @@
 <!--             <artifactId>spring-cloud-starter-openfeign</artifactId>-->
 <!--        </dependency>-->
 
+        <!--导入公共包依赖-->
         <dependency>
             <groupId>com.github</groupId>
             <artifactId>service_base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github</groupId>
+            <artifactId>common_utils</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
