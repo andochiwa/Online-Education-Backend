@@ -3,6 +3,7 @@ package com.github.eduservice.controller;
 
 import com.github.eduservice.entity.EduTeacher;
 import com.github.eduservice.service.EduTeacherService;
+import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -30,16 +31,21 @@ public class EduTeacherController {
     // 查询所有数据
     @GetMapping("")
     @ApiOperation(value = "获取所有教师信息")
-    public List<EduTeacher> getAll() {
-        return eduTeacherService.list();
+    public ResultCommon getAll() {
+        List<EduTeacher> list = eduTeacherService.list();
+        return ResultCommon.success().setData("items", list).setMessage("获取所有教师数据成功");
     }
 
     // 删除数据
     @DeleteMapping("{id}")
     @ApiOperation(value = "根据ID逻辑删除教师")
-    public void removeById(@PathVariable("id") @ApiParam(value = "教师id", name = "id", required = true)
+    public ResultCommon removeById(@PathVariable("id") @ApiParam(value = "教师id", name = "id", required = true)
                                        Long id) {
-        eduTeacherService.removeById(id);
+        boolean flag = eduTeacherService.removeById(id);
+        if (flag) {
+            return ResultCommon.success();
+        }
+        return ResultCommon.fail();
     }
 }
 

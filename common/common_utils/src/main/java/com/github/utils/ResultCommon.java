@@ -46,7 +46,7 @@ public class ResultCommon {
         return resultCommon;
     }
 
-    public ResultCommon data(String key, Object value) {
+    public ResultCommon setData(String key, Object value) {
         this.getData().put(key, value);
         return this;
     }
