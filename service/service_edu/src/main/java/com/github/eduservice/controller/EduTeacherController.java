@@ -110,7 +110,7 @@ public class EduTeacherController {
     @ApiOperation(value = "根据条件分页查询教师数据")
     public ResultCommon getPageCondition(@PathVariable("current") long current,
                                          @PathVariable("limit") long limit,
-                                         @RequestBody(required = false) EduTeacherQuery teacherQuery) {
+                                         EduTeacherQuery teacherQuery) {
         // 创建page对象
         Page<EduTeacher> pageTeacher = new Page<>(current, limit);
 
