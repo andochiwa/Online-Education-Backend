@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.eduservice.entity.EduTeacher;
 import com.github.eduservice.service.EduTeacherService;
-import com.github.eduservice.vo.EduTeacherQuery;
+import com.github.eduservice.vo.TeacherQuery;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -106,13 +106,14 @@ public class EduTeacherController {
         return ResultCommon.success().setData(map);
     }
 
-    @PostMapping("/pageTeacherCondition/{current}/{limit}")
+    @PostMapping(value = "/pageTeacherCondition/{current}/{limit}")
     @ApiOperation(value = "根据条件分页查询教师数据")
     public ResultCommon getPageCondition(@PathVariable("current") long current,
                                          @PathVariable("limit") long limit,
-                                         EduTeacherQuery teacherQuery) {
+                                         @RequestBody TeacherQuery teacherQuery) {
         // 创建page对象
         Page<EduTeacher> pageTeacher = new Page<>(current, limit);
+        System.out.println(teacherQuery);
 
         // 构建条件
         QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
