@@ -2,6 +2,7 @@ package com.github.eduservice.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class EduTeacher implements Serializable {
 
     @ApiModelProperty(value = "讲师ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = com.fasterxml.jackson.databind.ser.std.ToStringSerializer.class) // 解决雪花算法js精度不足问题
     private Long id;
 
     @ApiModelProperty(value = "讲师姓名")

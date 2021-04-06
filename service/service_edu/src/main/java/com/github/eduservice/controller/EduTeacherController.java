@@ -56,6 +56,10 @@ public class EduTeacherController {
         return ResultCommon.success().setData("items", eduTeacher);
     }
 
+    /**
+     * 根据id修改教师
+     * @param eduTeacher 修改后教师的对象，需要包含id
+     */
     @PutMapping("")
     @ApiOperation(value = "根据id修改教师数据")
     public ResultCommon update(@RequestBody EduTeacher eduTeacher) {
