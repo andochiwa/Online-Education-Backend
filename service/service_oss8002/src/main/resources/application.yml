@@ -1,4 +1,10 @@
 server:
   port: 8002
 
-
+aliyun:
+  oss:
+    file:
+      endpoint: "oss-cn-beijing.aliyuncs.com"
+      keyId: "LTAI5tQuSDdfWgK4PKARXAf5"
+      keySecret: "CDtiUfRWo2vK5Pf6dJVqqS5T6xhr4a"
+      bucketName: "my-online-education-project"
