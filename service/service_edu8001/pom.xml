@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service_edu</artifactId>
+    <artifactId>service_edu8001</artifactId>
 
     <properties>
         <maven.compiler.source>15</maven.compiler.source>

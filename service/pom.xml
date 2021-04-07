@@ -12,7 +12,8 @@
     <artifactId>service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>service_edu</module>
+        <module>service_edu8001</module>
+        <module>service_oss8002</module>
     </modules>
 
     <properties>
