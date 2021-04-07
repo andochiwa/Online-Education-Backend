@@ -8,3 +8,9 @@ aliyun:
       keyId: "LTAI5tQuSDdfWgK4PKARXAf5"
       keySecret: "CDtiUfRWo2vK5Pf6dJVqqS5T6xhr4a"
       bucketName: "my-online-education-project"
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
