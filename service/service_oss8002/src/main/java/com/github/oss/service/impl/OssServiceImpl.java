@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 /**
  * @author HAN
@@ -32,7 +35,13 @@ public class OssServiceImpl implements OssService {
         // 获取上传文件的输入流
         InputStream inputStream = file.getInputStream();
 
-        String fileName = file.getOriginalFilename();
+        // 设置文件名随机值
+        String fileName = UUID.randomUUID().toString().replaceAll("-", "") +
+                file.getOriginalFilename();
+
+        String date = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(LocalDate.now());
+        // 加上日期路径，这样就能自动创建文件夹
+        fileName = date + "/" + fileName;
 
         // 上传。
         ossClient.putObject(bucketName, fileName, inputStream);
