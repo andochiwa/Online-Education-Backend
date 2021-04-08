@@ -2,6 +2,7 @@ package com.github.eduservice.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
@@ -68,6 +69,7 @@ public class EduVideo implements Serializable {
     private Long size;
 
     @ApiModelProperty(value = "乐观锁")
+    @Version
     private Long version;
 
     @ApiModelProperty(value = "创建时间")
