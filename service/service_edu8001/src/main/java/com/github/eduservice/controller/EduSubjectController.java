@@ -1,16 +1,16 @@
 package com.github.eduservice.controller;
 
 
+import com.github.eduservice.entity.subject.Subject;
 import com.github.eduservice.service.EduSubjectService;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -40,6 +40,18 @@ public class EduSubjectController {
         eduSubjectService.saveSubject(file);
 
         return ResultCommon.success();
+    }
+
+    /**
+     * 课程分类的树形结构
+     */
+    @GetMapping
+    @ApiOperation("递归获取课程分类信息")
+    public ResultCommon getSubject() {
+
+        List<Subject> list =  eduSubjectService.getRecursionList();
+
+        return ResultCommon.success().setData("items", list);
     }
 
 }

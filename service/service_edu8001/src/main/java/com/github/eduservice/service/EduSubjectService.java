@@ -2,7 +2,10 @@ package com.github.eduservice.service;
 
 import com.github.eduservice.entity.EduSubject;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.eduservice.entity.subject.Subject;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,4 +22,10 @@ public interface EduSubjectService extends IService<EduSubject> {
      * @param file excel文件
      */
     void saveSubject(MultipartFile file);
+
+    /**
+     * 获取分类后的list
+     * @return 递归分类完的list
+     */
+    List<Subject> getRecursionList();
 }
