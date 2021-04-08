@@ -26,7 +26,7 @@
         <swagger.version>3.0.0</swagger.version>
         <aliyun.oss.version>3.11.3</aliyun.oss.version>
         <jodatime.version>2.10.10</jodatime.version>
-        <poi.version>5.0.0</poi.version>
+        <poi.version>4.1.2</poi.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-io.version>2.8.0</commons-io.version>
         <httpclient.version>4.5.13</httpclient.version>
@@ -102,6 +102,13 @@
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
 
             <!--文件上传-->
             <dependency>

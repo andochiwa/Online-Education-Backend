@@ -16,4 +16,12 @@
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.2.8</version>
+        </dependency>
+    </dependencies>
+
 </project>
