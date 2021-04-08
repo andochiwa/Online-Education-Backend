@@ -12,13 +12,11 @@ import com.github.eduservice.service.EduSubjectService;
  * @version 1.0
  * @create 2021/4/8
  */
-//@Component
 public class SubjectExcelListener extends AnalysisEventListener<ExcelSubjectData> {
 
     /**
      * 因为这个类不能交给spring管理，所以这里也不能自动注入，这里选择用构造器注入
      */
-//    @Autowired
     private EduSubjectService eduSubjectService;
 
     public SubjectExcelListener(EduSubjectService eduSubjectService) {
