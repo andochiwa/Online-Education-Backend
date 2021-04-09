@@ -1,7 +1,10 @@
 package com.github.eduservice.service;
 
-import com.github.eduservice.entity.EduChapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.eduservice.entity.EduChapter;
+import com.github.eduservice.entity.chapter.Chapter;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduChapterService extends IService<EduChapter> {
 
+    /**
+     * 获取章节分类后的List
+     * @param courseId 课程id
+     */
+    List<Chapter> getChapter(Long courseId);
 }
