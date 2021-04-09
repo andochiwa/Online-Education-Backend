@@ -10,6 +10,7 @@ import com.github.eduservice.vo.CourseInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
  * @since 2021-04-09
  */
 @Service
+@Transactional
 public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
 
     @Autowired
@@ -37,10 +39,13 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
         eduCourseDescription.setDescription(courseInfo.getDescription());
+        eduCourseDescription.setId(eduCourse.getId());
         save = eduCourseDescriptionService.save(eduCourseDescription);
 
         if (!save) {
             throw new RuntimeException("添加课程简介失败");
         }
+        // 把id添加到courseInfo中，返回给前端
+        courseInfo.setId(eduCourse.getId());
     }
 }

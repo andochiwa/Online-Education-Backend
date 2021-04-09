@@ -37,7 +37,7 @@ public class EduCourseController {
 
         eduCourseService.saveCourseInfo(courseInfo);
 
-        return ResultCommon.success();
+        return ResultCommon.success().setData("id", courseInfo.getId());
     }
 
 }

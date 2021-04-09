@@ -29,6 +29,10 @@ public class CourseInfo {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long subjectId;
 
+    @ApiModelProperty(value = "课程专业父级ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long subjectParentId;
+
     @ApiModelProperty(value = "课程标题")
     private String title;
 
