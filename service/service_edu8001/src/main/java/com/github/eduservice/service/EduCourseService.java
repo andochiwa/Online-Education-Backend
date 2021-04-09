@@ -2,6 +2,7 @@ package com.github.eduservice.service;
 
 import com.github.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.eduservice.vo.CourseInfo;
 
 /**
  * <p>
@@ -13,4 +14,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduCourseService extends IService<EduCourse> {
 
+    /**
+     * 添加课程基本信息
+     * @param courseInfo 前端返回的课程信息对象
+     */
+    void saveCourseInfo(CourseInfo courseInfo);
 }

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInt
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author HAN
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @create 2021/4/5
  */
 @Configuration
+@EnableTransactionManagement
 public class MybatisPlusConfiguration {
 
     @Bean

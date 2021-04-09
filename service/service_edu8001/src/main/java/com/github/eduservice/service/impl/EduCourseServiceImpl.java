@@ -1,9 +1,14 @@
 package com.github.eduservice.service.impl;
 
 import com.github.eduservice.entity.EduCourse;
+import com.github.eduservice.entity.EduCourseDescription;
 import com.github.eduservice.mapper.EduCourseMapper;
+import com.github.eduservice.service.EduCourseDescriptionService;
 import com.github.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.eduservice.vo.CourseInfo;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +22,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
 
+    @Autowired
+    private EduCourseDescriptionService eduCourseDescriptionService;
+
+    @Override
+    public void saveCourseInfo(CourseInfo courseInfo) {
+        EduCourse eduCourse = new EduCourse();
+        BeanUtils.copyProperties(courseInfo, eduCourse);
+        boolean save = super.save(eduCourse);
+        if (!save) {
+            // 添加失败
+            throw new RuntimeException("添加课程信息失败");
+        }
+
+        EduCourseDescription eduCourseDescription = new EduCourseDescription();
+        eduCourseDescription.setDescription(courseInfo.getDescription());
+        save = eduCourseDescriptionService.save(eduCourseDescription);
+
+        if (!save) {
+            throw new RuntimeException("添加课程简介失败");
+        }
+    }
 }
