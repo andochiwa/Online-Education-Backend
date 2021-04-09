@@ -19,4 +19,17 @@ public interface EduCourseService extends IService<EduCourse> {
      * @param courseInfo 前端返回的课程信息对象
      */
     void saveCourseInfo(CourseInfo courseInfo);
+
+    /**
+     * 获取课程基本信息
+     * @param courseId 课程id
+     * @return 返回封装了课程基本信息以及课程简介的对象
+     */
+    CourseInfo getCourseInfo(Long courseId);
+
+    /**
+     * 修改课程信息
+     * @param courseInfo 课程信息对象
+     */
+    void updateCourseInfo(CourseInfo courseInfo);
 }

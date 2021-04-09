@@ -48,4 +48,34 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         // 把id添加到courseInfo中，返回给前端
         courseInfo.setId(eduCourse.getId());
     }
+
+    @Override
+    public CourseInfo getCourseInfo(Long courseId) {
+        // 查询课程表
+        EduCourse eduCourse = super.getById(courseId);
+
+        // 查询课程简介表
+        EduCourseDescription eduCourseDescription = eduCourseDescriptionService.getById(courseId);
+
+        // 复制进所需对象中
+        CourseInfo courseInfo = new CourseInfo();
+        BeanUtils.copyProperties(eduCourse, courseInfo);
+        BeanUtils.copyProperties(eduCourseDescription, courseInfo);
+
+
+        return courseInfo;
+    }
+
+    @Override
+    public void updateCourseInfo(CourseInfo courseInfo) {
+        // 修改课程信息表
+        EduCourse eduCourse = new EduCourse();
+        BeanUtils.copyProperties(courseInfo, eduCourse);
+        super.updateById(eduCourse);
+
+        // 修改课程简介表
+        EduCourseDescription eduCourseDescription = new EduCourseDescription();
+        BeanUtils.copyProperties(courseInfo, eduCourseDescription);
+        eduCourseDescriptionService.updateById(eduCourseDescription);
+    }
 }
