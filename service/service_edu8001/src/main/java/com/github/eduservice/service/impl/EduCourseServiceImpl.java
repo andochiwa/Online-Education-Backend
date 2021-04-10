@@ -7,6 +7,7 @@ import com.github.eduservice.mapper.EduCourseMapper;
 import com.github.eduservice.service.EduCourseDescriptionService;
 import com.github.eduservice.service.EduCourseService;
 import com.github.eduservice.vo.CourseInfo;
+import com.github.eduservice.vo.PublishInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,5 +78,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
         BeanUtils.copyProperties(courseInfo, eduCourseDescription);
         eduCourseDescriptionService.updateById(eduCourseDescription);
+    }
+
+    @Override
+    public PublishInfo getPublishInfo(Long courseId) {
+        return baseMapper.getPublishInfo(courseId);
     }
 }

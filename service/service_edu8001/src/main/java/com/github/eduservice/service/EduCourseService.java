@@ -3,6 +3,7 @@ package com.github.eduservice.service;
 import com.github.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.eduservice.vo.CourseInfo;
+import com.github.eduservice.vo.PublishInfo;
 
 /**
  * <p>
@@ -32,4 +33,6 @@ public interface EduCourseService extends IService<EduCourse> {
      * @param courseInfo 课程信息对象
      */
     void updateCourseInfo(CourseInfo courseInfo);
+
+    PublishInfo getPublishInfo(Long courseId);
 }

@@ -3,6 +3,7 @@ package com.github.eduservice.controller;
 
 import com.github.eduservice.service.EduCourseService;
 import com.github.eduservice.vo.CourseInfo;
+import com.github.eduservice.vo.PublishInfo;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,6 +60,17 @@ public class EduCourseController {
         eduCourseService.updateCourseInfo(courseInfo);
 
         return ResultCommon.success().setData("items", courseInfo);
+    }
+
+    /**
+     * 查询发布时回显信息
+     * @param courseId 课程id
+     */
+    @GetMapping("publish/{id}")
+    @ApiOperation("查询发布时回显信息")
+    public ResultCommon getPublishInfo(@PathVariable("id") Long courseId) {
+        PublishInfo publishInfo = eduCourseService.getPublishInfo(courseId);
+        return ResultCommon.success().setData("items", publishInfo);
     }
 
 }

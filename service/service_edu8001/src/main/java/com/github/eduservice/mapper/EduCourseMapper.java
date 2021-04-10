@@ -1,7 +1,8 @@
 package com.github.eduservice.mapper;
 
-import com.github.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.eduservice.entity.EduCourse;
+import com.github.eduservice.vo.PublishInfo;
 
 /**
  * <p>
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-04-09
  */
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
+
+    PublishInfo getPublishInfo(Long id);
 
 }
