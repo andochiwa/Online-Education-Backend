@@ -34,7 +34,7 @@ public class EduCourseController {
     public ResultCommon saveCourseInfo(@RequestBody CourseInfo courseInfo) {
         eduCourseService.saveCourseInfo(courseInfo);
 
-        return ResultCommon.success().setData("id", courseInfo.getId());
+        return ResultCommon.success().setData("id", courseInfo.getId().toString());
     }
 
     /**
@@ -52,7 +52,6 @@ public class EduCourseController {
     /**
      * 修改课程信息
      * @param courseInfo 课程信息对象
-     * @return
      */
     @PutMapping
     @ApiOperation("修改课程信息")

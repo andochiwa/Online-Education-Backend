@@ -21,4 +21,10 @@ public interface EduChapterService extends IService<EduChapter> {
      * @param courseId 课程id
      */
     List<Chapter> getChapter(Long courseId);
+
+    /**
+     * 如果有小节则先删除小节
+     * @param id 章节id
+     */
+    void deleteById(Long chapterId);
 }

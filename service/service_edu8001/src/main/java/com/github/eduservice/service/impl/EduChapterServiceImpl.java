@@ -1,5 +1,6 @@
 package com.github.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.eduservice.entity.EduChapter;
 import com.github.eduservice.entity.EduVideo;
@@ -43,6 +44,17 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
                 .map(item -> new Chapter(item.getId(), item.getTitle(), null)) // 转换为所需对象
                 .peek(item -> item.setChildren(getChildren(item, videos)))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteById(Long chapterId) {
+        // 删除小节
+        QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
+        wrapper.eq("chapter_id", chapterId);
+        eduVideoService.remove(wrapper);
+
+        // 删除章节
+        super.removeById(chapterId);
     }
 
     public List<Chapter> getChildren(Chapter root, List<EduVideo> videos) {
