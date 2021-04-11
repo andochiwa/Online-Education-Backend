@@ -134,5 +134,18 @@ public class EduCourseController {
         return ResultCommon.success().setData(map);
     }
 
+    /**
+     * 删除课程数据，包括章节和小节
+     *
+     * @param courseId 课程id
+     */
+    @DeleteMapping("{id}")
+    @ApiOperation("删除课程数据，包括章节和小节")
+    public ResultCommon deleteCourseInfo(@PathVariable("id") Long courseId) {
+        eduCourseService.deleteCourseInfo(courseId);
+
+        return ResultCommon.success();
+    }
+
 }
 

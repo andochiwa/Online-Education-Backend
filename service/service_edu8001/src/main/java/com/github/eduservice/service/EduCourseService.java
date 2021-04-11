@@ -34,5 +34,16 @@ public interface EduCourseService extends IService<EduCourse> {
      */
     void updateCourseInfo(CourseInfo courseInfo);
 
+    /**
+     * 获取发布时信息
+     * @param courseId 课程id
+     * @return 所需的发布时信息对象
+     */
     PublishInfo getPublishInfo(Long courseId);
+
+    /**
+     * 删除课程数据，包括章节和小节
+     * @param courseId 课程id
+     */
+    void deleteCourseInfo(Long courseId);
 }

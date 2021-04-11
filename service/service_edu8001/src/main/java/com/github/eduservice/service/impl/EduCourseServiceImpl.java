@@ -1,11 +1,16 @@
 package com.github.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.eduservice.entity.EduChapter;
 import com.github.eduservice.entity.EduCourse;
 import com.github.eduservice.entity.EduCourseDescription;
+import com.github.eduservice.entity.EduVideo;
 import com.github.eduservice.mapper.EduCourseMapper;
+import com.github.eduservice.service.EduChapterService;
 import com.github.eduservice.service.EduCourseDescriptionService;
 import com.github.eduservice.service.EduCourseService;
+import com.github.eduservice.service.EduVideoService;
 import com.github.eduservice.vo.CourseInfo;
 import com.github.eduservice.vo.PublishInfo;
 import org.springframework.beans.BeanUtils;
@@ -27,6 +32,12 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
+
+    @Autowired
+    private EduChapterService eduChapterService;
+
+    @Autowired
+    private EduVideoService eduVideoService;
 
     @Override
     public void saveCourseInfo(CourseInfo courseInfo) {
@@ -83,5 +94,22 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Override
     public PublishInfo getPublishInfo(Long courseId) {
         return baseMapper.getPublishInfo(courseId);
+    }
+
+    @Override
+    public void deleteCourseInfo(Long courseId) {
+        // 删除课程和课程简介
+        super.removeById(courseId);
+        eduCourseDescriptionService.removeById(courseId);
+
+        // 删除章节
+        QueryWrapper<EduChapter> chapterQueryWrapper = new QueryWrapper<>();
+        chapterQueryWrapper.eq("course_id", courseId);
+        eduChapterService.remove(chapterQueryWrapper);
+
+        // 删除小节
+        QueryWrapper<EduVideo> videoQueryWrapper = new QueryWrapper<>();
+        videoQueryWrapper.eq("course_id", courseId);
+        eduVideoService.remove(videoQueryWrapper);
     }
 }
