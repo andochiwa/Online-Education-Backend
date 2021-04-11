@@ -1,6 +1,7 @@
 package com.github.eduservice.controller;
 
 
+import com.github.eduservice.entity.EduCourse;
 import com.github.eduservice.service.EduCourseService;
 import com.github.eduservice.vo.CourseInfo;
 import com.github.eduservice.vo.PublishInfo;
@@ -71,6 +72,19 @@ public class EduCourseController {
     public ResultCommon getPublishInfo(@PathVariable("id") Long courseId) {
         PublishInfo publishInfo = eduCourseService.getPublishInfo(courseId);
         return ResultCommon.success().setData("items", publishInfo);
+    }
+
+    /**
+     * 发布课程
+     */
+    @PutMapping("publish/{id}")
+    @ApiOperation("发布课程，根据id修改status")
+    public ResultCommon updatePublishInfo(@PathVariable("id") Long courseId) {
+        EduCourse eduCourse = new EduCourse();
+        eduCourse.setId(courseId);
+        eduCourse.setStatus("Normal");
+        eduCourseService.updateById(eduCourse);
+        return ResultCommon.success();
     }
 
 }
