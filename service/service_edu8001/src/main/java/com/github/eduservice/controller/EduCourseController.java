@@ -1,15 +1,23 @@
 package com.github.eduservice.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.eduservice.entity.EduCourse;
 import com.github.eduservice.service.EduCourseService;
 import com.github.eduservice.vo.CourseInfo;
+import com.github.eduservice.vo.CourseQuery;
 import com.github.eduservice.vo.PublishInfo;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -76,6 +84,7 @@ public class EduCourseController {
 
     /**
      * 发布课程
+     * @param courseId 课程id
      */
     @PutMapping("publish/{id}")
     @ApiOperation("发布课程，根据id修改status")
@@ -85,6 +94,44 @@ public class EduCourseController {
         eduCourse.setStatus("Normal");
         eduCourseService.updateById(eduCourse);
         return ResultCommon.success();
+    }
+
+    /**
+     * 条件查询分页数据
+     * @param current 第几条数据开始
+     * @param limit 要几条数据
+     * @param courseQuery 条件对象
+     */
+    @PostMapping("condition/{current}/{limit}")
+    @ApiOperation("条件查询分页数据")
+    public ResultCommon getConditionCourseInfo(@PathVariable("current") long current,
+                                               @PathVariable("limit") long limit,
+                                               @RequestBody CourseQuery courseQuery) {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "title", "price", "lesson_num", "view_count", "status", "gmt_create");
+
+        // 条件查询
+        String title = courseQuery.getTitle();
+        String status = courseQuery.getStatus();
+        if (!ObjectUtils.isEmpty(title)) {
+            wrapper.like("title", title);
+        }
+        if (!ObjectUtils.isEmpty(status)) {
+            wrapper.eq("status", status);
+        }
+
+        Page<EduCourse> coursePage = new Page<>(current, limit);
+
+        eduCourseService.page(coursePage, wrapper);
+
+        long total = coursePage.getTotal();
+        List<EduCourse> courses = coursePage.getRecords();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", total);
+        map.put("items", courses);
+
+        return ResultCommon.success().setData(map);
     }
 
 }
