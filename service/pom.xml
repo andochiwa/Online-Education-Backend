@@ -14,6 +14,7 @@
     <modules>
         <module>service_edu8001</module>
         <module>service_oss8002</module>
+        <module>service_vod8003</module>
     </modules>
 
     <properties>
