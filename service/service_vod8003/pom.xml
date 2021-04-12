@@ -37,6 +37,25 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-vod-upload</artifactId>
+            <version>1.4.13</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/aliyun-java-vod-upload-1.4.13.jar</systemPath>
+        </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>/BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
 </project>

@@ -42,6 +42,7 @@
         <docker.image.prefix>zx</docker.image.prefix>
         <cloud-alibaba.version>2020.0.RC1</cloud-alibaba.version>
         <druid.version>1.2.5</druid.version>
+        <hutool.version>5.5.9</hutool.version>
     </properties>
 
     <dependencyManagement>
@@ -183,6 +184,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+            <!--hutool-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
