@@ -57,7 +57,7 @@ public class EduVideoController {
     @DeleteMapping("{id}")
     @ApiOperation("删除小节")
     public ResultCommon deleteVideo(@PathVariable("id") Long id) {
-        eduVideoService.removeById(id);
+        eduVideoService.removeVideo(id);
 
         return ResultCommon.success();
     }

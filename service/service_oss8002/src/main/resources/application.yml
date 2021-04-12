@@ -16,3 +16,7 @@ spring:
       max-request-size: 20MB
   application:
     name: service-oss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
