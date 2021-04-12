@@ -29,7 +29,9 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
 
     @Override
     public void removeVideo(Long id) {
-        EduVideo eduVideo = super.getById(id);
+        QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
+        wrapper.select("video_source_id").eq("id", id);
+        EduVideo eduVideo = super.getOne(wrapper);
         // 删除视频
         vodClient.deleteVideo(eduVideo.getVideoSourceId());
         // 删除小节
@@ -39,7 +41,7 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
     @Override
     public void removeByChapterId(Long chapterId) {
         QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
-        wrapper.eq("chapter_id", chapterId);
+        wrapper.eq("chapter_id", chapterId).select("video_source_id");
         List<EduVideo> eduVideos = super.list(wrapper);
         // 删除视频
         eduVideos.forEach(eduVideo -> vodClient.deleteVideo(eduVideo.getVideoSourceId()));

@@ -6,6 +6,7 @@ import com.github.eduservice.entity.EduChapter;
 import com.github.eduservice.entity.EduCourse;
 import com.github.eduservice.entity.EduCourseDescription;
 import com.github.eduservice.entity.EduVideo;
+import com.github.eduservice.feign.VodClient;
 import com.github.eduservice.mapper.EduCourseMapper;
 import com.github.eduservice.service.EduChapterService;
 import com.github.eduservice.service.EduCourseDescriptionService;
@@ -17,6 +18,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -38,6 +41,9 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Autowired
     private EduVideoService eduVideoService;
+
+    @Autowired
+    private VodClient vodClient;
 
     @Override
     public void saveCourseInfo(CourseInfo courseInfo) {
@@ -102,13 +108,19 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         super.removeById(courseId);
         eduCourseDescriptionService.removeById(courseId);
 
+        // 为了删除视频，先获取视频的id
+        QueryWrapper<EduVideo> videoQueryWrapper = new QueryWrapper<>();
+        videoQueryWrapper.select("video_source_id").eq("course_id", courseId);
+        List<EduVideo> eduVideos = eduVideoService.list(videoQueryWrapper);
+        eduVideos.forEach(item -> vodClient.deleteVideo(item.getVideoSourceId()));
+
         // 删除章节
         QueryWrapper<EduChapter> chapterQueryWrapper = new QueryWrapper<>();
         chapterQueryWrapper.eq("course_id", courseId);
         eduChapterService.remove(chapterQueryWrapper);
 
         // 删除小节
-        QueryWrapper<EduVideo> videoQueryWrapper = new QueryWrapper<>();
+        videoQueryWrapper.clear();
         videoQueryWrapper.eq("course_id", courseId);
         eduVideoService.remove(videoQueryWrapper);
     }
