@@ -50,7 +50,6 @@ public class EduVideoController {
 
     /**
      * 删除小节
-     * TODO 需要完善：删除小节时同时删除里面的视频
      *
      * @param id 小节id
      */

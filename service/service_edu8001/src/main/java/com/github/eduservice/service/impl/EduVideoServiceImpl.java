@@ -1,5 +1,6 @@
 package com.github.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.eduservice.entity.EduVideo;
 import com.github.eduservice.feign.VodClient;
 import com.github.eduservice.mapper.EduVideoMapper;
@@ -7,6 +8,9 @@ import com.github.eduservice.service.EduVideoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,6 +21,7 @@ import org.springframework.stereotype.Service;
  * @since 2021-04-09
  */
 @Service
+@Transactional
 public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> implements EduVideoService {
 
     @Autowired
@@ -29,5 +34,16 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
         vodClient.deleteVideo(eduVideo.getVideoSourceId());
         // 删除小节
         super.removeById(id);
+    }
+
+    @Override
+    public void removeByChapterId(Long chapterId) {
+        QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
+        wrapper.eq("chapter_id", chapterId);
+        List<EduVideo> eduVideos = super.list(wrapper);
+        // 删除视频
+        eduVideos.forEach(eduVideo -> vodClient.deleteVideo(eduVideo.getVideoSourceId()));
+        // 删除小节
+        super.remove(wrapper);
     }
 }
