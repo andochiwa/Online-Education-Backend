@@ -1,7 +1,7 @@
 package com.github.cms;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @version 1.0
  * @create 2021/4/13
  */
-@SpringBootConfiguration
+@SpringBootApplication
 @EnableFeignClients
 @ComponentScan(basePackages = "com.github")
 public class CmsApplicationMain8004 {
