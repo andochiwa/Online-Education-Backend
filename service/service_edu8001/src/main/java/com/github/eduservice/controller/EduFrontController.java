@@ -9,6 +9,7 @@ import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ public class EduFrontController {
      */
     @GetMapping
     @ApiOperation("查询前8条热门课程，前4个热门教师")
+    @Cacheable(value = "banner", key = "'EduCourseTeacher'")
     public ResultCommon getTeacherCourse() {
         // 查询前8条热门课程
         QueryWrapper<EduCourse> wrapperCourse = new QueryWrapper<>();
