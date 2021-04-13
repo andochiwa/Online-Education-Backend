@@ -9,6 +9,7 @@ import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/eduservice/index")
 @Api("前台页面查询功能")
+@CrossOrigin
 public class EduFrontController {
 
     @Autowired
