@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +16,11 @@ import java.util.Map;
  */
 @Data
 @Accessors(chain = true)
-public class ResultCommon {
+public class ResultCommon implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     public static int SUCCESS = 200;
     // 表示操作失败
     public static int ERROR = 404;

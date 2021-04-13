@@ -1,6 +1,7 @@
 package com.github.cms.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.cms.entity.CrmBanner;
 import com.github.cms.service.CrmBannerService;
@@ -8,6 +9,7 @@ import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -95,12 +97,15 @@ public class CrmBannerController {
     }
 
     /**
-     * 获取所有数据
+     * 获取后三条数据
      */
     @GetMapping
-    @ApiOperation("获取所有数据")
+    @ApiOperation("获取后三条数据")
+    @Cacheable(key = "'selectIndexList'", value = "banner")
     public ResultCommon getAllCrm() {
-        List<CrmBanner> crmBanners = crmBannerService.list();
+        QueryWrapper<CrmBanner> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("id").last("limit 3");
+        List<CrmBanner> crmBanners = crmBannerService.list(wrapper);
 
         return ResultCommon.success().setData("items", crmBanners);
     }
