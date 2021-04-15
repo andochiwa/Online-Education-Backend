@@ -4,11 +4,14 @@ package com.github.center.controller;
 import com.github.center.entity.UcenterMember;
 import com.github.center.service.UcenterMemberService;
 import com.github.center.vo.UserRegister;
+import com.github.utils.JwtUtils;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -50,6 +53,17 @@ public class UcenterMemberController {
     public ResultCommon registerUser(@RequestBody UserRegister userRegister) {
 
         return ucenterMemberService.register(userRegister);
+    }
+
+    /**
+     * 根据token获取用户信息
+     */
+    @GetMapping("user-info")
+    public ResultCommon InformationUser(HttpServletRequest request) {
+        String id = JwtUtils.getMemberIdByJwtToken(request);
+        UcenterMember ucenterMember = ucenterMemberService.getById(id);
+
+        return ResultCommon.success().setData("items", ucenterMember);
     }
 
 }

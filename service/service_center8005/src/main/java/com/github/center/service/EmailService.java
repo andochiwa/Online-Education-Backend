@@ -51,6 +51,6 @@ public class EmailService {
         // 存入redis，五分钟有效
         redisTemplate.opsForValue().set(email, code, 5, TimeUnit.MINUTES);
         mailSender.send(msg);
-        return ResultCommon.success();
+        return ResultCommon.success().setData("code", code);
     }
 }
