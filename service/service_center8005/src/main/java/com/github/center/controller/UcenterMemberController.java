@@ -3,6 +3,7 @@ package com.github.center.controller;
 
 import com.github.center.entity.UcenterMember;
 import com.github.center.service.UcenterMemberService;
+import com.github.center.vo.UserRegister;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,7 +41,16 @@ public class UcenterMemberController {
     }
 
 
-    // 注册
+    /**
+     * 注册账户
+     * @param userRegister 注册信息
+     */
+    @PostMapping("register")
+    @ApiOperation("注册账户")
+    public ResultCommon registerUser(@RequestBody UserRegister userRegister) {
+
+        return ucenterMemberService.register(userRegister);
+    }
 
 }
 

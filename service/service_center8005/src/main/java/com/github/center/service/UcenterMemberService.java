@@ -5,7 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.center.entity.UcenterMember;
 import com.github.center.mapper.UcenterMemberMapper;
+import com.github.center.vo.UserRegister;
 import com.github.utils.JwtUtils;
+import com.github.utils.ResultCommon;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -21,6 +25,9 @@ import java.util.Objects;
  */
 @Service
 public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, UcenterMember> {
+
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 登录
@@ -53,5 +60,29 @@ public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, Ucent
         }
 
         return JwtUtils.getJwtToken(ucenterMember.getId(), ucenterMember.getNickname());
+    }
+
+    /**
+     * 注册
+     * @param userRegister 注册信息
+     */
+    public ResultCommon register(UserRegister userRegister) {
+        String nickName = userRegister.getNickName();
+        String password = userRegister.getPassword();
+        String email = userRegister.getEmail();
+        String code = userRegister.getCode();
+
+        Object redisCode = redisTemplate.opsForValue().get(email);
+        if (!Objects.equals(code, redisCode)) {
+            return ResultCommon.fail().setMessage("验证码错误");
+        }
+
+        UcenterMember ucenterMember = new UcenterMember();
+        ucenterMember.setNickname(nickName);
+        ucenterMember.setPassword(SecureUtil.md5(password));
+        ucenterMember.setEmail(email);
+        ucenterMember.setAvatar("http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoj0hHXhgJNOTSOFsS4uZs8x1ConecaVOB8eIl115xmJZcT4oCicvia7wMEufibKtTLqiaJeanU2Lpg3w/132");
+        super.save(ucenterMember);
+        return ResultCommon.success().setData("items", ucenterMember);
     }
 }
