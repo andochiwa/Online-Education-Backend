@@ -16,6 +16,7 @@
         <module>service_oss8002</module>
         <module>service_vod8003</module>
         <module>service_cms8004</module>
+        <module>service_center8005</module>
     </modules>
 
     <properties>
