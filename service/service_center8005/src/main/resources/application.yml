@@ -33,6 +33,13 @@ spring:
         max-idle: 10
         # 连接池中的最小空闲连接
         min-idle: 0
+  mail:
+    port: 465
+    host: smtp.gmail.com
+    username: a1066079469@gmail.com
+    password: cihhnbjsmszbivli
+    properties:
+      "mail.smtp.ssl.enable": true
 # mybatis log
 mybatis-plus:
   configuration:
