@@ -38,7 +38,12 @@ public class UcenterMemberController {
     @ApiOperation("前台登录")
     public ResultCommon loginUser(@RequestBody UcenterMember ucenterMember) {
         // 获取生成token值
-        String token = ucenterMemberService.login(ucenterMember);
+        String token;
+        try {
+            token = ucenterMemberService.login(ucenterMember);
+        } catch (Exception e) {
+            return ResultCommon.fail().setMessage(e.getMessage());
+        }
 
         return ResultCommon.success().setData("token", token);
     }

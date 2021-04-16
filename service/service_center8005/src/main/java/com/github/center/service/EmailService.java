@@ -10,6 +10,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,6 +30,9 @@ public class EmailService {
     @Autowired
     private MailSender mailSender;
 
+    @Autowired
+    private ExecutorService executorService;
+
     /**
      * 发送邮箱
      * @param email 邮箱地址
@@ -44,13 +48,15 @@ public class EmailService {
         // 生成随机验证码
         String code = RandomUtil.randomNumbers(6);
         // 发送邮箱
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(email);
-        msg.setSubject("Verification code");
-        msg.setText("Your Verification code is: " + code);
-        // 存入redis，五分钟有效
-        redisTemplate.opsForValue().set(email, code, 5, TimeUnit.MINUTES);
-        mailSender.send(msg);
+        executorService.submit(() -> {
+            SimpleMailMessage msg = new SimpleMailMessage();
+            msg.setTo(email);
+            msg.setSubject("Verification code");
+            msg.setText("Your Verification code is: " + code);
+            // 存入redis，五分钟有效
+            redisTemplate.opsForValue().set(email, code, 5, TimeUnit.MINUTES);
+            mailSender.send(msg);
+        });
         return ResultCommon.success().setData("code", code);
     }
 }
