@@ -91,17 +91,19 @@ public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, Ucent
      * 从github中得到的用户信息放入数据库
      * @param userMap 用户信息
      */
-    public void saveUser(Map<String, Object> userMap) {
+    public UcenterMember saveUser(Map<String, Object> userMap) {
         // 查看是否已存在用户
         QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
         wrapper.eq("openid", userMap.get("node_id"));
-        if (super.count(wrapper) <= 0) {
-            UcenterMember ucenterMember = new UcenterMember();
+        UcenterMember ucenterMember = super.getOne(wrapper);
+        if (ucenterMember == null) {
+            ucenterMember = new UcenterMember();
             ucenterMember.setNickname((String) userMap.get("name"));
             ucenterMember.setOpenid((String) userMap.get("node_id"));
             ucenterMember.setAvatar((String) userMap.get("avatar_url"));
             super.save(ucenterMember);
         }
+        return ucenterMember;
 
     }
 }

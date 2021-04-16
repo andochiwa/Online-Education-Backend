@@ -5,6 +5,7 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.center.entity.UcenterMember;
 import com.github.center.service.GithubService;
 import com.github.center.service.UcenterMemberService;
 import com.github.center.thirdparty.Github;
@@ -82,9 +83,9 @@ public class GithubController {
                 .execute().body();
         Map<String, Object> userMap = JSONObject.parseObject(userString);
         // 存入数据库
-        ucenterMemberService.saveUser(userMap);
+        UcenterMember ucenterMember = ucenterMemberService.saveUser(userMap);
 
-        String token = JwtUtils.getJwtToken((String) userMap.get("node_id"), (String) userMap.get("name"));
+        String token = JwtUtils.getJwtToken(ucenterMember.getId(), ucenterMember.getNickname());
         return "redirect:http://localhost:3000?token=" + token;
     }
 }
