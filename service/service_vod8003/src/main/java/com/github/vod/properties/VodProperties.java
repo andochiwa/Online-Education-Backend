@@ -1,8 +1,8 @@
 package com.github.vod.properties;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 /**
  * @author HAN
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
  * @create 2021/4/12
  */
 @Data
-@Component
+@TableName("three_party_info")
 public class VodProperties {
-    @Value("${aliyun.vod.file.keyId}")
+    @TableField("id")
     private String keyId;
 
-    @Value("${aliyun.vod.file.keySecret}")
+    @TableField("secret")
     private String keySecret;
 }

@@ -1,14 +1,6 @@
 server:
   port: 8002
 
-aliyun:
-  oss:
-    file:
-      endpoint: "oss-cn-beijing.aliyuncs.com"
-      keyId: "LTAI5tQuSDdfWgK4PKARXAf5"
-      keySecret: "CDtiUfRWo2vK5Pf6dJVqqS5T6xhr4a"
-      bucketName: "my-online-education-project"
-
 spring:
   servlet:
     multipart:
@@ -24,3 +16,11 @@ spring:
       transport:
         dashboard: localhost:8080
         port: 8719
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/online?serverTimezone=Japan&useUnicode=true&characterEncoding=UTF-8
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -5,10 +5,12 @@ import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.vod.mapper.VodMapper;
 import com.github.vod.properties.VodProperties;
 import com.github.vod.utils.InitVodClient;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,10 +22,8 @@ import java.io.InputStream;
  * @create 2021/4/12
  */
 @Service
-public class VodService {
+public class VodService extends ServiceImpl<VodMapper, VodProperties> {
 
-    @Autowired
-    private VodProperties vodProperties;
 
     /**
      * 上传视频
@@ -32,6 +32,11 @@ public class VodService {
      */
     @SneakyThrows
     public String uploadVideo(MultipartFile file) {
+
+        QueryWrapper<VodProperties> wrapper = new QueryWrapper<>();
+        wrapper.eq("name", "aliyun");
+        VodProperties vodProperties = super.getOne(wrapper);
+
         // 上传文件的名字
         String filename = file.getOriginalFilename();
         // 设置上传后的文件的名字
@@ -57,6 +62,10 @@ public class VodService {
      */
     @SneakyThrows
     public void deleteVideo(String id) {
+        QueryWrapper<VodProperties> wrapper = new QueryWrapper<>();
+        wrapper.eq("name", "aliyun");
+        VodProperties vodProperties = super.getOne(wrapper);
+
         DefaultAcsClient client = InitVodClient.initVodClient(vodProperties.getKeyId(), vodProperties.getKeySecret());
 
         DeleteVideoRequest request = new DeleteVideoRequest();
