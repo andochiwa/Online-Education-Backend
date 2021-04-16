@@ -43,7 +43,7 @@ public class UcenterMember implements Serializable {
     @ApiModelProperty(value = "昵称")
     private String nickname;
 
-    @ApiModelProperty(value = "性别 1 女，2 男")
+    @ApiModelProperty(value = "性别 0 女，1 男")
     private Integer sex;
 
     @ApiModelProperty(value = "年龄")

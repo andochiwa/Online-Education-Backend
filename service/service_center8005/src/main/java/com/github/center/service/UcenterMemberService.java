@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -84,5 +85,23 @@ public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, Ucent
         ucenterMember.setAvatar("http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoj0hHXhgJNOTSOFsS4uZs8x1ConecaVOB8eIl115xmJZcT4oCicvia7wMEufibKtTLqiaJeanU2Lpg3w/132");
         super.save(ucenterMember);
         return ResultCommon.success().setData("items", ucenterMember);
+    }
+
+    /**
+     * 从github中得到的用户信息放入数据库
+     * @param userMap 用户信息
+     */
+    public void saveUser(Map<String, Object> userMap) {
+        // 查看是否已存在用户
+        QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
+        wrapper.eq("openid", userMap.get("node_id"));
+        if (super.count(wrapper) <= 0) {
+            UcenterMember ucenterMember = new UcenterMember();
+            ucenterMember.setNickname((String) userMap.get("name"));
+            ucenterMember.setOpenid((String) userMap.get("node_id"));
+            ucenterMember.setAvatar((String) userMap.get("avatar_url"));
+            super.save(ucenterMember);
+        }
+
     }
 }
