@@ -124,4 +124,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         videoQueryWrapper.eq("course_id", courseId);
         eduVideoService.remove(videoQueryWrapper);
     }
+
+    @Override
+    public List<EduCourse> getByTeacherId(Long id) {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.eq("teacher_id", id);
+        return super.list(wrapper);
+    }
 }

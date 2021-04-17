@@ -1,9 +1,11 @@
 package com.github.eduservice.service;
 
-import com.github.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.eduservice.entity.EduCourse;
 import com.github.eduservice.vo.CourseInfo;
 import com.github.eduservice.vo.PublishInfo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -46,4 +48,11 @@ public interface EduCourseService extends IService<EduCourse> {
      * @param courseId 课程id
      */
     void deleteCourseInfo(Long courseId);
+
+    /**
+     * 根据教师id查询课程
+     * @param id 教师id
+     * @return 课程信息
+     */
+    List<EduCourse> getByTeacherId(Long id);
 }

@@ -26,7 +26,7 @@ import java.util.List;
 @RequestMapping("/eduservice/index")
 @Api("前台页面查询功能")
 @CrossOrigin
-public class EduFrontController {
+public class EduFrontIndexController {
 
     @Autowired
     private EduCourseService eduCourseService;
