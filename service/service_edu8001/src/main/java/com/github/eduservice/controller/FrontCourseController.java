@@ -2,6 +2,8 @@ package com.github.eduservice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.eduservice.entity.EduCourse;
+import com.github.eduservice.entity.chapter.Chapter;
+import com.github.eduservice.service.EduChapterService;
 import com.github.eduservice.service.EduCourseService;
 import com.github.eduservice.vo.CourseFrontInfo;
 import com.github.eduservice.vo.CourseWebInfo;
@@ -11,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +29,9 @@ public class FrontCourseController {
 
     @Autowired
     private EduCourseService eduCourseService;
+
+    @Autowired
+    private EduChapterService eduChapterService;
 
     /**
      * 条件查询带分页课程
@@ -53,8 +59,12 @@ public class FrontCourseController {
     @ApiOperation("查询课程详细信息")
     public ResultCommon getCourseInfo(@PathVariable("id") Long courseId) {
 
+        // 查询课程详细信息
         CourseWebInfo courseWebInfo = eduCourseService.getBaseCourseInfo(courseId);
 
-        return ResultCommon.success().setData("items", courseWebInfo);
+        // 查询章节和小节
+        List<Chapter> chapters = eduChapterService.getChapter(courseId);
+
+        return ResultCommon.success().setData("courses", courseWebInfo).setData("chapters", chapters);
     }
 }

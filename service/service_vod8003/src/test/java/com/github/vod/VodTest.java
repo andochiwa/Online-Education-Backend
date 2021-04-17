@@ -7,8 +7,14 @@ import com.aliyun.vod.upload.resp.UploadVideoResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.vod.model.v20170321.GetPlayInfoRequest;
 import com.aliyuncs.vod.model.v20170321.GetPlayInfoResponse;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.vod.properties.VodProperties;
+import com.github.vod.service.VodService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -21,11 +27,18 @@ import java.util.List;
 @SpringBootTest
 public class VodTest {
 
+    @Autowired
+    private VodService vodService;
+
     // 测试视频上传
     @Test
     void testUpload() {
-        UploadVideoRequest request = new UploadVideoRequest("LTAI5tQuSDdfWgK4PKARXAf5",
-                "CDtiUfRWo2vK5Pf6dJVqqS5T6xhr4a",
+        QueryWrapper<VodProperties> wrapper = new QueryWrapper<>();
+        wrapper.eq("name", "aliyun");
+        VodProperties vodProperties = vodService.getOne(wrapper);
+
+        UploadVideoRequest request = new UploadVideoRequest(vodProperties.getKeyId(),
+                vodProperties.getKeySecret(),
                 IdUtil.fastSimpleUUID(),
                 "D:\\test.mp4");
         /*可指定分片上传时每个分片的大小，默认为1M字节*/
@@ -79,8 +92,14 @@ public class VodTest {
     @SneakyThrows
     @Test
     void testVod() {
+        QueryWrapper<VodProperties> wrapper = new QueryWrapper<>();
+        wrapper.eq("name", "aliyun");
+        VodProperties vodProperties = vodService.getOne(wrapper);
+
         // 初始化对象
-        DefaultAcsClient client = InitVodClient.initVodClient("LTAI5tQuSDdfWgK4PKARXAf5", "CDtiUfRWo2vK5Pf6dJVqqS5T6xhr4a");
+        DefaultAcsClient client =
+                InitVodClient.initVodClient(vodProperties.getKeyId(),
+                        vodProperties.getKeySecret());
 
         // 创建获取视频地址的request和response
         GetPlayInfoRequest request = new GetPlayInfoRequest();
@@ -95,6 +114,31 @@ public class VodTest {
         for (GetPlayInfoResponse.PlayInfo playInfo : playInfoList) {
             System.out.print("PlayInfo.PlayURL = " + playInfo.getPlayURL() + "\n");
         }
+    }
+
+    // 获取视频凭证
+    @SneakyThrows
+    @Test
+    void testPlayAuth() {
+        QueryWrapper<VodProperties> wrapper = new QueryWrapper<>();
+        wrapper.eq("name", "aliyun");
+        VodProperties vodProperties = vodService.getOne(wrapper);
+
+        // 初始化对象
+        DefaultAcsClient client =
+                InitVodClient.initVodClient(vodProperties.getKeyId(),
+                        vodProperties.getKeySecret());
+
+        // 创建获取视频地址的request和response
+        GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+        // 向response里设置视频id
+        request.setVideoId("1dd97efa4e534f1485a02c475b451fac");
+
+        // 调用初始化对象中的方法
+        GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+
+        // 视频凭证
+        System.out.println(response.getPlayAuth());
     }
 
 
