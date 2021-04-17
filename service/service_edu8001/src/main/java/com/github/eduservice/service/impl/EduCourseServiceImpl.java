@@ -1,6 +1,7 @@
 package com.github.eduservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.eduservice.entity.EduChapter;
 import com.github.eduservice.entity.EduCourse;
@@ -12,14 +13,19 @@ import com.github.eduservice.service.EduChapterService;
 import com.github.eduservice.service.EduCourseDescriptionService;
 import com.github.eduservice.service.EduCourseService;
 import com.github.eduservice.service.EduVideoService;
+import com.github.eduservice.vo.CourseFrontInfo;
 import com.github.eduservice.vo.CourseInfo;
 import com.github.eduservice.vo.PublishInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -42,6 +48,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Autowired
     private EduVideoService eduVideoService;
 
+    @Qualifier("com.github.eduservice.feign.VodClient")
     @Autowired
     private VodClient vodClient;
 
@@ -130,5 +137,42 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
         wrapper.eq("teacher_id", id);
         return super.list(wrapper);
+    }
+
+    @Override
+    public Map<String, Object> getPageCondition(Page<EduCourse> page, CourseFrontInfo courseFrontInfo) {
+        // 设置条件
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+
+        // 判断一级分类
+        if (!ObjectUtils.isEmpty(courseFrontInfo.getSubjectParentId())) {
+            wrapper.eq("subject_parent_id", courseFrontInfo.getSubjectParentId());
+            // 判断二级分类
+            if (!ObjectUtils.isEmpty(courseFrontInfo.getSubjectId())) {
+                wrapper.eq("subject_id", courseFrontInfo.getSubjectId());
+            }
+        }
+
+        // 判断销量
+        if (!ObjectUtils.isEmpty(courseFrontInfo.getBuyCountSort())) {
+            wrapper.orderByAsc("buy_count");
+        }
+        // 判断价格
+        if (!ObjectUtils.isEmpty(courseFrontInfo.getPriceSort())) {
+            wrapper.orderByAsc("price");
+        }
+        // 判断创建时间
+        if (!ObjectUtils.isEmpty(courseFrontInfo.getGmtCreateSort())) {
+            wrapper.orderByAsc("gmt_create");
+        }
+
+        Page<EduCourse> coursePage = super.page(page, wrapper);
+
+        // 存储list集合
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", coursePage.getRecords());
+        map.put("total", coursePage.getTotal());
+
+        return map;
     }
 }

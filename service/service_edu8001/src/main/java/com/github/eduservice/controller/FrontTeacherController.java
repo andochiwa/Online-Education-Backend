@@ -5,6 +5,8 @@ import com.github.eduservice.entity.EduTeacher;
 import com.github.eduservice.service.EduCourseService;
 import com.github.eduservice.service.EduTeacherService;
 import com.github.utils.ResultCommon;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,8 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/eduservice/front-teacher")
-public class EduFrontTeacherController {
+@Api("查询前台教师内容")
+public class FrontTeacherController {
 
     @Autowired
     private EduTeacherService eduTeacherService;
@@ -32,6 +35,7 @@ public class EduFrontTeacherController {
      * @param id 教师id
      */
     @GetMapping("{id}")
+    @ApiOperation("查询教师信息以及负责的课程信息")
     public ResultCommon getTeacherCourse(@PathVariable("id") Long id) {
 
         // 查询教师信息

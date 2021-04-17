@@ -1,11 +1,14 @@
 package com.github.eduservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.eduservice.entity.EduCourse;
+import com.github.eduservice.vo.CourseFrontInfo;
 import com.github.eduservice.vo.CourseInfo;
 import com.github.eduservice.vo.PublishInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -55,4 +58,11 @@ public interface EduCourseService extends IService<EduCourse> {
      * @return 课程信息
      */
     List<EduCourse> getByTeacherId(Long id);
+
+    /**
+     * 根据条件查询分页课程
+     * @param page 分页信息
+     * @param courseFrontInfo 条件
+     */
+    Map<String, Object> getPageCondition(Page<EduCourse> page, CourseFrontInfo courseFrontInfo);
 }
