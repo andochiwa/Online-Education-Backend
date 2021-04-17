@@ -32,10 +32,25 @@ public class VodController {
         return ResultCommon.success().setData("videoId", videoId);
     }
 
+    /**
+     * 删除视频
+     * @param id 视频id
+     */
     @DeleteMapping("{id}")
     @ApiOperation("删除视频")
     public ResultCommon deleteVideo(@PathVariable("id") String id) {
         vodService.deleteVideo(id);
         return ResultCommon.success();
+    }
+
+    /**
+     * 获取视频凭证
+     * @param id 视频id
+     */
+    @GetMapping("{id}")
+    @ApiOperation("获取视频凭证")
+    public ResultCommon getVideoPlayAuth(@PathVariable("id") String id) {
+        String playAuth = vodService.getVideoPlayAuth(id);
+        return ResultCommon.success().setData("playAuth", playAuth);
     }
 }

@@ -5,6 +5,8 @@ import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.vod.mapper.VodMapper;
@@ -73,5 +75,28 @@ public class VodService extends ServiceImpl<VodMapper, VodProperties> {
         request.setVideoIds(id);
 
         client.getAcsResponse(request);
+    }
+
+    /**
+     * 获取视频凭证
+     * @param id 视频id
+     */
+    @SneakyThrows
+    public String getVideoPlayAuth(String id) {
+        QueryWrapper<VodProperties> wrapper = new QueryWrapper<>();
+        wrapper.eq("name", "aliyun");
+        VodProperties vodProperties = super.getOne(wrapper);
+
+        DefaultAcsClient client = InitVodClient.initVodClient(vodProperties.getKeyId(), vodProperties.getKeySecret());
+
+        // 创建获取视频地址的request
+        GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+        // 向response里设置视频id
+        request.setVideoId(id);
+
+        // 调用初始化对象中的方法
+        GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+
+        return response.getPlayAuth();
     }
 }
