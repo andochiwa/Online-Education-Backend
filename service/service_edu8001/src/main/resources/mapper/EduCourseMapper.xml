@@ -3,14 +3,43 @@
 <mapper namespace="com.github.eduservice.mapper.EduCourseMapper">
     <!--根据课程id查询发布时信息-->
     <select id="getPublishInfo" resultType="com.github.eduservice.vo.PublishInfo">
-        SELECT ec.id, ec.title, ec.cover, ec.lesson_num, ec.price,
-               et.name as teacherName,
+        SELECT ec.id,
+               ec.title,
+               ec.cover,
+               ec.lesson_num,
+               ec.price,
+               et.name   as teacherName,
                es1.title AS subjectFirst,
                es2.title AS subjectSecond
         FROM edu_course ec
                  LEFT JOIN edu_teacher et ON ec.teacher_id = et.id
                  LEFT JOIN edu_subject es1 ON ec.subject_id = es1.id
                  LEFT JOIN edu_subject es2 ON ec.subject_parent_id = es2.id
-        WHERE ec.id = #{id}
+        WHERE ec.id = #{id} and ec.is_deleted = 0
+    </select>
+    <!--根据课程id查询关联的所有信息-->
+    <select id="getBaseCourseInfo" resultType="com.github.eduservice.vo.CourseWebInfo">
+        SELECT ec.id,
+               ec.title,
+               ec.price,
+               ec.lesson_num,
+               ec.cover,
+               ec.buy_count,
+               ec.view_count,
+               ec.subject_parent_id,
+               ec.subject_id,
+               ecd.description,
+               et.id     AS teacherId,
+               et.name   AS teacherName,
+               et.intro,
+               et.avatar,
+               es1.title AS subjectTitle,
+               es2.title AS subjectParentTitle
+        FROM edu_course ec
+                 LEFT JOIN edu_teacher et ON ec.teacher_id = et.id
+                 LEFT JOIN edu_subject es1 ON ec.subject_id = es1.id
+                 LEFT JOIN edu_subject es2 ON ec.subject_parent_id = es2.id
+                 LEFT JOIN edu_course_description ecd ON ecd.id = ec.id
+        WHERE ec.id = #{courseId} and ec.is_deleted = 0
     </select>
 </mapper>

@@ -7,6 +7,7 @@ import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/eduservice/subject")
+@CrossOrigin
 @Api("课程分类")
 public class EduSubjectController {
 
@@ -47,6 +49,7 @@ public class EduSubjectController {
      */
     @GetMapping
     @ApiOperation("递归获取课程分类信息")
+    @Cacheable(value = "subject")
     public ResultCommon getSubject() {
 
         List<Subject> list =  eduSubjectService.getRecursionList();

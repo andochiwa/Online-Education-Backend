@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.eduservice.entity.EduCourse;
 import com.github.eduservice.service.EduCourseService;
 import com.github.eduservice.vo.CourseFrontInfo;
+import com.github.eduservice.vo.CourseWebInfo;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +34,7 @@ public class FrontCourseController {
      * @param courseFrontInfo 条件对象
      */
     @PostMapping("condition/{current}/{limit}")
+    @ApiOperation("条件查询带分页课程")
     public ResultCommon getCoursePageCondition(@PathVariable("current") long current,
                                                @PathVariable("limit") long limit,
                                                @RequestBody CourseFrontInfo courseFrontInfo) {
@@ -40,5 +43,18 @@ public class FrontCourseController {
         Map<String, Object> map = eduCourseService.getPageCondition(page, courseFrontInfo);
 
         return ResultCommon.success().setData(map);
+    }
+
+    /**
+     * 查询课程以及其他详细信息
+     * @param courseId 课程id
+     */
+    @GetMapping("{id}")
+    @ApiOperation("查询课程详细信息")
+    public ResultCommon getCourseInfo(@PathVariable("id") Long courseId) {
+
+        CourseWebInfo courseWebInfo = eduCourseService.getBaseCourseInfo(courseId);
+
+        return ResultCommon.success().setData("items", courseWebInfo);
     }
 }

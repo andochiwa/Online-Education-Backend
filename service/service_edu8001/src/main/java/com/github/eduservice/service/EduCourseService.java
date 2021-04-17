@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.eduservice.entity.EduCourse;
 import com.github.eduservice.vo.CourseFrontInfo;
 import com.github.eduservice.vo.CourseInfo;
+import com.github.eduservice.vo.CourseWebInfo;
 import com.github.eduservice.vo.PublishInfo;
 
 import java.util.List;
@@ -65,4 +66,10 @@ public interface EduCourseService extends IService<EduCourse> {
      * @param courseFrontInfo 条件
      */
     Map<String, Object> getPageCondition(Page<EduCourse> page, CourseFrontInfo courseFrontInfo);
+
+    /**
+     * 查询课程以及其他详细信息
+     * @param courseId 课程id
+     */
+    CourseWebInfo getBaseCourseInfo(Long courseId);
 }

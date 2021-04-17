@@ -3,18 +3,13 @@ package com.github.eduservice.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.eduservice.entity.EduChapter;
-import com.github.eduservice.entity.EduCourse;
-import com.github.eduservice.entity.EduCourseDescription;
-import com.github.eduservice.entity.EduVideo;
+import com.github.eduservice.entity.*;
 import com.github.eduservice.feign.VodClient;
 import com.github.eduservice.mapper.EduCourseMapper;
-import com.github.eduservice.service.EduChapterService;
-import com.github.eduservice.service.EduCourseDescriptionService;
-import com.github.eduservice.service.EduCourseService;
-import com.github.eduservice.service.EduVideoService;
+import com.github.eduservice.service.*;
 import com.github.eduservice.vo.CourseFrontInfo;
 import com.github.eduservice.vo.CourseInfo;
+import com.github.eduservice.vo.CourseWebInfo;
 import com.github.eduservice.vo.PublishInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +46,9 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Qualifier("com.github.eduservice.feign.VodClient")
     @Autowired
     private VodClient vodClient;
+
+    @Autowired
+    private EduCourseMapper eduCourseMapper;
 
     @Override
     public void saveCourseInfo(CourseInfo courseInfo) {
@@ -174,5 +172,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         map.put("total", coursePage.getTotal());
 
         return map;
+    }
+
+    @Override
+    public CourseWebInfo getBaseCourseInfo(Long courseId) {
+        return eduCourseMapper.getBaseCourseInfo(courseId);
     }
 }
