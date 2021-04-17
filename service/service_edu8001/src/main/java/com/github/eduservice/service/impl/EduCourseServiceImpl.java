@@ -153,15 +153,15 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
         // 判断销量
         if (!ObjectUtils.isEmpty(courseFrontInfo.getBuyCountSort())) {
-            wrapper.orderByAsc("buy_count");
+            wrapper.orderByDesc("buy_count");
         }
         // 判断价格
         if (!ObjectUtils.isEmpty(courseFrontInfo.getPriceSort())) {
-            wrapper.orderByAsc("price");
+            wrapper.orderByDesc("price");
         }
         // 判断创建时间
         if (!ObjectUtils.isEmpty(courseFrontInfo.getGmtCreateSort())) {
-            wrapper.orderByAsc("gmt_create");
+            wrapper.orderByDesc("gmt_create");
         }
 
         Page<EduCourse> coursePage = super.page(page, wrapper);

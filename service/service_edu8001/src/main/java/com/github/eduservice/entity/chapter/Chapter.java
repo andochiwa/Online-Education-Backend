@@ -23,6 +23,8 @@ public class Chapter {
 
     private String title;
 
+    private String videoSourceId;
+
     private List<Chapter> children;
 
 }

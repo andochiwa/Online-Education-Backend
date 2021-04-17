@@ -40,7 +40,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         // 递归查询
         return chapters.stream()
                 .filter(item -> Objects.equals(item.getCourseId(), courseId)) // 过滤出所需课程
-                .map(item -> new Chapter(item.getId(), item.getTitle(), null)) // 转换为所需对象
+                .map(item -> new Chapter(item.getId(), item.getTitle(), null, null)) // 转换为所需对象
                 .peek(item -> item.setChildren(getChildren(item, videos)))
                 .collect(Collectors.toList());
     }
@@ -57,7 +57,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
     public List<Chapter> getChildren(Chapter root, List<EduVideo> videos) {
         return videos.stream()
                 .filter(item -> Objects.equals(item.getChapterId(), root.getId())) // 把小节中的章节id对应章节的过滤出来
-                .map(item -> new Chapter(item.getId(), item.getTitle(), null))
+                .map(item -> new Chapter(item.getId(), item.getTitle(), item.getVideoSourceId(), null))
                 .peek(item -> item.setChildren(getChildren(item, videos)))
                 .collect(Collectors.toList());
     }
