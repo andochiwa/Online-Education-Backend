@@ -7,9 +7,11 @@ import com.github.eduservice.service.EduChapterService;
 import com.github.eduservice.service.EduCourseService;
 import com.github.eduservice.vo.CourseFrontInfo;
 import com.github.eduservice.vo.CourseWebInfo;
+import com.github.servicebase.entity.CourseWebInfoCommon;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,5 +68,18 @@ public class FrontCourseController {
         List<Chapter> chapters = eduChapterService.getChapter(courseId);
 
         return ResultCommon.success().setData("courses", courseWebInfo).setData("chapters", chapters);
+    }
+
+    /**
+     * 查询课程信息
+     * @param courseId 课程id
+     */
+    @GetMapping("feign/{id}")
+    @ApiOperation("feign专用，根据课程id查询课程信息")
+    public ResultCommon getCourseInfoCommon(@PathVariable("id") Long courseId) {
+        CourseWebInfo courseWebInfo = eduCourseService.getBaseCourseInfo(courseId);
+        CourseWebInfoCommon courseInfo = new CourseWebInfoCommon();
+        BeanUtils.copyProperties(courseWebInfo, courseInfo);
+        return ResultCommon.success().setData("items", courseInfo);
     }
 }

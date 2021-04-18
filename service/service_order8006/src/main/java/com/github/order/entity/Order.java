@@ -49,14 +49,13 @@ public class Order implements Serializable {
     private String teacherName;
 
     @ApiModelProperty(value = "会员id")
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long memberId;
+    private String memberId;
 
     @ApiModelProperty(value = "会员昵称")
     private String nickname;
 
-    @ApiModelProperty(value = "会员手机")
-    private String mobile;
+    @ApiModelProperty(value = "会员邮箱")
+    private String email;
 
     @ApiModelProperty(value = "订单金额（分）")
     private BigDecimal totalFee;
