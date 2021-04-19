@@ -12,7 +12,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -36,7 +35,7 @@ public class StatisticsDaily implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "统计日期")
-    private LocalDate dateCalculated;
+    private String dateCalculated;
 
     @ApiModelProperty(value = "注册人数")
     private Integer registerNum;

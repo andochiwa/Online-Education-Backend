@@ -1,7 +1,7 @@
 package com.github.center.mapper;
 
-import com.github.center.entity.UcenterMember;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.center.entity.UcenterMember;
 
 /**
  * <p>
@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UcenterMemberMapper extends BaseMapper<UcenterMember> {
 
+    int countRegister(String date);
 }

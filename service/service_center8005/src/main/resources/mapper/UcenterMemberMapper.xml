@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.center.mapper.UcenterMemberMapper">
 
+<select id="countRegister" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM ucenter_member
+    WHERE #{date} = DATE(gmt_create)
+</select>
 </mapper>

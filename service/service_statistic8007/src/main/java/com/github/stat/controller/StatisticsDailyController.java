@@ -1,9 +1,11 @@
 package com.github.stat.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.github.stat.service.StatisticsDailyService;
+import com.github.utils.ResultCommon;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -15,7 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/stat/statistics-daily")
+@CrossOrigin
 public class StatisticsDailyController {
 
+    @Autowired
+    private StatisticsDailyService statisticsDailyService;
+
+    /**
+     * 统计某一天的注册人数
+     * @param date 哪一天
+     */
+    @GetMapping("{date}")
+    @ApiOperation("统计某一天的注册人数")
+    public ResultCommon countRegister(@PathVariable("date") String date) {
+        Integer count = statisticsDailyService.countRegister(date);
+
+        return ResultCommon.success().setData("count", count);
+    }
 }
 

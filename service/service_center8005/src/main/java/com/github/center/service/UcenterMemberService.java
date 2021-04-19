@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Objects;
 
@@ -105,5 +106,15 @@ public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, Ucent
         }
         return ucenterMember;
 
+    }
+
+    /**
+     * 查询某一天的注册人数
+     * @param date 哪一天
+     * @return 注册人数
+     */
+    public int statRegister(String date) {
+        int count = baseMapper.countRegister(date);
+        return count;
     }
 }

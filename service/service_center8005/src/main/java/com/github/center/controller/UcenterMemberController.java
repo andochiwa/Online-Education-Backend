@@ -64,6 +64,7 @@ public class UcenterMemberController {
      * 根据token获取用户信息
      */
     @GetMapping("user-info")
+    @ApiOperation("根据token获取用户信息")
     public ResultCommon InformationUser(HttpServletRequest request) {
         String id = JwtUtils.getMemberIdByJwtToken(request);
         UcenterMember ucenterMember = ucenterMemberService.getById(id);
@@ -76,10 +77,24 @@ public class UcenterMemberController {
      * @param id 用户id
      */
     @GetMapping("user-info/{id}")
+    @ApiOperation("根据id获取用户信息")
     public ResultCommon infoUserById(@PathVariable("id") String id) {
         UcenterMember ucenterMember = ucenterMemberService.getById(id);
 
         return ResultCommon.success().setData("items", ucenterMember);
+    }
+
+    /**
+     * 统计某一天的注册人数
+     * @param date 哪一天
+     * @return 人数
+     */
+    @GetMapping("stat-register/{date}")
+    @ApiOperation("统计某一天的注册人数")
+    public int statRegister(@PathVariable("date") String date) {
+        int count = ucenterMemberService.statRegister(date);
+
+        return count;
     }
 
 }
