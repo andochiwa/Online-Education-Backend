@@ -4,12 +4,10 @@ package com.github.center.controller;
 import com.github.center.entity.UcenterMember;
 import com.github.center.service.UcenterMemberService;
 import com.github.center.vo.UserRegister;
-import com.github.servicebase.entity.UcenterMemberCommon;
 import com.github.utils.JwtUtils;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,10 +78,8 @@ public class UcenterMemberController {
     @GetMapping("user-info/{id}")
     public ResultCommon infoUserById(@PathVariable("id") String id) {
         UcenterMember ucenterMember = ucenterMemberService.getById(id);
-        UcenterMemberCommon member = new UcenterMemberCommon();
-        BeanUtils.copyProperties(ucenterMember, member);
 
-        return ResultCommon.success().setData("items", member);
+        return ResultCommon.success().setData("items", ucenterMember);
     }
 
 }
