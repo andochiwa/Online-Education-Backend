@@ -1,10 +1,11 @@
 package com.github.order.controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import com.github.order.service.PayLogService;
+import com.github.utils.ResultCommon;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -18,6 +19,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/pay-log")
 @CrossOrigin
 public class PayLogController {
+
+    @Autowired
+    private PayLogService payLogService;
+
+    /**
+     * 更新订单支付状态
+     * @param id 订单id
+     */
+    @PutMapping("{orderId}")
+    @ApiOperation("更新订单支付状态")
+    public ResultCommon getOrderStatus(@PathVariable("orderId") String id) {
+        payLogService.savePayLog(id);
+        return ResultCommon.success();
+    }
 
 }
 
