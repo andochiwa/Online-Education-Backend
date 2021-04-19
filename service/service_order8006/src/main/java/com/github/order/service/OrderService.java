@@ -81,4 +81,18 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         wrapper.eq("order_no", id);
         return super.getOne(wrapper);
     }
+
+    /**
+     * 查询订单是否存在且支付完成
+     * @param courseId 课程id
+     * @param userId 用户id
+     * @return 查询出来的数量
+     */
+    public int isBuyCourse(Long courseId, String userId) {
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id", courseId)
+                .eq("member_id", userId)
+                .eq("status", 1);
+        return super.count(wrapper);
+    }
 }

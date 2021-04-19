@@ -50,10 +50,22 @@ public class OrderController {
      * @param id 订单号
      */
     @GetMapping("{orderId}")
-    @ApiOperation("查询订单")
+    @ApiOperation("订单id查询订单")
     public ResultCommon getOrder(@PathVariable("orderId") String id) {
         Order order = orderService.getOrder(id);
         return ResultCommon.success().setData("items", order);
+    }
+
+    /**
+     * 查询订单是否存在
+     * @param courseId 课程id
+     */
+    @GetMapping("course-status/{courseId}")
+    @ApiOperation("课程和用户id查询订单是否存在")
+    public ResultCommon isBuyCourse(@PathVariable("courseId") Long courseId,
+                                   HttpServletRequest request) {
+        int count = orderService.isBuyCourse(courseId, JwtUtils.getMemberIdByJwtToken(request));
+        return count <= 0 ? ResultCommon.fail() : ResultCommon.success();
     }
 
 }
