@@ -1,6 +1,7 @@
 package com.github.order.controller;
 
 
+import com.github.order.entity.Order;
 import com.github.order.service.OrderService;
 import com.github.utils.JwtUtils;
 import com.github.utils.ResultCommon;
@@ -42,6 +43,17 @@ public class OrderController {
         String orderId = orderService.saveOrder(courseId, JwtUtils.getMemberIdByJwtToken(request));
 
         return ResultCommon.success().setData("orderId", orderId);
+    }
+
+    /**
+     * 查询订单
+     * @param id 订单号
+     */
+    @GetMapping("{orderId}")
+    @ApiOperation("查询订单")
+    public ResultCommon getOrder(@PathVariable("orderId") String id) {
+        Order order = orderService.getOrder(id);
+        return ResultCommon.success().setData("items", order);
     }
 
 }

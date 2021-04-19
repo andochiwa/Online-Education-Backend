@@ -1,6 +1,7 @@
 package com.github.order.service;
 
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.order.entity.Order;
 import com.github.order.feign.EduFeign;
@@ -59,5 +60,16 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         super.save(order);
 
         return order.getOrderNo();
+    }
+
+    /**
+     * 查询订单
+     * @param id 订单id
+     * @return 订单对象
+     */
+    public Order getOrder(String id) {
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.eq("order_no", id);
+        return super.getOne(wrapper);
     }
 }
