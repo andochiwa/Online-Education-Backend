@@ -18,6 +18,7 @@
         <module>service_cms8004</module>
         <module>service_center8005</module>
         <module>service_order8006</module>
+        <module>service_statistic8007</module>
     </modules>
 
     <properties>
