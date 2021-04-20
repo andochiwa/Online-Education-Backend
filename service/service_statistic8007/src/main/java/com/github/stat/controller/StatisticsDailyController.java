@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * <p>
  * 网站统计日数据 前端控制器
@@ -33,6 +35,22 @@ public class StatisticsDailyController {
         Integer count = statisticsDailyService.countRegister(date);
 
         return ResultCommon.success().setData("count", count);
+    }
+
+    /**
+     * 查询图表显示数据
+     * @param type 数据类型
+     * @param begin 开始日期
+     * @param end 结束日期
+     */
+    @GetMapping("{type}/{begin}/{end}")
+    @ApiOperation("查询图表显示数据")
+    public ResultCommon showData(@PathVariable("type") String type,
+                                 @PathVariable("begin") String begin,
+                                 @PathVariable("end") String end) {
+        Map<String, Object> map = statisticsDailyService.showData(type, begin, end);
+
+        return ResultCommon.success().setData(map);
     }
 }
 
