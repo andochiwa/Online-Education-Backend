@@ -1,0 +1,55 @@
+server:
+  port: 80
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service-edu
+          uri: lb://service-edu
+          predicates:
+            - Path=/eduservice/**
+
+        - id: service-oss
+          uri: lb://service-oss
+          predicates:
+            - Path=/edu-oss/**
+
+        - id: service-vod
+          uri: lb://service-vod
+          predicates:
+            - Path=/edu-vod/**
+
+        - id: service-cms
+          uri: lb://service-cms
+          predicates:
+            - Path=/cms/**
+
+        - id: service-center
+          uri: lb://service-center
+          predicates:
+            - Path=/edu-center/**,/github**
+
+        - id: service-order
+          uri: lb://service-order
+          predicates:
+            - Path=/order/**
+
+        - id: service-statistic
+          uri: lb://service-statistic
+          predicates:
+            - Path=/stat/**
+feign:
+  sentinel:
+    enabled: true
