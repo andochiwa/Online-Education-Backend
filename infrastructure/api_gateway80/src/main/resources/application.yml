@@ -12,6 +12,16 @@ spring:
         dashboard: localhost:8080
         port: 8719
     gateway:
+      # 跨域配置
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            #这里有个allowCredentials: true这个东西是设置允许访问携带cookie的，这点一定要和前端对应！
+#            allowCredentials: true
+#            #可以填写多个域名用","隔开 例如："http://www.xiaolc.cn,https://spring.io"  "*"代表允许所有
+#            allowedOriginPatterns: "*"
+#            allowedMethods: "*"
+#            allowedHeaders: "*"
       discovery:
         locator:
           enabled: true

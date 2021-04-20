@@ -18,7 +18,7 @@ import java.util.List;
  * @create 04-17-15:59
  */
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/eduservice/front-teacher")
 @Api("查询前台教师内容")
 public class FrontTeacherController {

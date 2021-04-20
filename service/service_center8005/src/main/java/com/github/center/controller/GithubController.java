@@ -24,7 +24,7 @@ import java.util.Map;
  * @create 04-16-21:57
  */
 @Controller
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/login/github")
 public class GithubController {
 

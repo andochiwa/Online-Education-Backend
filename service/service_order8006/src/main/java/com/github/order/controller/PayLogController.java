@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/order/pay-log")
-@CrossOrigin
 public class PayLogController {
 
     @Autowired

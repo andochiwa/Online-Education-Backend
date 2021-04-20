@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/edu-center/email")
-@CrossOrigin
+//@CrossOrigin
 @Api("发送邮箱")
 public class EmailController {
 

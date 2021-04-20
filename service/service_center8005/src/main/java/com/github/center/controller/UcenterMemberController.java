@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/edu-center")
-@CrossOrigin
+//@CrossOrigin
 @Api("登陆注册功能")
 public class UcenterMemberController {
 
