@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,11 +30,10 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
     private UcenterClient ucenterClient;
 
     /**
-     * 统计某天的注册人数
+     * 统计某天的信息
      * @param date 哪一天
-     * @return 注册人数
      */
-    public Integer countRegister(String date) {
+    public void countRegister(String date) {
         int count = ucenterClient.statRegister(date);
 
         StatisticsDaily daily = new StatisticsDaily();
@@ -51,7 +51,6 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
             daily.setGmtModified(null);
             super.update(daily, wrapper);
         }
-        return count;
     }
 
     /**
@@ -64,10 +63,10 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
     public Map<String, Object> showData(String type, String begin, String end) {
 
         QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
-        if (!ObjectUtils.isEmpty(begin)) {
+        if (!ObjectUtils.isEmpty(begin) && !begin.equals("undefined")) {
             wrapper.ge("date_calculated", begin);
         }
-        if (!ObjectUtils.isEmpty(end)) {
+        if (!ObjectUtils.isEmpty(end) && !end.equals("undefined")) {
             wrapper.le("date_calculated", end);
         }
         wrapper.select(type, "date_calculated");
@@ -85,6 +84,11 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
             case "course_num" -> item.getCourseNum();
             default -> null;
         }).collect(Collectors.toList());
-        return null;
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("dateList", dates);
+        map.put("countList", counts);
+
+        return map;
     }
 }
