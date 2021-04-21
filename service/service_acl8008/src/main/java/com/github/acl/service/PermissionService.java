@@ -3,11 +3,14 @@ package com.github.acl.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.acl.entity.Permission;
+import com.github.acl.entity.RolePermission;
 import com.github.acl.mapper.PermissionMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -23,6 +26,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class PermissionService extends ServiceImpl<PermissionMapper, Permission> {
+
+    @Autowired
+    private RolePermissionService rolePermissionService;
 
     /**
      * 查询所有菜单
@@ -86,5 +92,23 @@ public class PermissionService extends ServiceImpl<PermissionMapper, Permission>
         super.removeByIds(ids);
         // 递归删除
         ids.forEach(item -> deleteHelper(item, wrapper));
+    }
+
+    /**
+     * 给角色分配权限
+     * @param roleId 角色id
+     * @param permissionIds 菜单id
+     */
+    public void saveRolePermission(Long roleId, Long[] permissionIds) {
+        // 获取RolePermission对象
+        List<RolePermission> rolePermissions = Arrays.stream(permissionIds)
+                .map(permissionId -> {
+                    RolePermission rolePermission = new RolePermission();
+                    rolePermission.setPermissionId(permissionId);
+                    rolePermission.setRoleId(roleId);
+                    return rolePermission;
+                })
+                .collect(Collectors.toList());
+        rolePermissionService.saveBatch(rolePermissions);
     }
 }

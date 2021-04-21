@@ -46,7 +46,24 @@ public class PermissionController {
     @DeleteMapping("{id}")
     @ApiOperation("删除当前以及子级菜单")
     public ResultCommon deleteListPermission(@PathVariable("id") Long id) {
-        permissionService.deleteList(id);
+        try {
+            permissionService.deleteList(id);
+        } catch (Exception e) {
+            return ResultCommon.fail().setMessage("未知错误");
+        }
+
+        return ResultCommon.success();
+    }
+
+    /**
+     * 给角色分配权限
+     * @param roleId 角色id
+     * @param permissionIds 菜单id
+     */
+    @PostMapping("auth")
+    @ApiOperation("给角色分配权限")
+    public ResultCommon saveRolePermission(Long roleId, Long[] permissionIds) {
+        permissionService.saveRolePermission(roleId, permissionIds);
 
         return ResultCommon.success();
     }
