@@ -1,0 +1,19 @@
+server:
+  port: 8008
+spring:
+  application:
+    name: service-acl
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    caches:
+feign:
+  sentinel:
+    enabled: true
