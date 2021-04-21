@@ -36,8 +36,6 @@ spring:
   mail:
     port: 465
     host: smtp.gmail.com
-    username: a1066079469@gmail.com
-    password: cihhnbjsmszbivli
     properties:
       "mail.smtp.ssl.enable": true
 # mybatis log

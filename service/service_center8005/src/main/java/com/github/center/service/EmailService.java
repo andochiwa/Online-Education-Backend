@@ -2,14 +2,19 @@ package com.github.center.service;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.center.entity.UcenterMember;
+import com.github.center.mapper.EmailMapper;
+import com.github.center.thirdparty.Email;
 import com.github.utils.ResultCommon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @create 2021/4/15
  */
 @Service
-public class EmailService {
+public class EmailService extends ServiceImpl<EmailMapper, Email> {
 
     @Autowired
     private UcenterMemberService ucenterMemberService;
@@ -32,6 +37,18 @@ public class EmailService {
 
     @Autowired
     private ExecutorService executorService;
+
+    @Autowired
+    private JavaMailSenderImpl sender;
+
+    @PostConstruct
+    public void init() {
+        QueryWrapper<Email> wrapper = new QueryWrapper<>();
+        wrapper.eq("name", "email");
+        Email email = super.getOne(wrapper);
+        sender.setPassword(email.getPassword());
+        sender.setUsername(email.getUsername());
+    }
 
     /**
      * 发送邮箱
