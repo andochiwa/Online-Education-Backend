@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -35,6 +36,14 @@ public class Permission implements Serializable {
     @ApiModelProperty(value = "所属上级")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long pid;
+
+    @ApiModelProperty("层级")
+    @TableField(exist = false)
+    private Integer level;
+
+    @ApiModelProperty("下级")
+    @TableField(exist = false)
+    private List<Permission> children;
 
     @ApiModelProperty(value = "名称")
     private String name;
