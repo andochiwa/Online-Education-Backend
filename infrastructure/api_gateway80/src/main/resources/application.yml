@@ -60,6 +60,11 @@ spring:
           uri: lb://service-statistic
           predicates:
             - Path=/stat/**
+
+        - id: service-acl
+          uri: lb://service-acl
+          predicates:
+            - Path=/acl/**
 feign:
   sentinel:
     enabled: true
