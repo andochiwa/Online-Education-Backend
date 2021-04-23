@@ -7,7 +7,6 @@ import com.github.utils.JwtUtils;
 import com.github.utils.ResponseUtil;
 import com.github.utils.ResultCommon;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -29,16 +27,14 @@ import java.util.ArrayList;
  * @version 1.0
  * @create 04-24-0:58
  */
-@Component
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
-
-    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired
     private AuthenticationManager authenticationManager;
 
-    public LoginFilter() {
+    public LoginFilter(RedisTemplate<String, Object> redisTemplate, AuthenticationManager authenticationManager) {
+        this.redisTemplate = redisTemplate;
+        this.authenticationManager = authenticationManager;
         super.setPostOnly(false);
         super.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/acl/login"));
     }

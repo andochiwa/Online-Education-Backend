@@ -1,7 +1,6 @@
 package com.github.security.filter;
 
 import com.github.utils.JwtUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
 import javax.servlet.FilterChain;
@@ -25,14 +23,13 @@ import java.util.List;
  * @version 1.0
  * @create 04-24-2:18
  */
-@Component
 public class AuthFilter extends BasicAuthenticationFilter {
 
-    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    public AuthFilter(AuthenticationManager authenticationManager) {
+    public AuthFilter(AuthenticationManager authenticationManager, RedisTemplate<String, Object> redisTemplate) {
         super(authenticationManager);
+        this.redisTemplate = redisTemplate;
     }
 
     @Override

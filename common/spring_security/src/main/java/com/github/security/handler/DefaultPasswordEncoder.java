@@ -13,13 +13,6 @@ import java.util.Objects;
  */
 @Component
 public class DefaultPasswordEncoder implements PasswordEncoder {
-    public DefaultPasswordEncoder() {
-        this(-1);
-    }
-
-    public DefaultPasswordEncoder(int length) {
-
-    }
 
     /**
      * 对密码进行md5加密
