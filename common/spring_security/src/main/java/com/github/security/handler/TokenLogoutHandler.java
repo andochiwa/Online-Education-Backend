@@ -26,7 +26,7 @@ public class TokenLogoutHandler implements LogoutHandler {
 
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        // 获取会员id
+        // 获取会员名
         String token = JwtUtils.getMemberIdByJwtToken(request);
         if (!ObjectUtils.isEmpty(token)) {
             // 这里也可以移除token，不过交给前端了
