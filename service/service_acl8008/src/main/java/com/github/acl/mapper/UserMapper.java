@@ -1,6 +1,6 @@
 package com.github.acl.mapper;
 
-import com.github.acl.entity.User;
+import com.github.security.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

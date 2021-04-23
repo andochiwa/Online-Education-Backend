@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.acl.mapper.PermissionMapper">
 
+    <select id="getPermissionByUserId" resultType="java.lang.String">
+        SELECT ap.permission_value
+        FROM acl_role_permission arp
+                 JOIN acl_user_role aur ON aur.role_id = arp.role_id
+                 JOIN acl_permission ap ON arp.permission_id = ap.id
+        WHERE aur.user_id = #{id}
+          AND ap.type = 1
+          AND arp.is_deleted = 0
+          AND ap.is_deleted = 0
+          AND aur.is_deleted = 0
+    </select>
 </mapper>

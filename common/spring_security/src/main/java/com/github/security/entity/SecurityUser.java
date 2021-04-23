@@ -26,8 +26,9 @@ public class SecurityUser implements UserDetails {
     public SecurityUser() {
     }
 
-    public SecurityUser(User user) {
+    public SecurityUser(User user, List<String> permissionList) {
         this.user = user;
+        this.permissionList = permissionList;
     }
 
     @Override
@@ -46,12 +47,12 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return user.getUsername();
     }
 
     @Override

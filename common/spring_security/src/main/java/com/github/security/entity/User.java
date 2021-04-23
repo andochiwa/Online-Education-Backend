@@ -1,46 +1,60 @@
 package com.github.security.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
+ * <p>
+ * 用户表
+ * </p>
+ *
  * @author HAN
- * @version 1.0
- * @create 04-24-1:11
+ * @since 2021-04-22
  */
 @Data
-@ApiModel("用户类")
+@EqualsAndHashCode(callSuper = false)
+@TableName("acl_user")
+@ApiModel(value="User对象", description="用户表")
 public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "会员id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private String id;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long id;
 
-    @ApiModelProperty("用户名")
+    @ApiModelProperty(value = "用户名")
     private String username;
 
-    @ApiModelProperty("用户密码")
+    @ApiModelProperty(value = "密码")
     private String password;
 
-    @ApiModelProperty("用户昵称")
-    private String nickname;
+    @ApiModelProperty(value = "昵称")
+    private String nickName;
 
-    @ApiModelProperty("用户头像")
+    @ApiModelProperty(value = "用户头像")
     private String avatar;
 
-    @ApiModelProperty("逻辑删除")
+    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
     @TableLogic
     private Integer isDeleted;
 
-    @ApiModelProperty("创建时间")
+    @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
-    private String gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    @ApiModelProperty("修改时间")
+    @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String gmrModified;
+    private LocalDateTime gmtModified;
+
+
 }

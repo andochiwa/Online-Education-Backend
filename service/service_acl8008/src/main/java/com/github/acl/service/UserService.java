@@ -1,9 +1,9 @@
 package com.github.acl.service;
 
-import com.github.acl.entity.User;
-import com.github.acl.mapper.UserMapper;
-import com.github.acl.service.UserService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.security.entity.User;
+import com.github.acl.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService extends ServiceImpl<UserMapper, User> {
 
+    /**
+     * 根据用户名查询
+     * @param username 用户名
+     */
+    public User getByUsername(String username) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("username", username);
+        return super.getOne(wrapper);
+    }
 }

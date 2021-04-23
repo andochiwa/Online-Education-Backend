@@ -111,4 +111,13 @@ public class PermissionService extends ServiceImpl<PermissionMapper, Permission>
                 .collect(Collectors.toList());
         rolePermissionService.saveBatch(rolePermissions);
     }
+
+    /**
+     * 根据用户id查询权限
+     * @param id 用户id
+     * @return 权限列表
+     */
+    public List<String> getPermissionByUserId(Long id) {
+        return super.baseMapper.getPermissionByUserId(id);
+    }
 }
