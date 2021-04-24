@@ -68,5 +68,29 @@ public class PermissionController {
         return ResultCommon.success();
     }
 
+    /**
+     * 保存菜单或功能
+     * @param permission 菜单或功能对象
+     */
+    @PostMapping()
+    @ApiOperation("保存菜单或功能")
+    public ResultCommon savePermission(@RequestBody Permission permission) {
+        System.out.println(permission);
+        permissionService.save(permission);
+        return ResultCommon.success();
+    }
+
+    /**
+     * 更新菜单或功能
+     * @param permission 菜单或功能对象
+     */
+    @PutMapping
+    @ApiOperation("更新菜单或功能")
+    public ResultCommon updatePermission(@RequestBody Permission permission) {
+        System.out.println(permission);
+        permissionService.updateById(permission);
+        return ResultCommon.success();
+    }
+
 }
 

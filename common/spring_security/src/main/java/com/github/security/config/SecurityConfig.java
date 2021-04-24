@@ -36,14 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.exceptionHandling()
                 .authenticationEntryPoint(new UnAuthHandler()) // 无权访问设置
+                .and()// 不进行认证路径
+                .authorizeRequests().antMatchers("/api/**").permitAll()
                 .and() // 关闭csrf
                 .csrf().disable()
                 .authorizeRequests().anyRequest().authenticated()
                 .and() // 设置登出
-                .logout().logoutUrl("admin/acl/logout")
+                .logout().logoutUrl("/admin/acl/logout")
                 .addLogoutHandler(new TokenLogoutHandler(redisTemplate))
-                .and()// 不进行认证路径
-                .authorizeRequests().antMatchers("/api/**").permitAll()
                 .and() // 设置过滤器
                 .addFilter(new LoginFilter(redisTemplate, authenticationManager()))
                 .addFilter(new AuthFilter(authenticationManager(), redisTemplate))

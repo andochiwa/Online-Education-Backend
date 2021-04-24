@@ -52,13 +52,15 @@ public class AuthFilter extends BasicAuthenticationFilter {
             List<String> permissions = (List<String>) redisTemplate.opsForValue().get(username);
             ArrayList<GrantedAuthority> authorities = new ArrayList<>();
 
-            permissions.forEach(item -> {
-                if (ObjectUtils.isEmpty(item)) {
-                    return;
-                }
-                SimpleGrantedAuthority authority = new SimpleGrantedAuthority(item);
-                authorities.add(authority);
-            });
+            if (permissions != null) {
+                permissions.forEach(item -> {
+                    if (ObjectUtils.isEmpty(item)) {
+                        return;
+                    }
+                    SimpleGrantedAuthority authority = new SimpleGrantedAuthority(item);
+                    authorities.add(authority);
+                });
+            }
 
 
             return new UsernamePasswordAuthenticationToken(username, request.getHeader("token"), authorities);
