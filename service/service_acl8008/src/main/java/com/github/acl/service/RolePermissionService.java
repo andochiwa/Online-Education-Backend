@@ -33,7 +33,7 @@ public class RolePermissionService extends ServiceImpl<RolePermissionMapper, Rol
 
     /**
      * 根据角色id获取权限列表id
-     * @param roleId
+     * @param roleId 角色id
      * @return 所有权限列表id的list
      */
     public List<String> getPermissionIdByRoleId(Long roleId) {
