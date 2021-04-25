@@ -43,7 +43,7 @@ public class RoleController {
     @ApiOperation("分页条件查询获取所有角色")
     public ResultCommon getPageConditionList(@PathVariable("current") long current,
                                              @PathVariable("limit") long limit,
-                                             String name) {
+                                             @RequestParam(required = false) String name) {
         Map<String, Object> map = roleService.getPageConditionList(current, limit, name);
         return ResultCommon.success().setData(map);
     }
@@ -71,7 +71,7 @@ public class RoleController {
     }
 
     /**
-     * 更细角色
+     * 更新角色
      * @param role 角色对象
      */
     @PutMapping
@@ -105,6 +105,27 @@ public class RoleController {
                                                @RequestParam(required = false) Set<Long> newPermissionIds) {
         rolePermissionService.removeOrSavePermission(roleId, oldPermissionIds, newPermissionIds);
         return ResultCommon.success();
+    }
+
+    /**
+     * 查询所有角色
+     */
+    @GetMapping("user")
+    @ApiOperation("查询所有角色的id和name")
+    public ResultCommon getAllRole() {
+        List<Role> role = roleService.getAllRole();
+        return ResultCommon.success().setData("items", role);
+    }
+
+    /**
+     * 根据用户id查询角色
+     * @param id 用户id
+     */
+    @GetMapping("user/{userId}")
+    @ApiOperation("根据用户id查询角色")
+    public ResultCommon getRoleByUserId(@PathVariable("userId") Long id) {
+        List<Role> role = roleService.getRoleByUserId(id);
+        return ResultCommon.success().setData("items", role);
     }
 
 }

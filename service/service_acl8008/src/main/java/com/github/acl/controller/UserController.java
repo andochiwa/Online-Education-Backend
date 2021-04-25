@@ -1,6 +1,7 @@
 package com.github.acl.controller;
 
 
+import com.github.acl.service.UserRoleService;
 import com.github.acl.service.UserService;
 import com.github.security.entity.User;
 import com.github.utils.ResultCommon;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -26,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRoleService userRoleService;
 
     /**
      * 分页条件查询用户信息
@@ -72,6 +77,21 @@ public class UserController {
     @ApiOperation("根据id删除用户")
     public ResultCommon deleteUser(@PathVariable("id") Long userId) {
         userService.removeById(userId);
+        return ResultCommon.success();
+    }
+
+    /**
+     * 保存或删除用户的角色
+     * @param id 用户id
+     * @param oldRoleIds 角色旧id
+     * @param newRoleIds 角色新id
+     */
+    @PostMapping("role/{userId}")
+    @ApiOperation("保存或删除用户的角色")
+    public ResultCommon saveOrRemoveRole(@PathVariable("userId") Long id,
+                                 @RequestParam(required = false) Set<Long> oldRoleIds,
+                                 @RequestParam(required = false) Set<Long> newRoleIds) {
+        userRoleService.saveOrRemoveRole(id, oldRoleIds, newRoleIds);
         return ResultCommon.success();
     }
 

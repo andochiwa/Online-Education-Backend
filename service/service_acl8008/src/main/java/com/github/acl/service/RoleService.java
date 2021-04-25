@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.acl.entity.Role;
+import com.github.acl.entity.UserRole;
 import com.github.acl.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,9 @@ public class RoleService extends ServiceImpl<RoleMapper, Role> {
 
     @Autowired
     private RolePermissionService rolePermissionService;
+
+    @Autowired
+    private UserRoleService userRoleService;
 
     /**
      * 分页条件查询获取所有角色
@@ -59,5 +64,30 @@ public class RoleService extends ServiceImpl<RoleMapper, Role> {
     public void deleteById(Long roleId) {
         super.removeById(roleId);
         rolePermissionService.removeByRoleId(roleId);
+    }
+
+    /**
+     * 查询所有角色的id的角色名
+     */
+    public List<Role> getAllRole() {
+        QueryWrapper<Role> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "roleName");
+        return super.list(wrapper);
+    }
+
+    /**
+     * 根据用户id查询角色
+     * @param userId 用户id
+     * @return 角色列表
+     */
+    public List<Role> getRoleByUserId(Long userId) {
+        // 获取角色id
+        List<UserRole> userRoles = userRoleService.getRoleId(userId);
+        // 查询相应角色
+        ArrayList<Role> roles = new ArrayList<>();
+        userRoles.forEach(item -> {
+            roles.add(super.getById(item.getRoleId()));
+        });
+        return roles;
     }
 }
