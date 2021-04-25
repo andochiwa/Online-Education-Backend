@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.acl.entity.RolePermission;
 import com.github.acl.mapper.RolePermissionMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -51,6 +52,30 @@ public class RolePermissionService extends ServiceImpl<RolePermissionMapper, Rol
      * @param newPermissionIds 更新后的权限id
      */
     public void removeOrSavePermission(Long roleId, Set<Long> oldPermissionIds, Set<Long> newPermissionIds) {
+        // 如果旧数据为空直接保存新数据
+        if (CollectionUtils.isEmpty(oldPermissionIds)) {
+            if (!CollectionUtils.isEmpty(newPermissionIds)) {
+                super.saveBatch(newPermissionIds.parallelStream()
+                        .map(item -> {
+                            RolePermission rolePermission = new RolePermission();
+                            rolePermission.setRoleId(roleId);
+                            rolePermission.setPermissionId(item);
+                            return rolePermission;
+                        })
+                        .collect(Collectors.toList()));
+            }
+            return;
+        }
+        // 如果新数据为空直接删除所有旧数据
+        if (CollectionUtils.isEmpty(newPermissionIds)) {
+            if (!CollectionUtils.isEmpty(oldPermissionIds)) {
+                QueryWrapper<RolePermission> wrapper = new QueryWrapper<>();
+                wrapper.eq("role_id", roleId);
+                super.remove(wrapper);
+            }
+            return;
+        }
+
         // 删除数据
         List<Long> removeList = oldPermissionIds.stream()
                 .filter(item -> !newPermissionIds.contains(item)) // 如果新数据中有id就不需要删除

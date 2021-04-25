@@ -101,8 +101,8 @@ public class RoleController {
     @PostMapping("auth/{id}")
     @ApiOperation("保存或删除权限列表")
     public ResultCommon removeOrSavePermission(@PathVariable("id") Long roleId,
-                                               @RequestParam Set<Long> oldPermissionIds,
-                                               @RequestParam Set<Long> newPermissionIds) {
+                                               @RequestParam(required = false) Set<Long> oldPermissionIds,
+                                               @RequestParam(required = false) Set<Long> newPermissionIds) {
         rolePermissionService.removeOrSavePermission(roleId, oldPermissionIds, newPermissionIds);
         return ResultCommon.success();
     }
