@@ -2,6 +2,7 @@ package com.github.acl.controller;
 
 
 import com.github.acl.entity.Role;
+import com.github.acl.service.RolePermissionService;
 import com.github.acl.service.RoleService;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
@@ -9,7 +10,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -26,6 +29,9 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private RolePermissionService rolePermissionService;
 
     /**
      * 分页条件查询获取所有角色
@@ -72,6 +78,32 @@ public class RoleController {
     @ApiOperation("更新角色")
     public ResultCommon updateRole(@RequestBody Role role) {
         roleService.saveOrUpdate(role);
+        return ResultCommon.success();
+    }
+
+    /**
+     * 获取权限列表的id
+     * @param roleId 角色id
+     */
+    @GetMapping("auth/{id}")
+    @ApiOperation("获取权限列表的id")
+    public ResultCommon getPermissionIdByRoleId(@PathVariable("id") Long roleId) {
+        List<String> permissionIds = rolePermissionService.getPermissionIdByRoleId(roleId);
+        return ResultCommon.success().setData("items", permissionIds);
+    }
+
+    /**
+     * 保存或删除权限列表
+     * @param roleId 角色id
+     * @param oldPermissionIds 已有权限id
+     * @param newPermissionIds 更新后的权限id
+     */
+    @PostMapping("auth/{id}")
+    @ApiOperation("保存或删除权限列表")
+    public ResultCommon removeOrSavePermission(@PathVariable("id") Long roleId,
+                                               @RequestParam Set<Long> oldPermissionIds,
+                                               @RequestParam Set<Long> newPermissionIds) {
+        rolePermissionService.removeOrSavePermission(roleId, oldPermissionIds, newPermissionIds);
         return ResultCommon.success();
     }
 
