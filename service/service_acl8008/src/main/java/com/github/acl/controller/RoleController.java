@@ -1,7 +1,9 @@
 package com.github.acl.controller;
 
 
+import com.github.acl.entity.Permission;
 import com.github.acl.entity.Role;
+import com.github.acl.service.PermissionService;
 import com.github.acl.service.RolePermissionService;
 import com.github.acl.service.RoleService;
 import com.github.utils.ResultCommon;
@@ -32,6 +34,9 @@ public class RoleController {
 
     @Autowired
     private RolePermissionService rolePermissionService;
+
+    @Autowired
+    private PermissionService permissionService;
 
     /**
      * 分页条件查询获取所有角色
@@ -82,14 +87,14 @@ public class RoleController {
     }
 
     /**
-     * 获取权限列表的id
+     * 角色id获取权限列表
      * @param roleId 角色id
      */
     @GetMapping("auth/{id}")
-    @ApiOperation("获取权限列表的id")
+    @ApiOperation("角色id获取权限列表")
     public ResultCommon getPermissionIdByRoleId(@PathVariable("id") Long roleId) {
-        List<String> permissionIds = rolePermissionService.getPermissionIdByRoleId(roleId);
-        return ResultCommon.success().setData("items", permissionIds);
+        List<Permission> permissions = permissionService.getPermissionsByRoleId(roleId);
+        return ResultCommon.success().setData("items", permissions);
     }
 
     /**

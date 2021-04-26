@@ -132,9 +132,19 @@ public class PermissionService extends ServiceImpl<PermissionMapper, Permission>
         List<Long> permissionIds = rolePermissionService.getPermissionIdByRoleIds(roleIds);
         // 根据权限id查询权限值
         QueryWrapper<Permission> wrapper = new QueryWrapper<>();
-        wrapper.eq("type", 2)
-                .in("id", permissionIds)
-                .groupBy("permission_value"); // 去重
+        wrapper.in("id", permissionIds)
+                .select("permission_value", "id", "pid", "type", "path", "component", "icon", "status");
         return super.list(wrapper);
+    }
+
+    /**
+     * 角色id获取权限列表
+     * @param roleId 角色id
+     * @return 权限列表
+     */
+    public List<Permission> getPermissionsByRoleId(Long roleId) {
+        // 获取权限id
+        List<Long> permissionIds = rolePermissionService.getPermissionIdByRoleId(roleId);
+        return CollectionUtils.isEmpty(permissionIds) ? null : super.listByIds(permissionIds);
     }
 }

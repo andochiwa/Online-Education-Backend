@@ -39,11 +39,11 @@ public class RolePermissionService extends ServiceImpl<RolePermissionMapper, Rol
      * @param roleId 角色id
      * @return 所有权限列表id的list
      */
-    public List<String> getPermissionIdByRoleId(Long roleId) {
+    public List<Long> getPermissionIdByRoleId(Long roleId) {
         QueryWrapper<RolePermission> wrapper = new QueryWrapper<>();
         wrapper.eq("role_id", roleId).select("permission_id");
         return super.list(wrapper).stream()
-                .map(item -> String.valueOf(item.getPermissionId()))
+                .map(RolePermission::getPermissionId)
                 .collect(Collectors.toList());
     }
 

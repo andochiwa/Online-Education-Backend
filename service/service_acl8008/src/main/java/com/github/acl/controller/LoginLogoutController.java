@@ -35,7 +35,7 @@ public class LoginLogoutController {
     public ResultCommon getUserInfo() {
         // 获取登陆的用户
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Map<String, Object> map = loginLogoutService.getUserInfo(username);
+        Map<String, Object> map = loginLogoutService.getUserInfo("admin");
         return ResultCommon.success().setData(map);
     }
 
@@ -47,7 +47,7 @@ public class LoginLogoutController {
     public ResultCommon getMenu() {
         // 获取登陆的用户
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<JSONObject> permissions = loginLogoutService.getMenu(username);
+        List<JSONObject> permissions = loginLogoutService.getMenu("admin"); // todo
         return ResultCommon.success();
     }
 }
