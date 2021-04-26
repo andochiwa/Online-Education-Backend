@@ -3,9 +3,11 @@ package com.github.stat.service;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.servicebase.cache.MybatisRedisCacheConfig;
 import com.github.stat.entity.StatisticsDaily;
 import com.github.stat.feign.UcenterClient;
 import com.github.stat.mapper.StatisticsDailyMapper;
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
  * @since 2021-04-20
  */
 @Service
+@CacheNamespace(implementation = MybatisRedisCacheConfig.class, eviction = MybatisRedisCacheConfig.class)
 public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, StatisticsDaily> {
 
     @Autowired

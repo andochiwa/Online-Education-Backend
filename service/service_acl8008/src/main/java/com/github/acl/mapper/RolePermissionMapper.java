@@ -1,7 +1,9 @@
 package com.github.acl.mapper;
 
-import com.github.acl.entity.RolePermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.acl.entity.RolePermission;
+import com.github.servicebase.cache.MybatisRedisCacheConfig;
+import org.apache.ibatis.annotations.CacheNamespace;
 
 /**
  * <p>
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author HAN
  * @since 2021-04-22
  */
+@CacheNamespace(implementation = MybatisRedisCacheConfig.class, eviction = MybatisRedisCacheConfig.class)
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
 }

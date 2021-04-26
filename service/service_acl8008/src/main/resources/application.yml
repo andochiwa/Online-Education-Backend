@@ -33,7 +33,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    caches:
+    cache-enabled: true
 feign:
   sentinel:
     enabled: true
