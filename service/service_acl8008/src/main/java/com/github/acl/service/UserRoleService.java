@@ -85,4 +85,10 @@ public class UserRoleService extends ServiceImpl<UserRoleMapper, UserRole> {
                 .collect(Collectors.toList());
         super.saveBatch(userRoles);
     }
+
+    public void removeByUserId(Long userId) {
+        QueryWrapper<UserRole> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", userId);
+        super.remove(wrapper);
+    }
 }

@@ -26,6 +26,9 @@ import java.util.Map;
 @Transactional
 public class UserService extends ServiceImpl<UserMapper, User> {
 
+    @Autowired
+    private UserRoleService userRoleService;
+
     /**
      * 根据用户名查询
      * @param username 用户名
@@ -66,5 +69,15 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         // 对密码MD5加密
         user.setPassword(SecureUtil.md5(user.getPassword()));
         super.save(user);
+    }
+
+    /**
+     * 根据用户id删除
+     * @param userId 用户id
+     */
+    public void removeByUserId(Long userId) {
+        super.removeById(userId);
+        userRoleService.removeByUserId(userId);
+
     }
 }

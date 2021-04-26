@@ -76,7 +76,7 @@ public class UserController {
     @DeleteMapping("{id}")
     @ApiOperation("根据id删除用户")
     public ResultCommon deleteUser(@PathVariable("id") Long userId) {
-        userService.removeById(userId);
+        userService.removeByUserId(userId);
         return ResultCommon.success();
     }
 

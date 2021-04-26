@@ -71,7 +71,7 @@ public class RoleService extends ServiceImpl<RoleMapper, Role> {
      */
     public List<Role> getAllRole() {
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "roleName");
+        wrapper.select("id", "role_name");
         return super.list(wrapper);
     }
 
