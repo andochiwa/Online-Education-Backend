@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.acl.entity.RolePermission;
 import com.github.acl.mapper.RolePermissionMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  * @since 2021-04-22
  */
 @Service
+@Transactional
 public class RolePermissionService extends ServiceImpl<RolePermissionMapper, RolePermission> {
 
     /**
@@ -98,4 +100,19 @@ public class RolePermissionService extends ServiceImpl<RolePermissionMapper, Rol
                 .collect(Collectors.toList());
         super.saveBatch(saveList);
     }
+
+    /**
+     * 根据角色id获取权限id
+     * @param roleIds 角色所有id
+     * @return 权限id
+     */
+    public List<Long> getPermissionIdByRoleIds(List<Long> roleIds) {
+        QueryWrapper<RolePermission> wrapper = new QueryWrapper<>();
+        wrapper.select("permission_id").in("role_id", roleIds);
+
+        return super.list(wrapper).stream()
+                .map(RolePermission::getPermissionId)
+                .collect(Collectors.toList());
+    }
+
 }

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -84,10 +84,10 @@ public class RoleService extends ServiceImpl<RoleMapper, Role> {
         // 获取角色id
         List<UserRole> userRoles = userRoleService.getRoleId(userId);
         // 查询相应角色
-        ArrayList<Role> roles = new ArrayList<>();
-        userRoles.forEach(item -> {
-            roles.add(super.getById(item.getRoleId()));
-        });
-        return roles;
+        QueryWrapper<Role> wrapper = new QueryWrapper<>();
+        wrapper.in("id", userRoles.stream()
+                .map(UserRole::getRoleId)
+                .collect(Collectors.toList()));
+        return super.list(wrapper);
     }
 }

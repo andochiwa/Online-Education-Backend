@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.acl.entity.UserRole;
 import com.github.acl.mapper.UserRoleMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  * @since 2021-04-22
  */
 @Service
+@Transactional
 public class UserRoleService extends ServiceImpl<UserRoleMapper, UserRole> {
 
     /**

@@ -120,4 +120,21 @@ public class PermissionService extends ServiceImpl<PermissionMapper, Permission>
     public List<String> getPermissionByUserId(Long id) {
         return super.baseMapper.getPermissionByUserId(id);
     }
+
+
+    /**
+     * 根据roleId获取权限值
+     * @param roleIds 角色id列表
+     * @return 所有权限值
+     */
+    public List<Permission> getPermissionsByRoleIds(List<Long> roleIds) {
+        // 获取权限id
+        List<Long> permissionIds = rolePermissionService.getPermissionIdByRoleIds(roleIds);
+        // 根据权限id查询权限值
+        QueryWrapper<Permission> wrapper = new QueryWrapper<>();
+        wrapper.eq("type", 2)
+                .in("id", permissionIds)
+                .groupBy("permission_value"); // 去重
+        return super.list(wrapper);
+    }
 }
