@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests().anyRequest().authenticated()
                 .and() // 设置登出
-                .logout().logoutUrl("/admin/acl/logout")
+                .logout().logoutUrl("/acl/index/logout")
                 .addLogoutHandler(new TokenLogoutHandler(redisTemplate))
                 .and() // 设置过滤器
                 .addFilter(new LoginFilter(redisTemplate, authenticationManager()))

@@ -36,7 +36,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         this.redisTemplate = redisTemplate;
         this.authenticationManager = authenticationManager;
         super.setPostOnly(false);
-        super.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/acl/login"));
+        super.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/acl/index/login"));
     }
 
     // 获取表单提交的用户名与密码

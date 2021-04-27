@@ -42,6 +42,8 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    useDeprecatedExecutor: false # Since it has not been removed, so continue to use(default true to false)
+    cache-enabled: true
 feign:
   sentinel:
     enabled: true

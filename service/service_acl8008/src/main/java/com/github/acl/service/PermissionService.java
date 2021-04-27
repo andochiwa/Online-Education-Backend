@@ -133,7 +133,7 @@ public class PermissionService extends ServiceImpl<PermissionMapper, Permission>
         // 根据权限id查询权限值
         QueryWrapper<Permission> wrapper = new QueryWrapper<>();
         wrapper.in("id", permissionIds)
-                .select("permission_value", "id", "pid", "type", "path", "component", "icon", "status");
+                .select("permission_value", "id", "pid", "type", "path", "component", "icon", "status", "name");
         return super.list(wrapper);
     }
 

@@ -1,7 +1,9 @@
 package com.github.stat.mapper;
 
-import com.github.stat.entity.StatisticsDaily;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.servicebase.cache.MybatisRedisCacheConfig;
+import com.github.stat.entity.StatisticsDaily;
+import org.apache.ibatis.annotations.CacheNamespace;
 
 /**
  * <p>
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author HAN
  * @since 2021-04-20
  */
+@CacheNamespace(implementation = MybatisRedisCacheConfig.class, eviction = MybatisRedisCacheConfig.class)
 public interface StatisticsDailyMapper extends BaseMapper<StatisticsDaily> {
 
 }

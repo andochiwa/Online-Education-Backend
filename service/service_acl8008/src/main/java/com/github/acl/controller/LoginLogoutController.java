@@ -1,6 +1,5 @@
 package com.github.acl.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.github.acl.service.LoginLogoutService;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,7 +33,7 @@ public class LoginLogoutController {
     public ResultCommon getUserInfo() {
         // 获取登陆的用户
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Map<String, Object> map = loginLogoutService.getUserInfo("admin");
+        Map<String, Object> map = loginLogoutService.getUserInfo(username);
         return ResultCommon.success().setData(map);
     }
 
@@ -47,7 +45,17 @@ public class LoginLogoutController {
     public ResultCommon getMenu() {
         // 获取登陆的用户
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<JSONObject> permissions = loginLogoutService.getMenu("admin"); // todo
+        Map<String, Object> permissions = loginLogoutService.getMenu(username);
+        System.out.println(permissions);
+        return ResultCommon.success().setData("items", permissions);
+    }
+
+    /**
+     * 登出
+     */
+    @GetMapping("logout")
+    @ApiOperation("登出")
+    public ResultCommon logout() {
         return ResultCommon.success();
     }
 }
