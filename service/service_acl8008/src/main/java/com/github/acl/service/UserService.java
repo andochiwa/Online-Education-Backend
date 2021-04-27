@@ -80,4 +80,13 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         userRoleService.removeByUserId(userId);
 
     }
+
+    /**
+     * 更新用户
+     * @param user 用户信息
+     */
+    public void updateUserById(User user) {
+        user.setPassword(SecureUtil.md5(user.getPassword()));
+        super.updateById(user);
+    }
 }

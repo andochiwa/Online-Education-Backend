@@ -83,15 +83,16 @@ public class LoginLogoutService {
         User user = userService.getByUsername(username);
         // 获得权限信息
         List<Role> roles = roleService.getRoleByUserId(user.getId());
-        // 获得菜单列表, 并把name作为key返回给前端判断
-        Map<String, Object> map = permissionService.
+        // 获得菜单列表,
+        List<Permission> permissions = permissionService.
                 getPermissionsByRoleIds(roles.stream()
                         .map(Role::getId)
-                        .collect(Collectors.toList()))
-                .stream()
-                .filter(item -> item.getType() == 1) // 过滤出所有为菜单选项
-                .collect(Collectors.toMap(Permission::getName, Permission::getPath));
+                        .collect(Collectors.toList()));
+        // 把name作为key返回给前端判断
+        HashMap<String, Object> map = new HashMap<>();
+        permissions.forEach(item -> map.put(item.getName(), item.getPath()));
         // 放入
         return map;
     }
 }
+

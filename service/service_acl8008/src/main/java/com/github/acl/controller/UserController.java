@@ -65,7 +65,7 @@ public class UserController {
     @PutMapping
     @ApiOperation("更新用户")
     public ResultCommon updateUser(@RequestBody User user) {
-        userService.updateById(user);
+        userService.updateUserById(user);
         return ResultCommon.success();
     }
 
