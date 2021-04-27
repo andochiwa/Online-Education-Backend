@@ -9,6 +9,7 @@ import com.github.acl.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
@@ -83,6 +84,9 @@ public class RoleService extends ServiceImpl<RoleMapper, Role> {
     public List<Role> getRoleByUserId(Long userId) {
         // 获取角色id
         List<UserRole> userRoles = userRoleService.getRoleId(userId);
+        if (CollectionUtils.isEmpty(userRoles)) {
+            return null;
+        }
         // 查询相应角色
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
         wrapper.in("id", userRoles.stream()

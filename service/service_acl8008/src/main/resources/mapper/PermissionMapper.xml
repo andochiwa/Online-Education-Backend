@@ -8,7 +8,7 @@
                  JOIN acl_user_role aur ON aur.role_id = arp.role_id
                  JOIN acl_permission ap ON arp.permission_id = ap.id
         WHERE aur.user_id = 1
-          AND ap.type = 1
+          AND ap.type = 2
           AND ap.is_deleted = 0
     </select>
 </mapper>

@@ -46,7 +46,6 @@ public class LoginLogoutController {
         // 获取登陆的用户
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Map<String, Object> permissions = loginLogoutService.getMenu(username);
-        System.out.println(permissions);
         return ResultCommon.success().setData("items", permissions);
     }
 

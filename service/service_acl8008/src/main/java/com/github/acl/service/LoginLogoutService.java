@@ -46,13 +46,15 @@ public class LoginLogoutService {
         User user = userService.getByUsername(username);
         // 获取权限列表
         List<Role> roles = roleService.getRoleByUserId(user.getId());
-        List<String> roleNames = roles.stream()
-                .map(Role::getRoleName)
-                .collect(Collectors.toList());
+        List<String> roleNames = null;
         // 如果为空，返回一个空值，否则前端报错
         if (CollectionUtils.isEmpty(roles)) {
+            roleNames = new ArrayList<>();
             roleNames.add("");
         } else {
+            roleNames = roles.stream()
+                    .map(Role::getRoleName)
+                    .collect(Collectors.toList());
             // 获取权限操作值
             permissionValues = permissionService
                     .getPermissionsByRoleIds(roles.stream()
