@@ -93,4 +93,15 @@ public class UserRoleService extends ServiceImpl<UserRoleMapper, UserRole> {
         wrapper.eq("user_id", userId);
         super.remove(wrapper);
     }
+
+    /**
+     * 给用户默认添加一个普通管理员角色
+     * @param id 用户id
+     */
+    public void saveDefaultRoleByUserId(Long id) {
+        UserRole userRole = new UserRole();
+        userRole.setUserId(id);
+        userRole.setRoleId(1L);
+        super.save(userRole);
+    }
 }

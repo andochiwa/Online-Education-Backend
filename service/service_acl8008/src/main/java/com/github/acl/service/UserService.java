@@ -69,6 +69,8 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         // 对密码MD5加密
         user.setPassword(SecureUtil.md5(user.getPassword()));
         super.save(user);
+        // 默认给一个普通管理员角色
+        userRoleService.saveDefaultRoleByUserId(user.getId());
     }
 
     /**
