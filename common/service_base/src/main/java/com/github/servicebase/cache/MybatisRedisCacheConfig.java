@@ -52,11 +52,10 @@ public class MybatisRedisCacheConfig implements Cache {
             getRedisTemplate();
             log.info("save cache to redis");
             // 保存数据设置为一天
-            if (key.toString().length() > 10) {
-                redisTemplate.opsForValue().set(key.toString(), value, 1, TimeUnit.DAYS);
-                return;
+            if (key.toString().length() < 20) {
+                redisTemplate.opsForValue().set(key.toString() + this.id, value, 1, TimeUnit.DAYS);
             }
-            redisTemplate.opsForValue().set(key.toString().substring(0, 10), value, 1, TimeUnit.DAYS);
+            redisTemplate.opsForValue().set(key.toString().substring(0, 20) + this.id, value, 1, TimeUnit.DAYS);
         }
     }
 
@@ -65,7 +64,10 @@ public class MybatisRedisCacheConfig implements Cache {
         try {
             if (!ObjectUtils.isEmpty(key)) {
                 getRedisTemplate();
-                return redisTemplate.opsForValue().get(key.toString());
+                if (key.toString().length() < 20) {
+                    return redisTemplate.opsForValue().get(key.toString() + this.id);
+                }
+                return redisTemplate.opsForValue().get(key.toString().substring(0, 20) + this.id);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +79,10 @@ public class MybatisRedisCacheConfig implements Cache {
     public Object removeObject(Object key) {
         if (!ObjectUtils.isEmpty(key)) {
             getRedisTemplate();
-            redisTemplate.delete(key.toString());
+            if (key.toString().length() < 20) {
+                redisTemplate.delete(key.toString() + this.id);
+            }
+            redisTemplate.delete(key.toString().substring(0, 20) + this.id);
             log.info("remove redis cache");
         }
         return null;
@@ -87,7 +92,7 @@ public class MybatisRedisCacheConfig implements Cache {
     public void clear() {
         getRedisTemplate();
         log.info("clear redis cache");
-        Set<String> keys = redisTemplate.keys("*:" + this.id + "*");
+        Set<String> keys = redisTemplate.keys("*" + this.id + "*");
         if (!CollectionUtils.isEmpty(keys)) {
             redisTemplate.delete(keys);
         }
