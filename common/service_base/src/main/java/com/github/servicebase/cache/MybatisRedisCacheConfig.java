@@ -50,10 +50,11 @@ public class MybatisRedisCacheConfig implements Cache {
     public void putObject(Object key, Object value) {
         if (!ObjectUtils.isEmpty(value)) {
             getRedisTemplate();
-            log.info("save cache to redis");
+            log.info("save cache to redis" + this.id);
             // 保存数据设置为一天
             if (key.toString().length() < 20) {
                 redisTemplate.opsForValue().set(key.toString() + this.id, value, 1, TimeUnit.DAYS);
+                return;
             }
             redisTemplate.opsForValue().set(key.toString().substring(0, 20) + this.id, value, 1, TimeUnit.DAYS);
         }
@@ -79,11 +80,12 @@ public class MybatisRedisCacheConfig implements Cache {
     public Object removeObject(Object key) {
         if (!ObjectUtils.isEmpty(key)) {
             getRedisTemplate();
+            log.info("remove redis cache");
             if (key.toString().length() < 20) {
                 redisTemplate.delete(key.toString() + this.id);
+                return null;
             }
             redisTemplate.delete(key.toString().substring(0, 20) + this.id);
-            log.info("remove redis cache");
         }
         return null;
     }
@@ -91,7 +93,7 @@ public class MybatisRedisCacheConfig implements Cache {
     @Override
     public void clear() {
         getRedisTemplate();
-        log.info("clear redis cache");
+        log.info("clear redis cache" + this.id);
         Set<String> keys = redisTemplate.keys("*" + this.id + "*");
         if (!CollectionUtils.isEmpty(keys)) {
             redisTemplate.delete(keys);

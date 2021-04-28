@@ -82,8 +82,12 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
         // 复制进所需对象中
         CourseInfo courseInfo = new CourseInfo();
-        BeanUtils.copyProperties(eduCourse, courseInfo);
-        BeanUtils.copyProperties(eduCourseDescription, courseInfo);
+        if (eduCourse != null) {
+            BeanUtils.copyProperties(eduCourse, courseInfo);
+        }
+        if (eduCourseDescription != null) {
+            BeanUtils.copyProperties(eduCourseDescription, courseInfo);
+        }
 
 
         return courseInfo;
