@@ -4,13 +4,6 @@ spring:
   application:
     name: api-gateway
   cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-    sentinel:
-      transport:
-        dashboard: localhost:8080
-        port: 8719
     gateway:
       # 跨域配置
 #      globalcors:
@@ -65,6 +58,3 @@ spring:
           uri: lb://service-acl
           predicates:
             - Path=/acl/**
-feign:
-  sentinel:
-    enabled: true

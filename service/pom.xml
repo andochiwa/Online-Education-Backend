@@ -29,13 +29,13 @@
 
     <dependencies>
 
-        <!--负载均衡-->
+        <!--Load balancing-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
-        <!--服务熔断-->
+        <!--Circuit Breakers-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
@@ -46,18 +46,23 @@
             <artifactId>sentinel-datasource-nacos</artifactId>
         </dependency>
 
-        <!--服务注册-->
+        <!--Service registration and discovery-->
         <dependency>
              <groupId>com.alibaba.cloud</groupId>
              <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!--服务调用-->
+        <!--service config-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--Service-to-service calls-->
         <dependency>
              <groupId>org.springframework.cloud</groupId>
              <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-        <!--导入公共包依赖-->
+        <!--common-->
         <dependency>
             <groupId>com.github</groupId>
             <artifactId>service_base</artifactId>
@@ -72,6 +77,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--bootstrap.yml-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
 
         <!--mybatis-plus-->

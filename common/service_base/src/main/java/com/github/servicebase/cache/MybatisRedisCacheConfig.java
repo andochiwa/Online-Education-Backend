@@ -52,7 +52,11 @@ public class MybatisRedisCacheConfig implements Cache {
             getRedisTemplate();
             log.info("save cache to redis");
             // 保存数据设置为一天
-            redisTemplate.opsForValue().set(key.toString(), value, 1, TimeUnit.DAYS);
+            if (key.toString().length() > 10) {
+                redisTemplate.opsForValue().set(key.toString(), value, 1, TimeUnit.DAYS);
+                return;
+            }
+            redisTemplate.opsForValue().set(key.toString().substring(0, 10), value, 1, TimeUnit.DAYS);
         }
     }
 

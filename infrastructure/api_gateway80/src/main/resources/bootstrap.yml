@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        namespace: b909e98d-d1c4-4319-879a-758981c15700
+        file-extension: yaml
+        extension-configs:
+          - data-id: feign-sentinel.yml
+            refresh: true
+          - data-id: nacos-sentinel.yml
+            refresh: true

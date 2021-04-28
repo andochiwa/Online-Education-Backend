@@ -21,13 +21,13 @@
     </properties>
 
     <dependencies>
-        <!--负载均衡-->
+        <!--Load balance-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
-        <!--服务熔断-->
+        <!--Circuit breaker-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
@@ -38,18 +38,29 @@
             <artifactId>sentinel-datasource-nacos</artifactId>
         </dependency>
 
-        <!--服务注册-->
+        <!--service discover-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!--服务调用-->
+        <!--service config-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--service-to-service calls-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-        <!--导入公共包依赖-->
+        <!--bootstrap.yml-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <!--common-->
         <dependency>
             <groupId>com.github</groupId>
             <artifactId>common_utils</artifactId>

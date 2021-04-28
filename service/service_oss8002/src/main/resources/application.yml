@@ -1,6 +1,5 @@
 server:
   port: 8002
-
 spring:
   servlet:
     multipart:
@@ -8,20 +7,3 @@ spring:
       max-request-size: 20MB
   application:
     name: service-oss
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-    sentinel:
-      transport:
-        dashboard: localhost:8080
-        port: 8719
-  datasource:
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/online?serverTimezone=Japan&useUnicode=true&characterEncoding=UTF-8
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    cache-enabled: true
