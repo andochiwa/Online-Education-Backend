@@ -46,7 +46,7 @@ public class LoginLogoutService {
         User user = userService.getByUsername(username);
         // 获取权限列表
         List<Role> roles = roleService.getRoleByUserId(user.getId());
-        List<String> roleNames = null;
+        List<String> roleNames;
         // 如果为空，返回一个空值，否则前端报错
         if (CollectionUtils.isEmpty(roles)) {
             roleNames = new ArrayList<>();

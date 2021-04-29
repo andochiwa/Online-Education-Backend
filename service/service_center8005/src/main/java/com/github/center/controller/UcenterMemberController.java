@@ -66,7 +66,7 @@ public class UcenterMemberController {
     @GetMapping("user-info")
     @ApiOperation("根据token获取用户信息")
     public ResultCommon InformationUser(HttpServletRequest request) {
-        String id = JwtUtils.getMemberIdByJwtToken(request);
+        String id = JwtUtils.getUserIdByJwtToken(request);
         UcenterMember ucenterMember = ucenterMemberService.getById(id);
 
         return ResultCommon.success().setData("items", ucenterMember);

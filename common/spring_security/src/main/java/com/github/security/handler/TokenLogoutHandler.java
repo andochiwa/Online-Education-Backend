@@ -6,7 +6,6 @@ import com.github.utils.ResultCommon;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,12 +26,9 @@ public class TokenLogoutHandler implements LogoutHandler {
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         // 获取会员名
-        String token = JwtUtils.getMemberIdByJwtToken(request);
-        if (!ObjectUtils.isEmpty(token)) {
-            // 这里也可以移除token，不过交给前端了
-            // 从redis中移除token
-            redisTemplate.delete(token);
-        }
+        String username = JwtUtils.getMemberIdByJwtToken(request);
+        // 从redis中移除user权限数据
+        redisTemplate.delete(username);
         // 返回信息
         ResponseUtil.out(response, ResultCommon.success());
     }

@@ -33,6 +33,7 @@ public class LoginLogoutController {
     public ResultCommon getUserInfo() {
         // 获取登陆的用户
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(username);
         Map<String, Object> map = loginLogoutService.getUserInfo(username);
         return ResultCommon.success().setData(map);
     }

@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .authenticationEntryPoint(new UnAuthHandler()) // 无权访问设置
                 .and()// 不进行认证路径
-                .authorizeRequests().antMatchers("/api/**").permitAll()
+                .authorizeRequests().antMatchers("/druid/**").permitAll()
                 .and() // 关闭csrf
                 .csrf().disable()
                 .authorizeRequests().anyRequest().authenticated()

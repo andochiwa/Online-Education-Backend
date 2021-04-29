@@ -40,7 +40,7 @@ public class OrderController {
                                   HttpServletRequest request) {
 
         // 生成订单号
-        String orderId = orderService.saveOrder(courseId, JwtUtils.getMemberIdByJwtToken(request));
+        String orderId = orderService.saveOrder(courseId, JwtUtils.getUserIdByJwtToken(request));
 
         return ResultCommon.success().setData("orderId", orderId);
     }
@@ -64,7 +64,7 @@ public class OrderController {
     @ApiOperation("课程和用户id查询订单是否存在")
     public ResultCommon isBuyCourse(@PathVariable("courseId") Long courseId,
                                    HttpServletRequest request) {
-        int count = orderService.isBuyCourse(courseId, JwtUtils.getMemberIdByJwtToken(request));
+        int count = orderService.isBuyCourse(courseId, JwtUtils.getUserIdByJwtToken(request));
         return count <= 0 ? ResultCommon.fail() : ResultCommon.success();
     }
 

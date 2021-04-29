@@ -23,9 +23,6 @@ public class SecurityUser implements UserDetails {
     // 当前权限
     private List<String> permissionList;
 
-    public SecurityUser() {
-    }
-
     public SecurityUser(User user, List<String> permissionList) {
         this.user = user;
         this.permissionList = permissionList;
