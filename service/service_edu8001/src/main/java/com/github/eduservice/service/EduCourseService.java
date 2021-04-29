@@ -75,6 +75,13 @@ public interface EduCourseService extends IService<EduCourse> {
 
     /**
      * 增加浏览数量
+     * @param courseId 课程id
      */
     void viewCount(Long courseId);
+
+    /**
+     * 增加购买数量
+     * @param courseId 课程id
+     */
+    void buyCount(Long courseId);
 }

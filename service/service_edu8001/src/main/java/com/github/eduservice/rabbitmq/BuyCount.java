@@ -1,9 +1,9 @@
 package com.github.eduservice.rabbitmq;
 
-import lombok.extern.slf4j.Slf4j;
+import com.github.eduservice.service.EduCourseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
@@ -13,12 +13,14 @@ import org.springframework.stereotype.Component;
  * @create 04-30-4:58
  */
 @Component
-@EnableBinding(Sink.class)
-@Slf4j
+@EnableBinding(BuyCountSink.class)
 public class BuyCount {
 
-    @StreamListener(Sink.INPUT)
-    public void butCount(Message<String> message) {
-        log.info("buy count input ==== " + message.getPayload());
+    @Autowired
+    private EduCourseService eduCourseService;
+
+    @StreamListener(BuyCountSink.INPUT)
+    public void buyCountCourse(Message<Long> message) {
+        eduCourseService.buyCount(message.getPayload());
     }
 }

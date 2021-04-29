@@ -40,7 +40,6 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
     public String saveOrder(long courseId, String userId) {
         // 获取用户信息
         ResultCommon userResult = ucenterFeign.infoUserById(userId);
-//        UcenterMemberCommon user = (UcenterMemberCommon) userResult.getData().get("items");
         // 转为json格式
         String json = JSON.toJSONString(userResult.getData().get("items"));
         // 转成对象
@@ -49,7 +48,6 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
 
         // 获取课程信息
         ResultCommon eduResult = eduFeign.getCourseInfoCommon(courseId);
-//        CourseWebInfoCommon course = (CourseWebInfoCommon) eduResult.getData().get("items");
         // 转为json
         json = JSON.toJSONString(eduResult.getData().get("items"));
         CourseWebInfoCommon course = JSON.parseObject(json, CourseWebInfoCommon.class);

@@ -1,7 +1,7 @@
-package com.github.order.Aspect;
+package com.github.order.aspect;
 
-import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +30,14 @@ public class OrderAspect {
     @Autowired
     private MessageChannel output;
 
-    @Before("execution(* com.github.order.controller.PayLogController.getOrderStatus(..)) ")
-    public void payCount() {
+    /**
+     * 更新销售数量
+     */
+    @Before("execution(* com.github.order.controller.OrderController.saveOrder(..)) ")
+    public void payCount(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
         threadPoolExecutor.execute(() -> {
-            log.info("send message to rabbitmq");
-            output.send(MessageBuilder.withPayload(IdUtil.fastUUID()).build(), 30L);
+            output.send(MessageBuilder.withPayload(args[0]).build(), 30L);
         });
     }
 }

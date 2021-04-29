@@ -23,4 +23,6 @@ public interface EduCourseMapper extends BaseMapper<EduCourse> {
     CourseWebInfo getBaseCourseInfo(Long courseId);
 
     void viewCount(Long courseId);
+
+    void buyCount(Long courseId);
 }

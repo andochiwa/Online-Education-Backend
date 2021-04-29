@@ -61,7 +61,7 @@
              <groupId>org.springframework.cloud</groupId>
              <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!--spring stream to rabbitmq-->
+        <!--spring cloud stream to rabbitmq-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>

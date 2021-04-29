@@ -7,6 +7,11 @@
         set view_count = view_count + 1
         where id = #{courseId}
     </update>
+    <update id="buyCount">
+        update edu_course
+        set buy_count = buy_count + 1
+        where id = #{courseId}
+    </update>
     <!--根据课程id查询发布时信息-->
     <select id="getPublishInfo" resultType="com.github.eduservice.vo.PublishInfo">
         SELECT ec.id,

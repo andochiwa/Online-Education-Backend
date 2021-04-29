@@ -187,4 +187,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     public void viewCount(Long CourseId) {
         super.baseMapper.viewCount(CourseId);
     }
+
+    @Override
+    public void buyCount(Long courseId) {
+        super.baseMapper.buyCount(courseId);
+    }
+
+
 }
