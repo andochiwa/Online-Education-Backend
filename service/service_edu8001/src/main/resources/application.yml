@@ -3,3 +3,10 @@ server:
 spring:
   application:
     name: service-edu
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: eduExchange # 表示要使用的Exchange名称定义
+          content-type: application/json # 消息类型
+          binder: defaultRabbit # 要绑定的消息服务的具体设置

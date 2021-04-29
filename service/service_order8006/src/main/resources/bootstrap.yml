@@ -17,3 +17,5 @@ spring:
             refresh: true
           - data-id: feign-sentinel.yml
             refresh: true
+          - data-id: rabbitmq.yml
+            refresh: true
