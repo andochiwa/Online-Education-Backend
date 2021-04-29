@@ -182,4 +182,9 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     public CourseWebInfo getBaseCourseInfo(Long courseId) {
         return eduCourseMapper.getBaseCourseInfo(courseId);
     }
+
+    @Override
+    public void viewCount(Long CourseId) {
+        super.baseMapper.viewCount(CourseId);
+    }
 }

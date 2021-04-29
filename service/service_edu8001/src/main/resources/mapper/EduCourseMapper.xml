@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.eduservice.mapper.EduCourseMapper">
+    <!--浏览数+1-->
+    <update id="viewCount">
+        update edu_course
+        set view_count = view_count + 1
+        where id = #{courseId}
+    </update>
     <!--根据课程id查询发布时信息-->
     <select id="getPublishInfo" resultType="com.github.eduservice.vo.PublishInfo">
         SELECT ec.id,

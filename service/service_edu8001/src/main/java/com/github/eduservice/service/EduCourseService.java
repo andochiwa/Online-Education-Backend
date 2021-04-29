@@ -72,4 +72,9 @@ public interface EduCourseService extends IService<EduCourse> {
      * @param courseId 课程id
      */
     CourseWebInfo getBaseCourseInfo(Long courseId);
+
+    /**
+     * 增加浏览数量
+     */
+    void viewCount(Long courseId);
 }

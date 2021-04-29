@@ -1,7 +1,12 @@
 package com.github.eduservice.config;
 
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.tomcat.util.threads.ThreadPoolExecutor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author HAN
@@ -9,6 +14,16 @@ import org.springframework.context.annotation.Configuration;
  * @create 2021/4/4
  */
 @Configuration
-@MapperScan("com.github.eduservice.mapper")
 public class EduConfiguration {
+
+    @Bean
+    public ThreadPoolExecutor threadPoolExecutor() {
+        return new ThreadPoolExecutor(15,
+                30,
+                30,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(30),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.CallerRunsPolicy());
+    }
 }
