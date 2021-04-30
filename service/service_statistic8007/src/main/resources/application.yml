@@ -6,8 +6,13 @@ spring:
   cloud:
     stream:
       bindings:
-        statLoginCount:
-          destination: login-exchange # 表示要使用的Exchange名称定义
+        statLoginCount: # input
+          destination: login-stat-exchange # 表示要使用的Exchange名称定义
+          content-type: application/json # 消息类型
+          binder: defaultRabbit # 要绑定的消息服务的具体设置
+          group: statistic
+        courseViewCountStat: # input
+          destination: course-view-stat-exchange # 表示要使用的Exchange名称定义
           content-type: application/json # 消息类型
           binder: defaultRabbit # 要绑定的消息服务的具体设置
           group: statistic
@@ -15,6 +20,9 @@ spring:
         bindings:
           statLoginCount:
             consumer:
-              ttl: 60000 #消息几秒不消费转入私信队列
               autoBindDlq: true #启用死信队列，默认会生成一个DLX EXCHANGE，当消息重复消费失败后
-              deadLetterExchange: dead-letter-exchangee #绑定exchange
+              deadLetterExchange: dead-letter-exchange #绑定exchange
+          courseViewCountStat:
+            consumer:
+              autoBindDlq: true #启用死信队列，默认会生成一个DLX EXCHANGE，当消息重复消费失败后
+              deadLetterExchange: dead-letter-exchange #绑定exchange

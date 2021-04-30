@@ -17,4 +17,6 @@ import org.apache.ibatis.annotations.CacheNamespace;
 public interface StatisticsDailyMapper extends BaseMapper<StatisticsDaily> {
 
     void loginCount(String date);
+
+    void courseViewCount(String date);
 }

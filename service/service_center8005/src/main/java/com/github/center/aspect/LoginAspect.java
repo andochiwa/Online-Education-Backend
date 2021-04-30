@@ -28,6 +28,9 @@ public class LoginAspect {
     @Autowired
     private MessageChannel output;
 
+    /**
+     * 统计登陆次数+1
+     */
     @Before("execution(* com.github.center.controller.UcenterMemberController.loginUser(..))")
     public void loginCount() {
         threadPoolExecutor.execute(() -> {

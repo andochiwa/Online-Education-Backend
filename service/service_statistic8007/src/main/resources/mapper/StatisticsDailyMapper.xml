@@ -7,4 +7,9 @@
         set login_num = login_num + 1
         where date_calculated = #{date}
     </update>
+    <update id="courseViewCount">
+        update statistics_daily
+        set course_num = course_num + 1
+        where date_calculated = #{date}
+    </update>
 </mapper>

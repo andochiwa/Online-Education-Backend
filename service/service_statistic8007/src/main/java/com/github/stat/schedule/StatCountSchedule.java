@@ -20,6 +20,6 @@ public class StatCountSchedule {
 
     @Scheduled(cron = "1 0 0 * * ?")
     public void count() {
-        statisticsDailyService.countRegister(LocalDate.now().plusDays(-1L).toString());
+        statisticsDailyService.countStat(LocalDate.now().plusDays(-1L).toString());
     }
 }

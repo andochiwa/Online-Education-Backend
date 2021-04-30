@@ -25,13 +25,13 @@ public class StatisticsDailyController {
     private StatisticsDailyService statisticsDailyService;
 
     /**
-     * 统计某一天的注册人数
+     * 统计某一天信息
      * @param date 哪一天
      */
     @PostMapping("{date}")
-    @ApiOperation("统计某一天的注册人数")
-    public ResultCommon countRegister(@PathVariable("date") String date) {
-        statisticsDailyService.countRegister(date);
+    @ApiOperation("统计某一天信息")
+    public ResultCommon countStat(@PathVariable("date") String date) {
+        statisticsDailyService.countStat(date);
 
         return ResultCommon.success();
     }

@@ -1,6 +1,5 @@
 package com.github.stat.service;
 
-import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.servicebase.cache.MybatisRedisCacheConfig;
@@ -36,23 +35,18 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
      * 统计某天的信息
      * @param date 哪一天
      */
-    public void countRegister(String date) {
-        int count = ucenterClient.statRegister(date);
+    public void countStat(String date) {
+        int countRegister = ucenterClient.statRegister(date);
 
         StatisticsDaily daily = new StatisticsDaily();
-        daily.setRegisterNum(count);
+        daily.setRegisterNum(countRegister);
         daily.setDateCalculated(date);
-        daily.setVideoViewNum(RandomUtil.randomInt(50));
-        daily.setLoginNum(RandomUtil.randomInt(50));
-        daily.setCourseNum(RandomUtil.randomInt(50));
+        daily.setVideoViewNum(0);
+        daily.setLoginNum(0);
+        daily.setCourseNum(0);
         try {
             super.save(daily);
-        } catch (Exception e) {
-            QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
-            wrapper.eq("date_calculated", date);
-            daily.setGmtCreate(null);
-            daily.setGmtModified(null);
-            super.update(daily, wrapper);
+        } catch (Exception ignored) {
         }
     }
 
@@ -103,8 +97,21 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
         QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
         wrapper.eq("date_calculated", date);
         if (super.count(wrapper) <= 0) {
-            countRegister(date);
+            countStat(date);
         }
         super.baseMapper.loginCount(date);
+    }
+
+    /**
+     * 观看数+1
+     * @param date
+     */
+    public void courseViewCount(String date) {
+        QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
+        wrapper.eq("date_calculated", date);
+        if (super.count(wrapper) <= 0) {
+            countStat(date);
+        }
+        super.baseMapper.courseViewCount(date);
     }
 }
