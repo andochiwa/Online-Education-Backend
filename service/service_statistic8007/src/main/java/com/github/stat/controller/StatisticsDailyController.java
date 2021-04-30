@@ -38,16 +38,14 @@ public class StatisticsDailyController {
 
     /**
      * 查询图表显示数据
-     * @param type 数据类型
      * @param begin 开始日期
      * @param end 结束日期
      */
-    @GetMapping("{type}/{begin}/{end}")
+    @GetMapping("{begin}/{end}")
     @ApiOperation("查询图表显示数据")
-    public ResultCommon showData(@PathVariable("type") String type,
-                                 @PathVariable("begin") String begin,
+    public ResultCommon showData(@PathVariable("begin") String begin,
                                  @PathVariable("end") String end) {
-        Map<String, Object> map = statisticsDailyService.showData(type, begin, end);
+        Map<String, Object> map = statisticsDailyService.showData(begin, end);
 
         return ResultCommon.success().setData(map);
     }

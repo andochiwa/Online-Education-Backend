@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,12 +53,11 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
 
     /**
      * 查询图表数据
-     * @param type 数据类型
      * @param begin 开始日期
      * @param end 结束日期
      * @return 封装好的map集合
      */
-    public Map<String, Object> showData(String type, String begin, String end) {
+    public Map<String, Object> showData(String begin, String end) {
 
         QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
         if (!ObjectUtils.isEmpty(begin) && !begin.equals("undefined")) {
@@ -66,32 +66,36 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
         if (!ObjectUtils.isEmpty(end) && !end.equals("undefined")) {
             wrapper.le("date_calculated", end);
         }
-        wrapper.select(type, "date_calculated").orderByAsc("date_calculated");
+        wrapper.orderByAsc("date_calculated");
         List<StatisticsDaily> list = super.list(wrapper);
 
         // 找出行date数据
         List<String> dates = list.stream().map(StatisticsDaily::getDateCalculated).collect(Collectors.toList());
 
-        // 找出列count数据
-        List<Integer> counts = list.stream().map(
-                item -> switch (type) {
-            case "register_num" -> item.getRegisterNum();
-            case "login_num" -> item.getLoginNum();
-            case "video_view_num" -> item.getVideoViewNum();
-            case "course_num" -> item.getCourseNum();
-            default -> null;
-        }).collect(Collectors.toList());
+        List<List<Integer>> counts = new ArrayList<>();
+        counts.add(list.stream().map(StatisticsDaily::getRegisterNum).collect(Collectors.toList()));
+        counts.add(list.stream().map(StatisticsDaily::getLoginNum).collect(Collectors.toList()));
+        counts.add(list.stream().map(StatisticsDaily::getVideoViewNum).collect(Collectors.toList()));
+        counts.add(list.stream().map(StatisticsDaily::getCourseNum).collect(Collectors.toList()));
+
+        // 记录名字
+        List<String> names = new ArrayList<>();
+        names.add("每日注册人数");
+        names.add("每日登陆人数");
+        names.add("视频观看人数");
+        names.add("课程观看人数");
 
         Map<String, Object> map = new HashMap<>();
         map.put("dateList", dates);
         map.put("countList", counts);
+        map.put("names", names);
 
         return map;
     }
 
     /**
      * 登录数+1
-     * @param date 时间
+     * @param date 日期
      */
     public void loginCount(String date) {
         QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
@@ -104,7 +108,7 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
 
     /**
      * 课程观看数+1
-     * @param date
+     * @param date 日期
      */
     public void courseViewCount(String date) {
         QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
@@ -117,7 +121,7 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
 
     /**
      * 视频观看数+1
-     * @param date
+     * @param date 日期
      */
     public void videoViewCount(String date) {
         QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
