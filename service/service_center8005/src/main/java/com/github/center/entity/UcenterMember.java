@@ -31,7 +31,7 @@ public class UcenterMember implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private String id;
 
-    @ApiModelProperty(value = "微信openid")
+    @ApiModelProperty(value = "openid")
     private String openid;
 
     @ApiModelProperty(value = "邮箱号")
