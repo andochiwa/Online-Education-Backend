@@ -10,7 +10,7 @@ import org.springframework.messaging.SubscribableChannel;
  */
 public interface LoginCountSink {
 
-    String INPUT = "StatLoginCount";
+    String INPUT = "statLoginCount";
 
     @Input(LoginCountSink.INPUT)
     SubscribableChannel input();

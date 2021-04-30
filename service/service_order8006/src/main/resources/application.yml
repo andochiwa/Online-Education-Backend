@@ -14,6 +14,6 @@ spring:
         bindings:
           output:
             producer:
-              ttl: 3000 #消息3秒不消费转入私信队列
-              autoBindDlq: true #启动私信队列
+              ttl: 60000 #消息60秒不消费转入死信队列
+              autoBindDlq: true #启动死信队列
               deadLetterExchange: dead-letter-exchange #绑定exchange
