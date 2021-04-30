@@ -14,7 +14,7 @@ import java.util.concurrent.*;
 public class BeanConfig {
 
     @Bean
-    public ExecutorService executorService() {
+    public ThreadPoolExecutor threadPoolExecutor() {
         return new ThreadPoolExecutor(
                 5,
                 5,

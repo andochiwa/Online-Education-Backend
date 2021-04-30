@@ -16,4 +16,5 @@ import org.apache.ibatis.annotations.CacheNamespace;
 @CacheNamespace(implementation = MybatisRedisCacheConfig.class, eviction = MybatisRedisCacheConfig.class)
 public interface StatisticsDailyMapper extends BaseMapper<StatisticsDaily> {
 
+    void loginCount(String date);
 }

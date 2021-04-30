@@ -18,7 +18,7 @@ public class StatCountSchedule {
     @Autowired
     private StatisticsDailyService statisticsDailyService;
 
-    @Scheduled(cron = "0 0 1 * * ?")
+    @Scheduled(cron = "1 0 0 * * ?")
     public void count() {
         statisticsDailyService.countRegister(LocalDate.now().plusDays(-1L).toString());
     }

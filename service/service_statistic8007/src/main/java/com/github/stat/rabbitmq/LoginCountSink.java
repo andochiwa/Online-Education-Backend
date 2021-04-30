@@ -1,4 +1,4 @@
-package com.github.eduservice.rabbitmq;
+package com.github.stat.rabbitmq;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
@@ -6,12 +6,12 @@ import org.springframework.messaging.SubscribableChannel;
 /**
  * @author HAN
  * @version 1.0
- * @create 04-30-6:44
+ * @create 04-30-17:51
  */
-public interface BuyCountSink {
+public interface LoginCountSink {
 
-    String INPUT = "buyCountCourse";
+    String INPUT = "StatLoginCount";
 
-    @Input(BuyCountSink.INPUT)
+    @Input(LoginCountSink.INPUT)
     SubscribableChannel input();
 }

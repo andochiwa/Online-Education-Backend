@@ -72,7 +72,7 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
         if (!ObjectUtils.isEmpty(end) && !end.equals("undefined")) {
             wrapper.le("date_calculated", end);
         }
-        wrapper.select(type, "date_calculated");
+        wrapper.select(type, "date_calculated").orderByAsc("date_calculated");
         List<StatisticsDaily> list = super.list(wrapper);
 
         // 找出行date数据
@@ -93,5 +93,18 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
         map.put("countList", counts);
 
         return map;
+    }
+
+    /**
+     * 登录数+1
+     * @param date 时间
+     */
+    public void loginCount(String date) {
+        QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
+        wrapper.eq("date_calculated", date);
+        if (super.count(wrapper) <= 0) {
+            countRegister(date);
+        }
+        super.baseMapper.loginCount(date);
     }
 }

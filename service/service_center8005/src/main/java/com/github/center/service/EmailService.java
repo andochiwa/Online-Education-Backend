@@ -15,7 +15,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -36,7 +36,7 @@ public class EmailService extends ServiceImpl<EmailMapper, Email> {
     private MailSender mailSender;
 
     @Autowired
-    private ExecutorService executorService;
+    private ThreadPoolExecutor threadPoolExecutor;
 
     @Autowired
     private JavaMailSenderImpl sender;
@@ -65,7 +65,7 @@ public class EmailService extends ServiceImpl<EmailMapper, Email> {
         // 生成随机验证码
         String code = RandomUtil.randomNumbers(6);
         // 发送邮箱
-        executorService.submit(() -> {
+        threadPoolExecutor.submit(() -> {
             SimpleMailMessage msg = new SimpleMailMessage();
             msg.setTo(email);
             msg.setSubject("Verification code");

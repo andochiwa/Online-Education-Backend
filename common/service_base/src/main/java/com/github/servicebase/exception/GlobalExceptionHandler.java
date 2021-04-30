@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResultCommon error(Exception e) {
         e.printStackTrace();
-        return ResultCommon.fail().setMessage("全局异常处理");
+        return ResultCommon.fail().setMessage("发生了错误");
     }
 
 }
