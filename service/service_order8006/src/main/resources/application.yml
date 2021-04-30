@@ -7,7 +7,7 @@ spring:
     stream:
       bindings:
         output: # 这个名字是一个信道的名称
-          destination: edu-exchange # 表示要使用的Exchange名称定义
+          destination: course-buy-count-exchange # 表示要使用的Exchange名称定义
           content-type: application/json # 消息类型
           binder: defaultRabbit # 要绑定的消息服务的具体设置
       rabbit:
