@@ -2,23 +2,24 @@ package com.github.eduservice.rabbitmq;
 
 import com.github.eduservice.service.EduCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.messaging.Message;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import java.util.function.Consumer;
 
 /**
  * @author HAN
  * @version 1.0
  * @create 04-30-4:58
  */
-@EnableBinding(BuyCountSink.class)
+@Component
 public class BuyCount {
 
     @Autowired
     private EduCourseService eduCourseService;
 
-    @StreamListener(BuyCountSink.INPUT)
-    public void buyCountCourse(Message<Long> message) {
-        eduCourseService.buyCount(message.getPayload());
+    @Bean
+    public Consumer<Long> buyCountCourse() {
+        return courseId -> eduCourseService.buyCount(courseId);
     }
 }

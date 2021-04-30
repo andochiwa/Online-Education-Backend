@@ -5,9 +5,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Source;
-import org.springframework.messaging.MessageChannel;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
@@ -21,14 +19,13 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Component
 @Aspect
 @Slf4j
-@EnableBinding(Source.class)
 public class OrderAspect {
 
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
 
     @Autowired
-    private MessageChannel output;
+    private StreamBridge streamBridge;
 
     /**
      * 更新销售数量
@@ -37,7 +34,7 @@ public class OrderAspect {
     public void payCount(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         threadPoolExecutor.execute(() -> {
-            output.send(MessageBuilder.withPayload(args[0]).build(), 30L);
+            streamBridge.send("buyCount-out-0", MessageBuilder.withPayload(args[0]).build());
         });
     }
 }

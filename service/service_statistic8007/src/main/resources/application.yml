@@ -6,32 +6,34 @@ spring:
   cloud:
     stream:
       bindings:
-        statLoginCount: # input
+        statLoginCount-in-0: # input
           destination: login-stat-exchange # 表示要使用的Exchange名称定义
           content-type: application/json # 消息类型
           binder: defaultRabbit # 要绑定的消息服务的具体设置
           group: statistic
-        courseViewCountStat: # input
+        courseViewCountStat-in-0: # input
           destination: course-view-stat-exchange # 表示要使用的Exchange名称定义
           content-type: application/json # 消息类型
           binder: defaultRabbit # 要绑定的消息服务的具体设置
           group: statistic
-        videoViewCountStat: # input
+        videoViewCountStat-in-0: # input
           destination: video-view-count-exchange # 表示要使用的Exchange名称定义
           content-type: application/json # 消息类型
           binder: defaultRabbit # 要绑定的消息服务的具体设置
           group: statistic
       rabbit:
         bindings:
-          statLoginCount:
+          statLoginCount-in-0:
             consumer:
               autoBindDlq: true #启用死信队列，默认会生成一个DLX EXCHANGE，当消息重复消费失败后
               deadLetterExchange: dead-letter-exchange #绑定exchange
-          courseViewCountStat:
+          courseViewCountStat-in-0:
             consumer:
               autoBindDlq: true #启用死信队列，默认会生成一个DLX EXCHANGE，当消息重复消费失败后
               deadLetterExchange: dead-letter-exchange #绑定exchange
-          videoViewCountStat:
+          videoViewCountStat-in-0:
             consumer:
               autoBindDlq: true #启用死信队列，默认会生成一个DLX EXCHANGE，当消息重复消费失败后
               deadLetterExchange: dead-letter-exchange #绑定exchange
+    function:
+      definition: statLoginCount;courseViewCountStat;videoViewCountStat

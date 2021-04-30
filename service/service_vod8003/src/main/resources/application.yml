@@ -10,14 +10,14 @@ spring:
   cloud:
     stream:
       bindings:
-        videoViewCountStat: # output
+        videoViewCountStat-out-0: # output
           destination: video-view-count-exchange # 表示要使用的Exchange名称定义
           content-type: application/json # 消息类型
           binder: defaultRabbit # 要绑定的消息服务的具体设置
           group: statistic
       rabbit:
         bindings:
-          videoViewCountStat:
+          videoViewCountStat-out-0:
             producer:
               autoBindDlq: true #启用死信队列，默认会生成一个DLX EXCHANGE，当消息重复消费失败后
               deadLetterExchange: dead-letter-exchange #绑定exchange
