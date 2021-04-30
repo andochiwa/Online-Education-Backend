@@ -9,17 +9,17 @@ import org.springframework.messaging.Message;
 /**
  * @author HAN
  * @version 1.0
- * @create 04-30-17:31
+ * @create 04-30-21:44
  */
-@EnableBinding(LoginCountSink.class)
-public class LoginCount {
+@EnableBinding(VideoViewCountSink.class)
+public class VideoViewCount {
 
     @Autowired
     private StatisticsDailyService statisticsDailyService;
 
-    @StreamListener(LoginCountSink.INPUT)
-    public void loginCount(Message<String> message) {
+    @StreamListener(VideoViewCountSink.INPUT)
+    public void videoViewCount(Message<String> message) {
         String date = message.getPayload();
-        statisticsDailyService.loginCount(date);
+        statisticsDailyService.videoViewCount(date);
     }
 }

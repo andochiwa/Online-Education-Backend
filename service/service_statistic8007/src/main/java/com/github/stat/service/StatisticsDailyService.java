@@ -103,7 +103,7 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
     }
 
     /**
-     * 观看数+1
+     * 课程观看数+1
      * @param date
      */
     public void courseViewCount(String date) {
@@ -113,5 +113,18 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
             countStat(date);
         }
         super.baseMapper.courseViewCount(date);
+    }
+
+    /**
+     * 视频观看数+1
+     * @param date
+     */
+    public void videoViewCount(String date) {
+        QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
+        wrapper.eq("date_calculated", date);
+        if (super.count(wrapper) <= 0) {
+            countStat(date);
+        }
+        super.baseMapper.videoViewCount(date);
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -18,7 +17,6 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @version 1.0
  * @create 04-30-1:33
  */
-@Component
 @Aspect
 @EnableBinding(FrontCourseSink.class)
 public class FrontCourseAspect {

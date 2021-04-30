@@ -19,4 +19,6 @@ public interface StatisticsDailyMapper extends BaseMapper<StatisticsDaily> {
     void loginCount(String date);
 
     void courseViewCount(String date);
+
+    void videoViewCount(String date);
 }

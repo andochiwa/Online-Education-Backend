@@ -12,4 +12,9 @@
         set course_num = course_num + 1
         where date_calculated = #{date}
     </update>
+    <update id="videoViewCount">
+        update statistics_daily
+        set video_view_num = video_view_num + 1
+        where date_calculated = #{date}
+    </update>
 </mapper>

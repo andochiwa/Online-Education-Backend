@@ -1,12 +1,12 @@
-package com.github.center.aspect;
+package com.github.vod.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -14,25 +14,23 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * @author HAN
  * @version 1.0
- * @create 04-30-16:57
+ * @create 04-30-21:23
  */
 @Aspect
-@EnableBinding(Source.class)
-public class LoginAspect {
+@Component
+@EnableBinding(VodViewCountSource.class)
+public class VodAspect {
 
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
 
     @Autowired
-    private MessageChannel output;
+    private MessageChannel videoViewCountStat;
 
-    /**
-     * 统计登陆次数+1
-     */
-    @Before("execution(* com.github.center.controller.UcenterMemberController.loginUser(..))")
-    public void loginCount() {
+    @Before("execution(* com.github.vod.controller.VodController.getVideoPlayAuth(..))")
+    public void videoViewCount() {
         threadPoolExecutor.execute(() -> {
-            output.send(MessageBuilder.withPayload(LocalDate.now().toString()).build(), 60L);
+            videoViewCountStat.send(MessageBuilder.withPayload(LocalDate.now().toString()).build());
         });
     }
 }
