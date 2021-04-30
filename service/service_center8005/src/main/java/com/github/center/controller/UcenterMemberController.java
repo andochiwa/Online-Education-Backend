@@ -97,5 +97,16 @@ public class UcenterMemberController {
         return count;
     }
 
+    /**
+     * 更新用户信息
+     */
+    @PutMapping
+    @ApiOperation("更新用户信息")
+    public ResultCommon updateUserInfo(@RequestBody UcenterMember ucenterMember) {
+        ucenterMemberService.updateByUserId(ucenterMember);
+        return ResultCommon.success();
+    }
+
+
 }
 

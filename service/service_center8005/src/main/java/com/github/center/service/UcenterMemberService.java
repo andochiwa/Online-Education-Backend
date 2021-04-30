@@ -116,4 +116,15 @@ public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, Ucent
         int count = baseMapper.countRegister(date);
         return count;
     }
+
+    /**
+     * 更新用户信息
+     * @param ucenterMember 更新用户信息
+     */
+    public void updateByUserId(UcenterMember ucenterMember) {
+        if (!ObjectUtils.isEmpty(ucenterMember.getPassword())) {
+            ucenterMember.setPassword(SecureUtil.md5(ucenterMember.getPassword()));
+        }
+        super.updateById(ucenterMember);
+    }
 }
