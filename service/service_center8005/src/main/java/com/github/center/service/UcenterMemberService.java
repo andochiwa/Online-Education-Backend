@@ -122,7 +122,7 @@ public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, Ucent
      * @param ucenterMember 更新用户信息
      */
     public void updateByUserId(UcenterMember ucenterMember) {
-        if (!ObjectUtils.isEmpty(ucenterMember.getPassword())) {
+        if (!ObjectUtils.isEmpty(ucenterMember.getPassword()) && ucenterMember.getPassword().length() != 32) {
             ucenterMember.setPassword(SecureUtil.md5(ucenterMember.getPassword()));
         }
         super.updateById(ucenterMember);
