@@ -88,7 +88,9 @@ public class UserService extends ServiceImpl<UserMapper, User> {
      * @param user 用户信息
      */
     public void updateUserById(User user) {
-        user.setPassword(SecureUtil.md5(user.getPassword()));
+        if (user.getPassword().length() != 32) {
+            user.setPassword(SecureUtil.md5(user.getPassword()));
+        }
         super.updateById(user);
     }
 }
