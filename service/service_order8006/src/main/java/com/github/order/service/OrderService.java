@@ -11,6 +11,7 @@ import com.github.order.mapper.OrderMapper;
 import com.github.servicebase.entity.CourseWebInfoCommon;
 import com.github.servicebase.entity.UcenterMemberCommon;
 import com.github.utils.ResultCommon;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,7 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
      * @param userId 用户id
      * @return 订单号
      */
+    @GlobalTransactional(name = "OrderTransaction", rollbackFor = Exception.class)
     public String saveOrder(long courseId, String userId) {
         // 获取用户信息
         ResultCommon userResult = ucenterFeign.infoUserById(userId);

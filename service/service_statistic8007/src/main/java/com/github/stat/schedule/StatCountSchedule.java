@@ -18,7 +18,7 @@ public class StatCountSchedule {
     @Autowired
     private StatisticsDailyService statisticsDailyService;
 
-    @Scheduled(cron = "1 0 0 * * ?")
+    @Scheduled(cron = "1 0 0 * * ?", zone = "GMT-9")
     public void count() {
         statisticsDailyService.countStat(LocalDate.now().plusDays(-1L).toString());
     }
