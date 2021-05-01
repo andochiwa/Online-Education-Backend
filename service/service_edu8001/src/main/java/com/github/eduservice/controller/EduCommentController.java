@@ -42,7 +42,7 @@ public class EduCommentController {
      * 添加评论信息
      * @param comment 评论以及用户信息
      */
-    @PostMapping("{courseId}}")
+    @PostMapping("{courseId}")
     @ApiOperation("添加一级评论信息")
     public ResultCommon saveCommentLevelOne(@RequestBody EduComment comment) {
         eduCommentService.save(comment);
