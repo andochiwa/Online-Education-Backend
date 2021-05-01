@@ -28,4 +28,7 @@ public class CourseFrontInfo {
 
     @ApiModelProperty("价格排序")
     private String priceSort;
+
+    @ApiModelProperty("课程名字模糊查询")
+    private String courseName;
 }

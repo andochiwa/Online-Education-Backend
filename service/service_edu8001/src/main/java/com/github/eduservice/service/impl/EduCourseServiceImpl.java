@@ -168,6 +168,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             wrapper.orderByDesc("gmt_create");
         }
 
+        if (!ObjectUtils.isEmpty(courseFrontInfo.getCourseName())) {
+            wrapper.like("title", courseFrontInfo.getCourseName());
+        }
+
         Page<EduCourse> coursePage = super.page(page, wrapper);
 
         // 存储list集合
