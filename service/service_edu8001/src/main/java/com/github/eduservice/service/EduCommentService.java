@@ -21,4 +21,5 @@ public interface EduCommentService extends IService<EduComment> {
      * @return 封装好的评论信息
      */
     List<EduComment> getComment(Long courseId);
+
 }

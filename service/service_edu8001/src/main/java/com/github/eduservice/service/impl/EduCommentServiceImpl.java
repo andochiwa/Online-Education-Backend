@@ -6,6 +6,7 @@ import com.github.eduservice.entity.EduComment;
 import com.github.eduservice.mapper.EduCommentMapper;
 import com.github.eduservice.service.EduCommentService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Objects;

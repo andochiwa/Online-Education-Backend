@@ -3,15 +3,12 @@ package com.github.eduservice.controller;
 
 import com.github.eduservice.entity.EduComment;
 import com.github.eduservice.service.EduCommentService;
-import com.github.utils.JwtUtils;
 import com.github.utils.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -42,16 +39,13 @@ public class EduCommentController {
     }
 
     /**
-     * 添加一级评论信息
+     * 添加评论信息
+     * @param comment 评论以及用户信息
      */
     @PostMapping("{courseId}}")
     @ApiOperation("添加一级评论信息")
-    public ResultCommon saveCommentLevelOne(@RequestBody EduComment comment, HttpServletRequest request) {
-        String userId = JwtUtils.getUserIdByJwtToken(request);
-        if (ObjectUtils.isEmpty(userId)) {
-            return ResultCommon.fail().setMessage("请先登录");
-        }
-
+    public ResultCommon saveCommentLevelOne(@RequestBody EduComment comment) {
+        eduCommentService.save(comment);
         return ResultCommon.success();
     }
 
