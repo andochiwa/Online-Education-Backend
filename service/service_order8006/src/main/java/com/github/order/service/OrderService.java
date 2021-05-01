@@ -8,7 +8,6 @@ import com.github.order.entity.Order;
 import com.github.order.feign.EduFeign;
 import com.github.order.feign.UcenterFeign;
 import com.github.order.mapper.OrderMapper;
-import com.github.servicebase.entity.CourseWebInfoCommon;
 import com.github.servicebase.entity.UcenterMemberCommon;
 import com.github.utils.ResultCommon;
 import io.seata.spring.annotation.GlobalTransactional;
@@ -51,20 +50,20 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         // 获取课程信息
         ResultCommon eduResult = eduFeign.getCourseInfoCommon(courseId);
         // 转为json
-        json = JSON.toJSONString(eduResult.getData().get("items"));
-        CourseWebInfoCommon course = JSON.parseObject(json, CourseWebInfoCommon.class);
+//        json = JSON.toJSONString(eduResult.getData().get("items"));
+//        CourseWebInfoCommon course = JSON.parseObject(json, CourseWebInfoCommon.class);
 
         // 创建订单对象
         Order order = new Order();
         order.setOrderNo(IdUtil.simpleUUID());
         order.setCourseId(courseId);
-        order.setCourseTitle(course.getTitle());
-        order.setCourseCover(course.getCover());
-        order.setTeacherName(course.getTeacherName());
-        order.setNickname(user.getNickname());
+//        order.setCourseTitle(course.getTitle());
+//        order.setCourseCover(course.getCover());
+//        order.setTeacherName(course.getTeacherName());
+//        order.setNickname(user.getNickname());
         order.setMemberId(userId);
-        order.setEmail(user.getEmail());
-        order.setTotalFee(course.getPrice());
+//        order.setEmail(user.getEmail());
+//        order.setTotalFee(course.getPrice());
 
         super.save(order);
 

@@ -11,6 +11,7 @@ import com.github.eduservice.vo.CourseFrontInfo;
 import com.github.eduservice.vo.CourseInfo;
 import com.github.eduservice.vo.CourseWebInfo;
 import com.github.eduservice.vo.PublishInfo;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -112,6 +113,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     }
 
     @Override
+    @GlobalTransactional
     public void deleteCourseInfo(Long courseId) {
         // 删除课程和课程简介
         super.removeById(courseId);

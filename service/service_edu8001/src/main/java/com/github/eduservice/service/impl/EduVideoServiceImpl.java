@@ -6,6 +6,7 @@ import com.github.eduservice.feign.VodClient;
 import com.github.eduservice.mapper.EduVideoMapper;
 import com.github.eduservice.service.EduVideoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,7 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
     private VodClient vodClient;
 
     @Override
+    @GlobalTransactional
     public void removeVideo(Long id) {
         QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
         wrapper.select("video_source_id").eq("id", id);
@@ -39,6 +41,7 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
     }
 
     @Override
+    @GlobalTransactional
     public void removeByChapterId(Long chapterId) {
         QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
         wrapper.eq("chapter_id", chapterId).select("video_source_id");
