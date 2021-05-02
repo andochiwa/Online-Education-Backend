@@ -6,5 +6,5 @@
 
 # 架构
 
-![](https://github.com/andochiwa/Online-Education-Backend/tree/master/image/architect.png)
+![](https://github.com/andochiwa/Online-Education-Backend/blob/master/image/architect.png)
 
