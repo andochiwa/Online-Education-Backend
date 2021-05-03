@@ -3,6 +3,7 @@ package com.github.center.service;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.center.aspect.RegisterAspect;
 import com.github.center.entity.UcenterMember;
 import com.github.center.mapper.UcenterMemberMapper;
 import com.github.center.vo.UserRegister;
@@ -29,6 +30,9 @@ public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, Ucent
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
+
+    @Autowired
+    private RegisterAspect registerAspect;
 
     /**
      * 登录
@@ -82,7 +86,6 @@ public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, Ucent
         ucenterMember.setNickname(nickName);
         ucenterMember.setPassword(SecureUtil.md5(password));
         ucenterMember.setEmail(email);
-        ucenterMember.setAvatar("http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoj0hHXhgJNOTSOFsS4uZs8x1ConecaVOB8eIl115xmJZcT4oCicvia7wMEufibKtTLqiaJeanU2Lpg3w/132");
         super.save(ucenterMember);
         return ResultCommon.success().setData("items", ucenterMember);
     }
@@ -102,6 +105,8 @@ public class UcenterMemberService extends ServiceImpl<UcenterMemberMapper, Ucent
             ucenterMember.setOpenid((String) userMap.get("node_id"));
             ucenterMember.setAvatar((String) userMap.get("avatar_url"));
             super.save(ucenterMember);
+            // 统计注册人数+1
+            registerAspect.countRegister();
         }
         return ucenterMember;
 

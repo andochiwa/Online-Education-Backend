@@ -18,7 +18,7 @@ public class EduConfiguration {
 
     @Bean
     public ThreadPoolExecutor threadPoolExecutor() {
-        return new ThreadPoolExecutor(10,
+        return new ThreadPoolExecutor(5,
                 30,
                 30,
                 TimeUnit.SECONDS,

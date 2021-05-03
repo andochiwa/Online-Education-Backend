@@ -131,4 +131,17 @@ public class StatisticsDailyService extends ServiceImpl<StatisticsDailyMapper, S
         }
         super.baseMapper.videoViewCount(date);
     }
+
+    /**
+     * 统计注册数量+1
+     * @param date 日期
+     */
+    public void registerCount(String date) {
+        QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
+        wrapper.eq("date_calculated", date);
+        if (super.count(wrapper) <= 0) {
+            countStat(date);
+        }
+        super.baseMapper.registerCount(date);
+    }
 }

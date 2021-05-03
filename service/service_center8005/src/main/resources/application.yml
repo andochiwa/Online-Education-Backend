@@ -15,10 +15,18 @@ spring:
           destination: login-stat-exchange # 表示要使用的Exchange名称定义
           content-type: application/json # 消息类型
           binder: defaultRabbit # 要绑定的消息服务的具体设置
+        registerCount-out-0:
+          destination: register-stat-exchange # 表示要使用的Exchange名称定义
+          content-type: application/json # 消息类型
+          binder: defaultRabbit # 要绑定的消息服务的具体设置
       rabbit:
         bindings:
           loginCount-out-0:
             producer:
               ttl: 60000 #消息几秒不消费转入私信队列
+              autoBindDlq: true #启动私信队列
+              deadLetterExchange: dead-letter-exchange #绑定exchange
+          registerCount-out-0:
+            producer:
               autoBindDlq: true #启动私信队列
               deadLetterExchange: dead-letter-exchange #绑定exchange

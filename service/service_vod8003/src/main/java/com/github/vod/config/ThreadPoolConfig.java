@@ -19,7 +19,7 @@ public class ThreadPoolConfig {
     public ThreadPoolExecutor threadPoolExecutor() {
         return new ThreadPoolExecutor(3,
                 20,
-                60L,
+                30L,
                 TimeUnit.SECONDS,
                 new ArrayBlockingQueue<>(15));
     }
