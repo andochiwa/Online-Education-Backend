@@ -86,7 +86,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
         // 配置序列化解决乱码问题，设定过期时间
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofSeconds(600))
+                .entryTtl(Duration.ofHours(6L))
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer))
                 .serializeValuesWith(pair)
                 .disableCachingNullValues();
