@@ -25,6 +25,8 @@ public class Chapter {
 
     private String videoSourceId;
 
+    private Integer isFree;
+
     private List<Chapter> children;
 
 }
