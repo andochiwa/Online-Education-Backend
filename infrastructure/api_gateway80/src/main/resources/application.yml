@@ -42,7 +42,7 @@ spring:
         - id: service-center
           uri: lb://service-center
           predicates:
-            - Path=/edu-center/**,/github**
+            - Path=/edu-center/**,/login/**
 
         - id: service-order
           uri: lb://service-order

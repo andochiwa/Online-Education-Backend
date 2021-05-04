@@ -19,3 +19,5 @@ spring:
             refresh: true
           - data-id: seata.yml
             refresh: true
+          - data-id: rabbitmq.yml
+            refresh: true
