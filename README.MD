@@ -23,7 +23,7 @@
 | Spring Cloud Gateway  |  服务网关，负责请求转发，负载均衡等   |       https://spring.io/projects/spring-cloud-gateway        |                   |
 |       OpenFeign       |   Http客户端，负责微服务之间的调用    |      https://spring.io/projects/spring-cloud-openfeign       |                   |
 | Spring Cloud Security |          负责管理系统的鉴权           |       https://spring.io/projects/spring-cloud-security       |                   |
-|       RabbitMQ        |    使用Spring Cloud Stream消息驱动    | https://www.rabbitmq.com/#features<br />https://spring.pleiades.io/projects/spring-cloud-stream |                   |
+|       RabbitMQ        |    使用Spring Cloud Stream消息驱动    | https://www.rabbitmq.com/#features<br />https://spring.io/projects/spring-cloud-stream |                   |
 |         MySQL         |                数据库                 |                    https://www.mysql.com/                    | 需要到Nacos上配置 |
 |         Druid         |       为监控而生的数据库连接池        |               https://github.com/alibaba/druid               | 需要到Nacos上配置 |
 |         Redis         | 缓存数据库，为spring、mybatis提供缓存 |                      https://redis.io/                       | 需要到Nacos上配置 |

@@ -17,7 +17,7 @@ SpringCloudに基づいてマイクロサービスアーキテクチャである
 |    フレームワーク     |                           使用内容                           |                          公式サイト                          |           備考            |
 | :-------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :-----------------------: |
 |         Nacos         |                   サービス登録、発見、配備                   |              https://nacos.io/en-us/index.html               |                           |
-|       Sentinel        |                 フロー制御、Circuit Breakers                 |               https://sentinelguard.io/zh-cn/                | Nacosに配備する必要がある |
+|       Sentinel        |                 フロー制御、Circuit Breakers                 |               https://sentinelguard.io/en-us/                | Nacosに配備する必要がある |
 | Spring Cloud Gateway  | サービスゲートウェイ，Request Forward、Load Balanceなどを担当する |       https://spring.io/projects/spring-cloud-gateway        |                           |
 |       OpenFeign       |      Http Client，マイクロサービーの間の転送を担当する       |      https://spring.io/projects/spring-cloud-openfeign       |                           |
 | Spring Cloud Security |                 管理システムの認証を担当する                 |       https://spring.io/projects/spring-cloud-security       |                           |
@@ -25,9 +25,9 @@ SpringCloudに基づいてマイクロサービスアーキテクチャである
 |         MySQL         |                         データベース                         |                    https://www.mysql.com/                    | Nacosに配備する必要がある |
 |         Druid         |            モニタリングのためのデータベースプール            |               https://github.com/alibaba/druid               | Nacosに配備する必要がある |
 |         Redis         |     Cacheデータベース、MybatisやSpringのCacheを提供する      |                      https://redis.io/                       | Nacosに配備する必要がある |
-|         Seata         |                       分散Transaction                        |                    http://seata.io/zh-cn/                    | Nacosに配備する必要がある |
+|         Seata         |                       分散Transaction                        |                    http://seata.io/en-us/                    | Nacosに配備する必要がある |
 |      Spring Boot      |                Springで効率で開発するscaffold                |           https://spring.io/projects/spring-boot/            |                           |
-|     Mybatis-Plus      |                 Mybatisの開発を簡略化にする                  |                   https://mp.baomidou.com/                   | Nacosに配備する必要がある |
+|     Mybatis-Plus      |                 Mybatisの開発を簡略化にする                  |                 https://mp.baomidou.com/en/                  | Nacosに配備する必要がある |
 
 # Modules説明
 
