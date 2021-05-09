@@ -30,6 +30,7 @@
 |         Seata         |              分布式事务               |                    http://seata.io/zh-cn/                    | 需要到Nacos上配置 |
 |      Spring Boot      |        Spring快速开发的脚手架         |           https://spring.io/projects/spring-boot/            |                   |
 |     Mybatis-Plus      |           为Mybatis简化开发           |                   https://mp.baomidou.com/                   | 需要到Nacos上配置 |
+|        Hutool         |              糊涂工具包               |                https://www.hutool.cn/docs/#/                 |                   |
 
 # 模块说明
 

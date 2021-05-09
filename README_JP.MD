@@ -28,6 +28,7 @@ SpringCloudに基づいてマイクロサービスアーキテクチャである
 |         Seata         |                       分散Transaction                        |                    http://seata.io/en-us/                    | Nacosに配備する必要がある |
 |      Spring Boot      |                Springで効率で開発するscaffold                |           https://spring.io/projects/spring-boot/            |                           |
 |     Mybatis-Plus      |                 Mybatisの開発を簡略化にする                  |                 https://mp.baomidou.com/en/                  | Nacosに配備する必要がある |
+|        Hutool         |                         Hutoolツール                         | https://github.com/dromara/hutool/blob/v5-master/README-EN.md |                           |
 
 # Modules説明
 
