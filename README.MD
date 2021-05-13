@@ -16,21 +16,22 @@
 
 # 使用技术栈
 
-|         框架          |               使用内容                |                             官网                             |       备注        |
-| :-------------------: | :-----------------------------------: | :----------------------------------------------------------: | :---------------: |
-|         Nacos         |         服务注册、发现、配置          |              https://nacos.io/zh-cn/index.html               |                   |
-|       Sentinel        |         服务熔断、流量监控等          |               https://sentinelguard.io/zh-cn/                | 需要到Nacos上配置 |
-| Spring Cloud Gateway  |  服务网关，负责请求转发，负载均衡等   |       https://spring.io/projects/spring-cloud-gateway        |                   |
-|       OpenFeign       |   Http客户端，负责微服务之间的调用    |      https://spring.io/projects/spring-cloud-openfeign       |                   |
-| Spring Cloud Security |          负责管理系统的鉴权           |       https://spring.io/projects/spring-cloud-security       |                   |
-|       RabbitMQ        |    使用Spring Cloud Stream消息驱动    | https://www.rabbitmq.com/#features<br />https://spring.io/projects/spring-cloud-stream |                   |
-|         MySQL         |                数据库                 |                    https://www.mysql.com/                    | 需要到Nacos上配置 |
-|         Druid         |       为监控而生的数据库连接池        |               https://github.com/alibaba/druid               | 需要到Nacos上配置 |
-|         Redis         | 缓存数据库，为spring、mybatis提供缓存 |                      https://redis.io/                       | 需要到Nacos上配置 |
-|         Seata         |              分布式事务               |                    http://seata.io/zh-cn/                    | 需要到Nacos上配置 |
-|      Spring Boot      |        Spring快速开发的脚手架         |           https://spring.io/projects/spring-boot/            |                   |
-|     Mybatis-Plus      |           为Mybatis简化开发           |                   https://mp.baomidou.com/                   | 需要到Nacos上配置 |
-|        Hutool         |              糊涂工具包               |                https://www.hutool.cn/docs/#/                 |                   |
+|         框架          |               使用内容                |                             官网                             |       备注        |  版本  |
+| :-------------------: | :-----------------------------------: | :----------------------------------------------------------: | :---------------: | :----: |
+|         Nacos         |         服务注册、发现、配置          |              https://nacos.io/zh-cn/index.html               |                   | 1.4.1  |
+|       Sentinel        |         服务熔断、流量监控等          |               https://sentinelguard.io/zh-cn/                | 需要到Nacos上配置 |        |
+| Spring Cloud Gateway  |  服务网关，负责请求转发，负载均衡等   |       https://spring.io/projects/spring-cloud-gateway        |                   |        |
+|       OpenFeign       |   Http客户端，负责微服务之间的调用    |      https://spring.io/projects/spring-cloud-openfeign       |                   |        |
+| Spring Cloud Security |          负责管理系统的鉴权           |       https://spring.io/projects/spring-cloud-security       |                   |        |
+|       RabbitMQ        |    使用Spring Cloud Stream消息驱动    | https://www.rabbitmq.com/#features<br />https://spring.io/projects/spring-cloud-stream |                   | 3.8.14 |
+|         MySQL         |                数据库                 |                    https://www.mysql.com/                    | 需要到Nacos上配置 | 8.0.22 |
+|         Druid         |       为监控而生的数据库连接池        |               https://github.com/alibaba/druid               | 需要到Nacos上配置 |        |
+|         Redis         | 缓存数据库，为spring、mybatis提供缓存 |                      https://redis.io/                       | 需要到Nacos上配置 | 6.2.1  |
+|         Seata         |              分布式事务               |                    http://seata.io/zh-cn/                    | 需要到Nacos上配置 | 1.3.0  |
+|      Spring Boot      |        Spring快速开发的脚手架         |           https://spring.io/projects/spring-boot/            |                   |        |
+|     Mybatis-Plus      |           为Mybatis简化开发           |                   https://mp.baomidou.com/                   | 需要到Nacos上配置 |        |
+|        Hutool         |              糊涂工具包               |                https://www.hutool.cn/docs/#/                 |                   |        |
+|         java          |                                       |                                                              |                   |   15   |
 
 # 模块说明
 
