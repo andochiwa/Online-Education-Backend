@@ -30,6 +30,7 @@ SpringCloudに基づいてマイクロサービスアーキテクチャである
 |     Mybatis-Plus      |                 Mybatisの利用を簡略化にする                  |                 https://mp.baomidou.com/en/                  | Nacosに配備する必要がある |         |
 |        Hutool         |                         Hutoolツール                         | https://github.com/dromara/hutool/blob/v5-master/README-EN.md |                           |         |
 |         java          |                                                              |                                                              |                           |   15    |
+|        Swagger        |                インターフェース ドキュメント                 |                     https://swagger.io/                      |    https://swagger.io/    |  3.0.0  |
 
 # Modules説明
 
