@@ -32,6 +32,7 @@
 |     Mybatis-Plus      |           为Mybatis简化开发           |                   https://mp.baomidou.com/                   | 需要到Nacos上配置 |        |
 |        Hutool         |              糊涂工具包               |                https://www.hutool.cn/docs/#/                 |                   |        |
 |         java          |                                       |                                                              |                   |   15   |
+|        Swagger        |             生成接口文档              |                     https://swagger.io/                      |                   | 3.0.0  |
 
 # 模块说明
 
