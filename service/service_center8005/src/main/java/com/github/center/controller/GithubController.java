@@ -85,6 +85,6 @@ public class GithubController {
         UcenterMember ucenterMember = ucenterMemberService.saveUser(userMap);
 
         String token = JwtUtils.getJwtToken(ucenterMember.getId(), ucenterMember.getNickname());
-        return "redirect:http://andochiwa.top:3000?token=" + token;
+        return "redirect:http://localhost:3000?token=" + token;
     }
 }
