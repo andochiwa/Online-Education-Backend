@@ -5,9 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cache.Cache;
 import org.springframework.data.redis.connection.RedisServerCommands;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -50,8 +52,11 @@ public class MybatisRedisCacheConfig implements Cache {
             getRedisTemplate();
             log.info("save cache to redis" + this.id);
             // 保存数据设置为一天
-            redisTemplate.opsForHash().put(this.id, key, value);
-            redisTemplate.expire(this.id, 1, TimeUnit.DAYS);
+            if (key.toString().length() < 20) {
+                redisTemplate.opsForValue().set(key.toString() + this.id, value, 1, TimeUnit.DAYS);
+                return;
+            }
+            redisTemplate.opsForValue().set(key.toString().substring(0, 20) + this.id, value, 1, TimeUnit.DAYS);
         }
     }
 
@@ -60,7 +65,10 @@ public class MybatisRedisCacheConfig implements Cache {
         try {
             if (!ObjectUtils.isEmpty(key)) {
                 getRedisTemplate();
-                return redisTemplate.opsForHash().get(this.id, key);
+                if (key.toString().length() < 20) {
+                    return redisTemplate.opsForValue().get(key.toString() + this.id);
+                }
+                return redisTemplate.opsForValue().get(key.toString().substring(0, 20) + this.id);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +81,11 @@ public class MybatisRedisCacheConfig implements Cache {
         if (!ObjectUtils.isEmpty(key)) {
             getRedisTemplate();
             log.info("remove redis cache");
-            redisTemplate.opsForHash().delete(this.id, key);
+            if (key.toString().length() < 20) {
+                redisTemplate.delete(key.toString() + this.id);
+                return null;
+            }
+            redisTemplate.delete(key.toString().substring(0, 20) + this.id);
         }
         return null;
     }
@@ -82,7 +94,10 @@ public class MybatisRedisCacheConfig implements Cache {
     public void clear() {
         getRedisTemplate();
         log.info("clear redis cache" + this.id);
-        redisTemplate.delete(this.id);
+        Set<String> keys = redisTemplate.keys("*" + this.id + "*");
+        if (!CollectionUtils.isEmpty(keys)) {
+            redisTemplate.delete(keys);
+        }
     }
 
     @Override
