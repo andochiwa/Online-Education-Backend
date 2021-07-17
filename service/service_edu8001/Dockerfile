@@ -1,0 +1,5 @@
+FROM adoptopenjdk/openjdk15:ubi
+COPY ./service/service_edu8001/target/service_edu.jar /app
+COPY ./wait-for-it.sh /app
+WORKDIR /app
+CMD ["java", "-jar", "service_edu.jar"]
