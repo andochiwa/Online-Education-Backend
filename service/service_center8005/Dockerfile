@@ -1,4 +1,5 @@
 FROM adoptopenjdk/openjdk15:ubi
+RUN mkdir /app
 COPY ./service/service_center8005/target/service_center.jar /app
 COPY ./wait-for-it.sh /app
 WORKDIR /app
