@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  nacos:
+    build:
+      context: .
+      dockerfile:
+
+
+networks:
+  online-education:
