@@ -278,7 +278,9 @@ CREATE TABLE `acl_user` (
 insert  into `acl_user`(`id`,`username`,`password`,`nick_name`,`avatar`,`is_deleted`,`gmt_create`,`gmt_modified`) values 
 (1387103687210811394,'andochiwa','8d2734586ed339c8388e81ebeff18d1a','andochiwa','https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/04/28/a8206a89608c45e197b09e32f1f2349f4.jpg',0,'2021-04-28 02:57:45','2021-04-28 02:57:45'),
 (1388897736636870658,'tourist','96e79218965eb72c92a549dd5a330112','游客','https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',0,'2021-05-03 01:46:40','2021-05-03 01:46:40'),
-(1389598987540279297,'null','96e79218965eb72c92a549dd5a330112','null','https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',1,'2021-05-05 00:13:11','2021-05-05 00:13:11');
+(1389598987540279297,'null','96e79218965eb72c92a549dd5a330112','null','https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',1,'2021-05-05 00:13:11','2021-05-05 00:13:11'),
+(1408501511458488321,'teacher','96e79218965eb72c92a549dd5a330112','teacher','https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',0,'2021-06-26 04:05:04','2021-06-26 04:05:04'),
+(1408501588407189506,'course','96e79218965eb72c92a549dd5a330112','course','https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',0,'2021-06-26 04:05:22','2021-06-26 04:05:22');
 
 /*Table structure for table `acl_user_role` */
 
@@ -300,7 +302,12 @@ CREATE TABLE `acl_user_role` (
 insert  into `acl_user_role`(`id`,`role_id`,`user_id`,`gmt_create`,`gmt_modified`) values 
 (1388897791582253057,1388889175722668034,1387103687210811394,'2021-05-03 01:46:53','2021-05-03 01:46:53'),
 (1388898423370264578,1,1388897736636870658,'2021-05-03 01:49:23','2021-05-03 01:49:23'),
-(1388965734911422465,1388889017454800898,1388897736636870658,'2021-05-03 06:16:52','2021-05-03 06:16:52');
+(1388965734911422465,1388889017454800898,1388897736636870658,'2021-05-03 06:16:52','2021-05-03 06:16:52'),
+(1408501511781449729,1,1408501511458488321,'2021-06-26 04:05:04','2021-06-26 04:05:04'),
+(1408501553946787841,1388888095714553857,1408501511458488321,'2021-06-26 04:05:14','2021-06-26 04:05:14'),
+(1408501588411383809,1,1408501588407189506,'2021-06-26 04:05:22','2021-06-26 04:05:22'),
+(1408501615254929409,1193757683205607426,1408501588407189506,'2021-06-26 04:05:28','2021-06-26 04:05:28'),
+(1408501615254929410,1388887922154254337,1408501588407189506,'2021-06-26 04:05:28','2021-06-26 04:05:28');
 
 /*Table structure for table `crm_banner` */
 
@@ -465,16 +472,16 @@ CREATE TABLE `edu_course` (
 /*Data for the table `edu_course` */
 
 insert  into `edu_course`(`id`,`teacher_id`,`subject_id`,`subject_parent_id`,`title`,`price`,`lesson_num`,`cover`,`buy_count`,`view_count`,`version`,`status`,`is_deleted`,`gmt_create`,`gmt_modified`) values 
-(1389172103958577154,1388933510056996865,1380216822119694338,1380216821620572161,'JavaSE',0.00,6,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/dd3f5e475f804900b5b70533ea32a80fu%3D419759217%2C2052875907%26fm%3D26%26gp%3D0.jpg',0,31,1,'Normal',0,'2021-05-03 19:56:54','2021-05-03 19:58:51'),
-(1389173328695345153,1388936503816974337,1380216822119694338,1380216821620572161,'javaEE',2.00,6,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/2a87cf688f9c4395b46dfbd87f4210a8u=4054347203,639861629&fm=26&gp=0.gif',1,28,1,'Normal',0,'2021-05-03 20:01:46','2021-05-03 20:03:10'),
-(1389174610520784898,1388936857354858497,1380216822119694338,1380216821620572161,'spring framework',0.00,5,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/24cf79f5b5234ad0b16681a2c64864c5u%3D1386741497%2C1690022462%26fm%3D26%26gp%3D0.jpg',0,8,1,'Normal',0,'2021-05-03 20:06:51','2021-05-03 20:09:19'),
-(1389179037784817666,1388937696752529410,1380216822119694338,1380216821620572161,'Spring Cloud',4.00,4,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/f78af7e8ecf348ceb5b928bda6094bbdsrc=http___static.zuidemo.com_upload_image_201810_8cc35820-6277-4b11-8273-bb051bb469e0_large.jpg&refer=http___static.zuidemo.jpg',1,43,1,'Normal',0,'2021-05-03 20:24:27','2021-05-03 20:25:11'),
-(1389181626911899650,1388938391253774335,1380216822732062721,1380216821620572161,'C++',50.00,2,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/e02259dcfb244936a9ecae3db3377970safjkalsfj.jpg',0,11,1,'Normal',0,'2021-05-03 20:34:44','2021-05-03 20:35:34'),
+(1389172103958577154,1388933510056996865,1380216822119694338,1380216821620572161,'JavaSE',0.00,6,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/dd3f5e475f804900b5b70533ea32a80fu%3D419759217%2C2052875907%26fm%3D26%26gp%3D0.jpg',0,33,1,'Normal',0,'2021-05-03 19:56:54','2021-05-03 19:58:51'),
+(1389173328695345153,1388936503816974337,1380216822119694338,1380216821620572161,'javaEE',2.00,6,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/2a87cf688f9c4395b46dfbd87f4210a8u=4054347203,639861629&fm=26&gp=0.gif',1,29,1,'Normal',0,'2021-05-03 20:01:46','2021-05-03 20:03:10'),
+(1389174610520784898,1388936857354858497,1380216822119694338,1380216821620572161,'spring framework',0.00,5,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/24cf79f5b5234ad0b16681a2c64864c5u%3D1386741497%2C1690022462%26fm%3D26%26gp%3D0.jpg',0,10,1,'Normal',0,'2021-05-03 20:06:51','2021-05-03 20:09:19'),
+(1389179037784817666,1388937696752529410,1380216822119694338,1380216821620572161,'Spring Cloud',4.00,4,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/f78af7e8ecf348ceb5b928bda6094bbdsrc=http___static.zuidemo.com_upload_image_201810_8cc35820-6277-4b11-8273-bb051bb469e0_large.jpg&refer=http___static.zuidemo.jpg',1,45,1,'Normal',0,'2021-05-03 20:24:27','2021-05-03 20:25:11'),
+(1389181626911899650,1388938391253774335,1380216822732062721,1380216821620572161,'C++',50.00,2,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/e02259dcfb244936a9ecae3db3377970safjkalsfj.jpg',1,13,1,'Normal',0,'2021-05-03 20:34:44','2021-05-03 20:35:34'),
 (1389182832740745218,1388938391253774336,1380216822732062721,1380216821620572161,'C++17',0.00,4,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/2fbf988297614338a05c99ddebe07a33cpp.jpg',0,3,1,'Normal',0,'2021-05-03 20:39:32','2021-05-03 20:40:48'),
-(1389184259991093249,1388938391253774337,1380216823461871617,1380216821620572161,'golang',3.00,5,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/3dc5bbacc2ea4f9fa8e1cf9e73ab4f0cgo.png',1,15,1,'Normal',0,'2021-05-03 20:45:12','2021-05-03 20:46:43'),
+(1389184259991093249,1388938391253774337,1380216823461871617,1380216821620572161,'golang',3.00,5,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/3dc5bbacc2ea4f9fa8e1cf9e73ab4f0cgo.png',1,16,1,'Normal',0,'2021-05-03 20:45:12','2021-05-03 20:46:43'),
 (1389184771226419201,1388939126271995905,1388897584278761473,1380216821620572161,'python',0.00,2,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/123df76fe622469cad14e3130ba91888Python.png',0,1,1,'Normal',0,'2021-05-03 20:47:14','2021-05-03 20:48:05'),
 (1389185170943590402,1388939126271995906,1388897584278761473,1380216821620572161,'django',3.00,2,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/9696cb22de5c41e2a31fb713dd1fa5cadjango-icatch-r.png',0,3,1,'Normal',0,'2021-05-03 20:48:49','2021-05-03 20:49:28'),
-(1389188244919631874,1388939437527101441,1380216824942460930,1380216824040685570,'Vue',3.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/01c866761b0a4b2d94d82ec37a4088c9u=3188406861,2602574171&fm=26&gp=0.jpg',0,0,1,'Normal',0,'2021-05-03 21:01:02','2021-05-03 21:02:13'),
+(1389188244919631874,1388939437527101441,1380216824942460930,1380216824040685570,'Vue',3.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/01c866761b0a4b2d94d82ec37a4088c9u=3188406861,2602574171&fm=26&gp=0.jpg',0,1,1,'Normal',0,'2021-05-03 21:01:02','2021-05-03 21:02:13'),
 (1389188730083164161,1388940136608526338,1380216824942460930,1380216824040685570,'Vue Router',7.00,5,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/f518ff6b41cf4c11affd4182a6c8d1c5u=1300146589,158997046&fm=26&gp=0.jpg',0,0,1,'Normal',0,'2021-05-03 21:02:58','2021-05-03 21:03:20'),
 (1389189010619187202,1388940659441102850,1380216825936510977,1380216824040685570,'JQuery',0.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/e2be62fc271249c19b7ca7ef0f16b0d2u=4243152510,3375696239&fm=26&gp=0.jpg',0,0,1,'Normal',0,'2021-05-03 21:04:05','2021-05-03 21:04:49'),
 (1389189470793056257,1388940899934105602,1380216827647787010,1380216827014447106,'docker',4.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/91a5d4dee42f4f8a9fc9b107391fdc5bdocker-eyecatch-960x504.png',1,1,1,'Normal',0,'2021-05-03 21:05:54','2021-05-03 21:06:40'),
@@ -488,7 +495,7 @@ insert  into `edu_course`(`id`,`teacher_id`,`subject_id`,`subject_parent_id`,`ti
 (1389196447313117186,1388936857354858497,1380216831422660609,1380216830789320705,'RabbitMQ',4.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/8cb7a9713bd145c784edbdcde3023c6erabbitmq.png',0,2,1,'Normal',0,'2021-05-03 21:33:38','2021-05-03 21:34:14'),
 (1389196834980052993,1388937696752529410,1380216831951142913,1380216830789320705,'ActiveMQ',14.00,4,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/fbdede3b1306455c94852a2df14f409eApache_ActiveMQ_Project_Logo_1.svg.png',0,0,1,'Normal',0,'2021-05-03 21:35:10','2021-05-03 21:36:19'),
 (1389198099671760898,1388938391253774335,1387505182037110786,1380216828763471873,'Redis',6.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/4a19fb6369914a6cad360abfc181bacc534d2e7a9cff4a1a7e9553dd7dedd10c.png',0,1,1,'Normal',0,'2021-05-03 21:40:12','2021-05-03 21:41:00'),
-(1389202151373619202,1388938391253774336,1388897584819826689,1380216824040685570,'JavaScript',5.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/8aecb9f8feac41378c91bbfafdfe5507javascript-960x504.png',0,5,1,'Normal',0,'2021-05-03 21:56:18','2021-05-03 21:56:53'),
+(1389202151373619202,1388938391253774336,1388897584819826689,1380216824040685570,'JavaScript',5.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/8aecb9f8feac41378c91bbfafdfe5507javascript-960x504.png',0,6,1,'Normal',0,'2021-05-03 21:56:18','2021-05-03 21:56:53'),
 (1389203599444492290,1388938391253774337,1388897585331531778,1380216824040685570,'React',4.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/1aaf8f29905b46af9c8d1235bf8340f11_yjH3SiDaVWtpBX0g_2q68g.png',0,0,1,'Normal',0,'2021-05-03 22:02:03','2021-05-03 22:02:19'),
 (1389205466488586241,1388933510056996865,1388897585851625473,1380216827014447106,'Kubernetes',14.00,4,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/80e7996f6db448d386ca78099c1a3accKubernetes-logo-1.png',0,2,1,'Normal',0,'2021-05-03 22:09:28','2021-05-03 22:09:58'),
 (1389205785255690241,1388939126271995905,1388897586493353986,1380216828763471873,'PostgreSQL',6.00,3,'https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/e94a167aff974454b2ecc1be59116600postgresql-1200x630-960x504.png',0,0,1,'Normal',0,'2021-05-03 22:10:44','2021-05-03 22:11:00'),
@@ -840,7 +847,12 @@ insert  into `statistics_daily`(`id`,`date_calculated`,`register_num`,`login_num
 (1388885286550069249,'2021-05-03',0,0,1,7,'2021-05-03 00:57:11','2021-05-03 00:57:11'),
 (1389237458760433666,'2021-05-04',2,7,7,126,'2021-05-04 00:16:36','2021-05-04 00:16:36'),
 (1389598414921383937,'2021-05-05',0,22,5,22,'2021-05-05 00:10:54','2021-05-05 00:10:54'),
-(1389984535585067010,'2021-05-06',0,2,0,6,'2021-05-06 01:45:13','2021-05-06 01:45:13');
+(1389984535585067010,'2021-05-06',0,2,0,6,'2021-05-06 01:45:13','2021-05-06 01:45:13'),
+(1391450022919647234,'2021-05-10',0,0,0,0,'2021-05-10 02:48:32','2021-05-10 02:48:32'),
+(1391679406230319106,'2021-05-09',0,0,0,0,'2021-05-10 18:00:01','2021-05-10 18:00:01'),
+(1408501370110451714,'2021-06-26',0,3,4,10,'2021-06-26 04:04:30','2021-06-26 04:04:30'),
+(1413398049204846593,'2021-07-09',0,1,1,1,'2021-07-09 16:22:09','2021-07-09 16:22:09'),
+(1415048554100367362,'2021-07-14',0,0,0,1,'2021-07-14 05:40:40','2021-07-14 05:40:40');
 
 /*Table structure for table `t_order` */
 
@@ -873,7 +885,8 @@ insert  into `t_order`(`id`,`order_no`,`course_id`,`course_title`,`course_cover`
 (1389252368730968065,'126482bfdfac401a9ba1487ed4421dbc',1389173328695345153,'javaEE','https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/2a87cf688f9c4395b46dfbd87f4210a8u=4054347203,639861629&fm=26&gp=0.gif','二階堂真紅','1389252345624576002','Andochiwa','',2.00,1,1,0,'2021-05-04 01:15:50','2021-05-04 01:15:50'),
 (1389532800873680897,'47d0a05a92584a4e8815496ee97faa3f',1389179037784817666,'Spring Cloud','https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/f78af7e8ecf348ceb5b928bda6094bbdsrc=http___static.zuidemo.com_upload_image_201810_8cc35820-6277-4b11-8273-bb051bb469e0_large.jpg&refer=http___static.zuidemo.jpg','二階堂藍','1389252345624576002','Andochiwa','',4.00,1,1,0,'2021-05-04 19:50:11','2021-05-04 19:50:11'),
 (1389586300768952321,'d53f2c18d0ce48c4b8a7362b4071ee53',1389184259991093249,'golang','https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/3dc5bbacc2ea4f9fa8e1cf9e73ab4f0cgo.png','御桜稟','1389252345624576002','Andochiwa','',3.00,1,1,0,'2021-05-04 23:22:46','2021-05-04 23:22:46'),
-(1389702274532880385,'a01bc57683e242dc8fff0917b1dbcf44',1389189470793056257,'docker','https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/91a5d4dee42f4f8a9fc9b107391fdc5bdocker-eyecatch-960x504.png','吹','1389252345624576002','Andochiwa','',4.00,1,0,0,'2021-05-05 07:03:36','2021-05-05 07:03:36');
+(1389702274532880385,'a01bc57683e242dc8fff0917b1dbcf44',1389189470793056257,'docker','https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/91a5d4dee42f4f8a9fc9b107391fdc5bdocker-eyecatch-960x504.png','吹','1389252345624576002','Andochiwa','',4.00,1,0,0,'2021-05-05 07:03:36','2021-05-05 07:03:36'),
+(1408505111337328641,'367965d8aef4446f92e8ec0d2d181f56',1389181626911899650,'C++','https://my-online-education-project.oss-cn-beijing.aliyuncs.com/2021/05/03/e02259dcfb244936a9ecae3db3377970safjkalsfj.jpg','夏目雫','1389252345624576002','Andochiwa','',50.00,1,1,0,'2021-06-26 04:19:22','2021-06-26 04:19:22');
 
 /*Table structure for table `t_pay_log` */
 
@@ -900,7 +913,8 @@ CREATE TABLE `t_pay_log` (
 insert  into `t_pay_log`(`id`,`order_no`,`pay_time`,`total_fee`,`transaction_id`,`trade_state`,`pay_type`,`attr`,`is_deleted`,`gmt_create`,`gmt_modified`) values 
 (1389252381347434498,'126482bfdfac401a9ba1487ed4421dbc','2021-05-04 01:15:53',2.00,'33665710776',NULL,0,NULL,0,'2021-05-04 01:15:53','2021-05-04 01:15:53'),
 (1389532813464981506,'47d0a05a92584a4e8815496ee97faa3f','2021-05-04 19:50:14',4.00,'69063346995',NULL,0,NULL,0,'2021-05-04 19:50:14','2021-05-04 19:50:14'),
-(1389586346147127298,'d53f2c18d0ce48c4b8a7362b4071ee53','2021-05-04 23:22:57',3.00,'01872707011',NULL,0,NULL,0,'2021-05-04 23:22:57','2021-05-04 23:22:57');
+(1389586346147127298,'d53f2c18d0ce48c4b8a7362b4071ee53','2021-05-04 23:22:57',3.00,'01872707011',NULL,0,NULL,0,'2021-05-04 23:22:57','2021-05-04 23:22:57'),
+(1408505173102649345,'367965d8aef4446f92e8ec0d2d181f56','2021-06-26 04:19:37',50.00,'97452450710',NULL,0,NULL,0,'2021-06-26 04:19:37','2021-06-26 04:19:37');
 
 /*Table structure for table `three_party_info` */
 
@@ -914,6 +928,13 @@ CREATE TABLE `three_party_info` (
   `temp2` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `three_party_info` */
+
+insert  into `three_party_info`(`name`,`id`,`secret`,`temp1`,`temp2`) values 
+('aliyun','改成你阿里云的AccessKey ID','改成你阿里云的AccessKey Secret','改成你oss的bucket的Endpoint','改成你oss的bucket的名称'),
+('email','改成你的邮箱','改成你邮箱的授权码',NULL,NULL),
+('github','改成你github的Client ID','改成你github的Client secrets',NULL,NULL);
 
 /*Table structure for table `ucenter_member` */
 
@@ -937,6 +958,12 @@ CREATE TABLE `ucenter_member` (
   UNIQUE KEY `uni_email` (`email`),
   KEY `idx_openid` (`openid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='会员表';
+
+/*Data for the table `ucenter_member` */
+
+insert  into `ucenter_member`(`id`,`openid`,`email`,`password`,`nickname`,`sex`,`age`,`avatar`,`sign`,`is_disabled`,`is_deleted`,`gmt_create`,`gmt_modified`) values 
+('1389252345624576002','MDQ6VXNlcjY3ODE4MjM3','',NULL,'Andochiwa',1,NULL,'https://avatars.githubusercontent.com/u/67818237?v=4',NULL,0,0,'2021-05-04 01:15:45','2021-05-04 01:15:45'),
+('1389275697324060674',NULL,'a1066079469@gmail.com','31942c61877e3513c7ed5e5e5a3f1dfa','Andochiwa',1,NULL,'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',NULL,0,0,'2021-05-04 02:48:32','2021-05-04 02:48:32');
 
 /*Table structure for table `undo_log` */
 
