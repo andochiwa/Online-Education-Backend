@@ -4,7 +4,80 @@ services:
   nacos:
     build:
       context: .
-      dockerfile:
+      dockerfile: ./Dockerfile-nacos
+    container_name: nacos
+    ports:
+      - "8848:8848"
+    restart: always
+    entrypoint: ./wait-for-it.sh mysql:3306 -t 0 -- bin/docker-startup.sh
+    depends_on:
+      - mysql
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=mysql
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_DB_NAME=nacos_config
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=root
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&serverTimezone=Japan
+    networks:
+      - online-education
+  seata:
+    image: seataio/seata-server:1.3.0
+    container_name: seata
+    hostname: seata-server
+    restart: always
+    depends_on:
+      - mysql
+      - nacos
+    ports:
+      - "8091:8091"
+    environment:
+      - SEATA_PORT=8091
+      - STORE_MODE=file
+      - SEATA_CONFIG_NAME=/root/seata-config/registry.conf
+    volumes:
+      - ./doc/docker/seata/config:/root/seata-config
+    networks:
+      - online-education
+  mysql:
+    image: mysql:8.0.22
+    restart: always
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./doc/sql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    networks:
+      - online-education
+  sentinel:
+    image: bladex/sentinel-dashboard:latest
+    restart: on-failure:3
+    container_name: sentinel_dashboard
+    ports:
+      - "8858:8858"
+  rabbitmq:
+    image: rabbitmq:3.8.19-management
+    hostname: rabbitmq
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER: "andochiwa"
+      - RABBITMQ_DEFAULT_PASS: "123789"
+  redis:
+    image: redis:6.2.4
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - online-education
 
 
 networks:
