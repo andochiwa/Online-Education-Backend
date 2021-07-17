@@ -37,9 +37,9 @@ services:
     environment:
       - SEATA_PORT=8091
       - STORE_MODE=file
-      - SEATA_CONFIG_NAME=/root/seata-config/registry.conf
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
     volumes:
-      - ./doc/docker/seata/config:/root/seata-config
+      - ./doc/seata/config:/root/seata-config
     networks:
       - online-education
   mysql:
@@ -61,6 +61,8 @@ services:
     container_name: sentinel_dashboard
     ports:
       - "8858:8858"
+    networks:
+      - online-education
   rabbitmq:
     image: rabbitmq:3.8.19-management
     hostname: rabbitmq
@@ -69,8 +71,10 @@ services:
       - "5672:5672"
       - "15672:15672"
     environment:
-      - RABBITMQ_DEFAULT_USER: "andochiwa"
-      - RABBITMQ_DEFAULT_PASS: "123789"
+      - RABBITMQ_DEFAULT_USER=andochiwa
+      - RABBITMQ_DEFAULT_PASS=123789
+    networks:
+      - online-education
   redis:
     image: redis:6.2.4
     container_name: redis
