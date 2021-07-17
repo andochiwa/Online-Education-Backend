@@ -16,4 +16,8 @@
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
 
+    <build>
+        <finalName>service_statictis</finalName>
+    </build>
+
 </project>

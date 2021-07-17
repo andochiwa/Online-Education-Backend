@@ -23,4 +23,8 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>service_oss</finalName>
+    </build>
+
 </project>

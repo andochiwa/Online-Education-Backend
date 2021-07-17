@@ -24,4 +24,8 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>service_edu</finalName>
+    </build>
+
 </project>

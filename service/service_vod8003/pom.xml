@@ -47,6 +47,7 @@
     </dependencies>
 
     <build>
+        <finalName>service_vod</finalName>
         <resources>
             <resource>
                 <directory>lib</directory>

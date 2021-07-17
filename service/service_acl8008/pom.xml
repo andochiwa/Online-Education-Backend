@@ -28,4 +28,8 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>service_acl</finalName>
+    </build>
+
 </project>

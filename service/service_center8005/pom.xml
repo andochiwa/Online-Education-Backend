@@ -27,4 +27,8 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>service_center</finalName>
+    </build>
+
 </project>
