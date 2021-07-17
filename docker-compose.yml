@@ -82,7 +82,153 @@ services:
       - "6379:6379"
     networks:
       - online-education
-
+  api_gateway:
+    build:
+      context: .
+      dockerfile: ./infrastructure/api_gateway80/Dockerfile
+    container_name: api_gateway80
+    command: ./wait-for-it.sh nacos:8848 -t 0 -- java -jar api_gateway.jar
+    depends_on:
+      - mysql
+      - nacos
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - online-education
+  service_edu:
+    build:
+      context: .
+      dockerfile: ./service/service_edu8001/Dockerfile
+    container_name: service_edu8001
+    command: ./wait-for-it.sh nacos:8848 -t 0 -- ./wait-for-it.sh seata:8091 -t 0 -- java -jar service_edu.jar
+    depends_on:
+      - mysql
+      - nacos
+      - rabbitmq
+      - redis
+      - seata
+    restart: always
+    ports:
+      - "8001:8001"
+    networks:
+      - online-education
+  service_oss:
+    build:
+      context: .
+      dockerfile: ./service/service_oss8002/Dockerfile
+    container_name: service_oss8002
+    command: ./wait-for-it.sh nacos:8848 -t 0 -- ./wait-for-it.sh seata:8091 -t 0 -- java -jar service_oss.jar
+    depends_on:
+      - mysql
+      - nacos
+      - redis
+      - seata
+    restart: always
+    ports:
+      - "8002:8002"
+    networks:
+      - online-education
+  service_vod:
+    build:
+      context: .
+      dockerfile: ./service/service_vod8003/Dockerfile
+    container_name: service_vod8003
+    command: ./wait-for-it.sh nacos:8848 -t 0 -- ./wait-for-it.sh seata:8091 -t 0 -- java -jar service_vod.jar
+    depends_on:
+      - mysql
+      - nacos
+      - redis
+      - seata
+      - rabbitmq
+    restart: always
+    ports:
+      - "8003:8003"
+    networks:
+      - online-education
+  service_cms:
+    build:
+      context: .
+      dockerfile: ./service/service_cms8004/Dockerfile
+    container_name: service_cms8004
+    command: ./wait-for-it.sh nacos:8848 -t 0 -- ./wait-for-it.sh seata:8091 -t 0 -- java -jar service_cms.jar
+    depends_on:
+      - mysql
+      - nacos
+      - redis
+      - seata
+    restart: always
+    ports:
+      - "8004:8004"
+    networks:
+      - online-education
+  service_center:
+    build:
+      context: .
+      dockerfile: ./service/service_center8005/Dockerfile
+    container_name: service_center8005
+    command: ./wait-for-it.sh nacos:8848 -t 0 -- ./wait-for-it.sh seata:8091 -t 0 -- java -jar service_center.jar
+    depends_on:
+      - mysql
+      - nacos
+      - redis
+      - seata
+      - rabbitmq
+    restart: always
+    ports:
+      - "8005:8005"
+    networks:
+      - online-education
+  service_order:
+    build:
+      context: .
+      dockerfile: ./service/service_order8006/Dockerfile
+    container_name: service_order8006
+    command: ./wait-for-it.sh nacos:8848 -t 0 -- ./wait-for-it.sh seata:8091 -t 0 -- java -jar service_order.jar
+    depends_on:
+      - mysql
+      - nacos
+      - redis
+      - seata
+      - rabbitmq
+    restart: always
+    ports:
+      - "8006:8006"
+    networks:
+      - online-education
+  service_statistic:
+    build:
+      context: .
+      dockerfile: ./service/service_statistic8007/Dockerfile
+    container_name: service_statistic8007
+    command: ./wait-for-it.sh nacos:8848 -t 0 -- ./wait-for-it.sh seata:8091 -t 0 -- java -jar service_statictis.jar
+    depends_on:
+      - mysql
+      - nacos
+      - redis
+      - seata
+      - rabbitmq
+    restart: always
+    ports:
+      - "8007:8007"
+    networks:
+      - online-education
+  service_acl:
+    build:
+      context: .
+      dockerfile: ./service/service_acl8008/Dockerfile
+    container_name: service_acl8008
+    command: ./wait-for-it.sh nacos:8848 -t 0 -- ./wait-for-it.sh seata:8091 -t 0 -- java -jar service_acl.jar
+    depends_on:
+      - mysql
+      - nacos
+      - redis
+      - seata
+    restart: always
+    ports:
+      - "8008:8008"
+    networks:
+      - online-education
 
 networks:
   online-education:
