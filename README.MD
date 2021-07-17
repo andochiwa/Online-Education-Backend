@@ -14,6 +14,11 @@
 
 ![](https://raw.githubusercontent.com/andochiwa/Online-Education-Backend/master/image/architect.png)
 
+# docker-compose一键执行
+```bash
+chmod +x wait-for-it.sh
+```
+
 # 使用技术栈
 
 |         框架          |               使用内容                |                             官网                             |       备注        |  版本  |
