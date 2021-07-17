@@ -11,3 +11,4 @@ spring:
             refresh: true
           - data-id: nacos-sentinel.yml
             refresh: true
+        server-addr: nacos:8848

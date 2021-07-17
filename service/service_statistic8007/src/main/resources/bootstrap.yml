@@ -5,6 +5,7 @@ spring:
     nacos:
       config:
         namespace: b909e98d-d1c4-4319-879a-758981c15700
+        server-addr: nacos:8848
         file-extension: yaml
         extension-configs:
           - data-id: redis.yml
