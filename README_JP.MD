@@ -34,11 +34,13 @@ docker-compose up -d --build
 |      rabbitmq      |  5672:5672, 15672:15672   | 3.8.19  | andochiwa: 123789  |
 |       seata        |        8091: 8091         |  1.3.0  |                    |
 
-|           その他           |  username: password  |
-| :------------------------: | :------------------: |
-| 管理システムスーパー管理者 | andochiwa: andochiwa |
+|                            その他                            |  username: password  |
+| :----------------------------------------------------------: | :------------------: |
+|                  管理システムスーパー管理者                  | andochiwa: andochiwa |
+| Druidデータベース接続プール監視SQLページ, ip:port/druidをアクセスしてください, <br />(ipはサーバーのip, portは監視したいサービスのport) |      root: root      |
+| swaggerインターフェースドキュメント<br />ip:port/swagger-ui/をアクセスしてください |                      |
 
-# Module 説明
+Module 説明
 
 ```
 education_parent
