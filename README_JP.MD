@@ -2,15 +2,62 @@
 
 # 前書き
 
-SpringCloudに基づいてマイクロサービスアーキテクチャである
+SpringCloud に基づいてマイクロサービスアーキテクチャであり、Spring Security 認証、Seata分散トランザクション、メッセージミドルウェア RabbitMQ、キャッシュRedis、および Spring Cloud alibaba のサービス発見、サービス構成、フロー制御、回路遮断など
 
-# [Front Page](https://github.com/andochiwa/Online-Education-Frontend-web)
-
-# [Front Managment System](https://github.com/andochiwa/Online-Education-Frontend-admin)
+# [Front Page](https://github.com/andochiwa/Online-Education-Frontend-web) [Front Managment System](https://github.com/andochiwa/Online-Education-Frontend-admin)
 
 # Architecture
 
 ![](https://raw.githubusercontent.com/andochiwa/Online-Education-Backend/master/image/architect.png)
+
+# docker-compose 配備
+
+> 注意：dockerがないバージョンは他の branch 参照
+
+配備する前に部署前 `java15`，`maven` および `docker compose` 环境があることを確認してください
+
+```bash
+git clone https://github.com/andochiwa/Online-Education-Backend.git
+cd Online-Education-Backend
+
+chmod +x wait-for-it.sh
+mvn clean install -DskipTests
+docker-compose up -d --build
+```
+
+|      コンテナ      | host port: container port | version | username: password |
+| :----------------: | :-----------------------: | :-----: | :----------------: |
+|       nacos        |        8848: 8848         |  1.4.0  |    nacos: nacos    |
+|       mysql        |        3307: 3306         | 8.0.22  |     root: root     |
+| sentinel-dashboard |        8858: 8858         | latest  | sentinel: sentinel |
+|       redis        |        6379: 6379         |  6.2.4  |                    |
+|      rabbitmq      |  5672:5672, 15672:15672   | 3.8.19  | andochiwa: 123789  |
+|       seata        |        8091: 8091         |  1.3.0  |                    |
+
+|           その他           |  username: password  |
+| :------------------------: | :------------------: |
+| 管理システムスーパー管理者 | andochiwa: andochiwa |
+
+# Module 説明
+
+```
+education_parent
+|- common                               || 公共Module
+	|- common_utils                     || いろんなツールを保存する
+	|- service_base                     || グローバルBean, configなど
+	|- spring_security                  || spring_security専用, service_acl Moduleと繋がる
+|- infrastructure                       || インフラModule
+	|- api_gateway80                    || マイクロサービスAPI Gateway
+|- service									
+	|- service_edu8001                  || メインサービスのApiを提供
+	|- service_oss8002                  || alibaba cloud ossにファイルをアップロード
+	|- service_vod8003                  || alibaba cloud ossにビデオをアップロード
+	|- service_cms8004                  || ホームページのデータ管理
+	|- service_center8005               || ユーザーログイン登録
+	|- service_order8006                || 注文Module
+	|- service_statistic8007            || 統計Module
+	|- service_acl                      || 管理システムの認証、承認
+```
 
 # 技術スタック
 
@@ -31,49 +78,3 @@ SpringCloudに基づいてマイクロサービスアーキテクチャである
 |        Hutool         |                         Hutoolツール                         | https://github.com/dromara/hutool/blob/v5-master/README-EN.md |                           |         |
 |         java          |                                                              |                                                              |                           |   15    |
 |        Swagger        |                インターフェース ドキュメント                 |                     https://swagger.io/                      |    https://swagger.io/    |  3.0.0  |
-
-# Modules説明
-
-Suffixの数字部分はポート番号である
-
-## common
-
-公共module、主に様々なConfigとツールキット
-
-## infrastructure -- api_gateway
-
-Spring Cloud Gateway module
-
-## service
-
-> service_edu
-
-メインサービスのApi Interface
-
-> service_oss
-
-ファイルをAliCloudにアップロードすることを担当する
-
-> service_vod
-
-ビデオをAliCloudにアップロードすることを担当する
-
-> service_cms
-
-ホームスライドデータを処理する
-
-> service_center
-
-ユーザーの登録、ログイン、アップデートなど
-
-> service_order
-
-注文や支払いmodule
-
-> service_statistic
-
-データを統計する
-
-> service_acl
-
-認証，`common`の`spring_security`moduleと繋がる
