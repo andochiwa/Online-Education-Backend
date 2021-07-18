@@ -14,9 +14,9 @@
 
 # docker-compose 一键部署
 
-无 docker 版本请移动到另一个 branch
+> 注意：无 docker 版本请移动到另一个 branch
 
-部署前请确保当前有 java15，maven 以及 docker compose 环境
+部署前请确保当前有 `java15`，`maven` 以及 `docker compose` 环境
 
 ```bash
 git clone https://github.com/andochiwa/Online-Education-Backend.git
@@ -27,7 +27,7 @@ mvn clean install -DskipTests
 docker-compose up -d --build
 ```
 
-如需使用`阿里云oss`，`github登录`, `发送邮箱`等服务，请连接至 mysql (外部端口3307) 并找到`online/three_party_info`，并根据说明修改表信息，然后重启端口为 8002, 8003, 8005 的容器
+如需使用`阿里云oss`，`github登录`, `发送邮箱`等服务，请连接至 mysql (宿主端口3307) 并找到`online/three_party_info`表，根据说明修改表信息，然后重启端口为 8002, 8003, 8005 的容器
 
 |        容器        | 宿主端口: 容器内部端口 |  版本  |    用户名: 密码    |
 | :----------------: | :--------------------: | :----: | :----------------: |
