@@ -48,21 +48,21 @@ docker-compose up -d --build
 
 ```
 education_parent
-|- common									|| 公共模块
-	|- common_utils							|| 存放各种工具
-	|- service_base							|| 全局bean，全局设置等
-	|- spring_security						|| spring_security专用设置, 与service_acl模块相连
-|- infrastructure							|| 基础设施模块
-	|- api_gateway80						|| 微服务api网关
+|- common                               || 公共模块
+	|- common_utils                     || 存放各种工具
+	|- service_base                     || 全局bean，全局设置等
+	|- spring_security                  || spring_security专用设置, 与service_acl模块相连
+|- infrastructure                       || 基础设施模块
+	|- api_gateway80                    || 微服务api网关
 |- service									
-	|- service_edu8001						|| 提供主要服务api接口
-	|- service_oss8002						|| 文件上传至阿里云oss
-	|- service_vod8003						|| 视频点播，上传至阿里云oss
-	|- service_cms8004						|| 控制首页数据
-	|- service_center8005					|| 用户登录注册模块
-	|- service_order8006					|| 订单模块
-	|- service_statistic8007				|| 统计模块
-	|- service_acl							|| 后台管理权限控制
+	|- service_edu8001                  || 提供主要服务api接口
+	|- service_oss8002                  || 文件上传至阿里云oss
+	|- service_vod8003                  || 视频点播，上传至阿里云oss
+	|- service_cms8004                  || 控制首页数据
+	|- service_center8005               || 用户登录注册模块
+	|- service_order8006                || 订单模块
+	|- service_statistic8007            || 统计模块
+	|- service_acl                      || 后台管理权限控制
 ```
 
 # 使用技术栈
