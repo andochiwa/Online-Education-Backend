@@ -38,9 +38,11 @@ docker-compose up -d --build
 |      rabbitmq      | 5672:5672, 15672:15672 | 3.8.19 | andochiwa: 123789  |
 |       seata        |       8091: 8091       | 1.3.0  |                    |
 
-|      其他信息      |     用户名: 密码     |
-| :----------------: | :------------------: |
-| 管理系统超级管理员 | andochiwa: andochiwa |
+|                           其他信息                           |     用户名: 密码     |
+| :----------------------------------------------------------: | :------------------: |
+|                      管理系统超级管理员                      | andochiwa: andochiwa |
+| druid数据库连接池监控sql页面, 请访问ip:port/druid, <br />其中(ip为你宿主服务器ip, port为需要监控的服务的端口) |      root: root      |
+|        swagger文档接口<br />请访问ip:port/swagger-ui/        |                      |
 
 
 
