@@ -10,11 +10,11 @@ SpringCloud に基づいてマイクロサービスアーキテクチャであ�
 
 ![](https://raw.githubusercontent.com/andochiwa/Online-Education-Backend/master/image/architect.png)
 
-# docker-compose 配備
+# docker-compose でデプロイ
 
 > 注意：dockerがないバージョンは他の branch 参照
 
-配備する前に部署前 `java15`，`maven` および `docker compose` 环境があることを確認してください
+デプロイする前に部署前 `java15`，`maven` および `docker compose` 环境があることを確認してください
 
 ```bash
 git clone https://github.com/andochiwa/Online-Education-Backend.git
