@@ -14,7 +14,7 @@ SpringCloud に基づいてマイクロサービスアーキテクチャであ�
 
 > 注意：dockerがないバージョンは他の branch 参照
 
-デプロイする前に部署前 `java15`，`maven` および `docker compose` 环境があることを確認してください
+デプロイする前に `java15`，`maven` および `docker compose` 环境があることを確認してください
 
 ```bash
 git clone https://github.com/andochiwa/Online-Education-Backend.git
@@ -65,7 +65,7 @@ education_parent
 
 |    フレームワーク     |                           使用内容                           |                          公式サイト                          |           備考            | version |
 | :-------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :-----------------------: | :-----: |
-|         Nacos         |                   サービス登録、発見、配備                   |              https://nacos.io/en-us/index.html               |                           |  1.4.1  |
+|         Nacos         |                   サービス登録、協調                   |              https://nacos.io/en-us/index.html               |                           |  1.4.1  |
 |       Sentinel        |                 フロー制御、Circuit Breakers                 |               https://sentinelguard.io/en-us/                | Nacosに配備する必要がある |         |
 | Spring Cloud Gateway  | サービスゲートウェイ，Request Forward、Load Balanceなどを担当する |       https://spring.io/projects/spring-cloud-gateway        |                           |         |
 |       OpenFeign       |      Http Client，マイクロサービスの間の転送を担当する       |      https://spring.io/projects/spring-cloud-openfeign       |                           |         |
